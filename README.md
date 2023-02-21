@@ -1,1 +1,2 @@
-# pi-java
+
+Notre application de troc permettra aux utilisateurs de s'inscrire et de créer un profil. Chaque utilisateur pourra proposer des offres de troc en indiquant les biens ou services qu'il souhaite échanger. Les autres utilisateurs pourront alors proposer des contre-offres ou accepter l'offre initiale.  Notre application permettra également de catégoriser les biens et services proposés pour faciliter la recherche et la navigation des utilisateurs.
