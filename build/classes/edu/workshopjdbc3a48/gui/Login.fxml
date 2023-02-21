@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="562.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.LoginController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="719.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="login" layoutX="237.0" layoutY="458.0" mnemonicParsing="false" onAction="#login" prefHeight="46.0" prefWidth="94.0" text="Login" />
+            <Button fx:id="sinUp" layoutX="387.0" layoutY="458.0" mnemonicParsing="false" onAction="#sinUp" prefHeight="46.0" prefWidth="94.0" text="Sin Up" />
+            <TextField fx:id="username" layoutX="245.0" layoutY="211.0" prefHeight="38.0" prefWidth="227.0" promptText="username" />
+            <PasswordField fx:id="password" layoutX="246.0" layoutY="282.0" prefHeight="38.0" prefWidth="227.0" promptText="password" />
+            <Label layoutX="179.0" layoutY="365.0" prefHeight="30.0" prefWidth="52.0" text="Type">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <CheckBox fx:id="show" layoutX="499.0" layoutY="288.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" text="show" />
+            <ChoiceBox fx:id="type" layoutX="284.0" layoutY="368.0" prefWidth="150.0" />
+            <ImageView fitHeight="150.0" fitWidth="217.0" layoutX="71.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Image/324220102_1390513315050705_4917919908598895187_n.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="84.0" fitWidth="86.0" layoutX="595.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Image/325487568_504340821815212_4524408024229645924_n.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="120.0" fitWidth="142.0" layoutX="299.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Image/user.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
