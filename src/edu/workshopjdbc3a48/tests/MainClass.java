@@ -10,6 +10,7 @@ package edu.workshopjdbc3a48.tests;
 import edu.workshopjdbc3a48.entities.Admin;
 import edu.workshopjdbc3a48.entities.Chat;
 import edu.workshopjdbc3a48.entities.Client;
+import edu.workshopjdbc3a48.entities.Reclamation;
 import edu.workshopjdbc3a48.entities.User;
 import edu.workshopjdbc3a48.services.*;
 import edu.workshopjdbc3a48.utils.DataSource;
@@ -20,8 +21,16 @@ import java.util.List;
 
  
 public class MainClass {
+
+
     
     public static void main(String[] args) throws SQLException {
+        
+        
+        
+    /*
+    
+    
          ServiceUser sc = new ServiceUser();
         ServiceChat sc1 = new ServiceChat(); 
  //  TEST SUR L'AJOUT
@@ -49,11 +58,14 @@ public class MainClass {
           }*/
   //TEST SUR GetOneByid
         //System.out.print(us.getOneById(46)); 
-    }  
-}        
      
-
-        
+       
+  
+ //Reclamation rec = new Reclamation( "abdouchnjnjjjjjj hdujjjjjjdcjd ");
+ //ServiceReclamation sr = new ServiceReclamation ();
+ //sr.ajouter(rec);
     
-
+}
+     
+}
     

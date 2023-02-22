@@ -215,4 +215,29 @@ public class ServiceUser implements IService<User> {
         }
        return listClient;
     }
+     
+   public List<User> getUserByType(String type) throws SQLException{
+        List<User> list = new ArrayList<>();
+        String req = "SELECT * FROM user WHERE type=? ";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, type);
+        ResultSet rs = ps.executeQuery();
+         while (rs.next()) {
+            if (rs.getString("type").equals("Admin")) {
+                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), null, rs.getString(6), rs.getInt(7));
+                list.add(admin);
+
+            } else if (rs.getString("type").equals("Client")) {
+                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), null, rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+                list.add(client);
+            } else {
+                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), null, rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("etat"), rs.getInt("cout"));
+                list.add(transporteur);
+            }
+
+        }
+        return list;
+      
+  
 }
+   }

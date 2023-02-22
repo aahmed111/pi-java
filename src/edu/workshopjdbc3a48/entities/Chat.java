@@ -14,13 +14,12 @@ import java.sql.Date;
 public class Chat {
     
    private int id_chat;
-   private Date date_envoie;
    private User user1,user2;
- private String nom ;
+   private String nom ;
 
-    public Chat(int id_chat, Date date_envoie, User user1, User user2, String nom) {
-        this.id_chat = id_chat;
-        this.date_envoie = date_envoie;
+    public Chat(int id_chat, User user1, User user2, String nom) {
+        
+         
         this.user1 = user1;
         this.user2 = user2;
         this.nom = nom;
@@ -31,6 +30,8 @@ public class Chat {
         this.user2 = user2;
         this.nom = nom;
     }
+
+ 
 
     public String getNom() {
         return nom;
@@ -44,9 +45,7 @@ public class Chat {
   
 
 
-    public Chat(Date date_envoie) {
-        this.date_envoie = date_envoie;
-    }
+     
 
     public int getId_chat() {
         return id_chat;
@@ -54,13 +53,8 @@ public class Chat {
 
     
 
-    public Date getDate_envoie() {
-        return date_envoie;
-    }
-
-    public void setDate_envoie(Date date_envoie) {
-        this.date_envoie = date_envoie;
-    }
+    
+     
 
     public User getUser1() {
         return user1;
@@ -106,9 +100,8 @@ public class Chat {
 
     @Override
     public String toString() {
-        return "Chat{" + "id_chat=" + id_chat + ", date_envoie=" + date_envoie + ", user1=" + user1 + ", user2=" + user2 + ", nom=" + nom + '}';
+        return "Chat{" + "id_chat=" + id_chat + ", user1=" + user1 + ", user2=" + user2 + ", nom=" + nom + '}';
     }
-
-   
+ 
    
 }
