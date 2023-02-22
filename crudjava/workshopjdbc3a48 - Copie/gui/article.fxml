@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="layout" cache="true" cacheHint="SCALE" depthTest="DISABLE" prefHeight="777.0" prefWidth="1128.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ArticleController">
+   <children>
+      <Button fx:id="btnmodifier" layoutX="570.0" layoutY="660.0" mnemonicParsing="false" onAction="#modifier" prefHeight="65.0" prefWidth="135.0" style="-fx-background-color: black;" text="modifier" textFill="WHITE" />
+      <Button fx:id="btnsupprimer" layoutX="376.0" layoutY="660.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="65.0" prefWidth="135.0" style="-fx-background-color: black;" text="supprimer" textFill="WHITE" />
+      <Button fx:id="btnajouter" layoutX="183.0" layoutY="660.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="65.0" prefWidth="135.0" style="-fx-background-color: black;" text="ajouter" textFill="WHITE" />
+      <TextField fx:id="tfdescription" layoutX="189.0" layoutY="136.0" />
+      <Label layoutX="79.0" layoutY="52.0" prefHeight="21.0" prefWidth="80.0" style="-fx-font-size: 20;" text="id_article" />
+      <TextField fx:id="tfproprietaire" layoutX="189.0" layoutY="223.0" />
+      <TextField fx:id="tfestimation" layoutX="189.0" layoutY="306.0" />
+      <TextField fx:id="tfid" layoutX="189.0" layoutY="47.0" />
+      <TextArea fx:id="tabox" layoutX="675.0" layoutY="88.0" prefHeight="471.0" prefWidth="386.0" style="-fx-background-color: red;" />
+      <Button fx:id="btnajouter1" layoutX="733.0" layoutY="660.0" mnemonicParsing="false" onAction="#getAll" prefHeight="65.0" prefWidth="135.0" style="-fx-background-color: black;" text="afficher" textFill="WHITE" />
+      <Button fx:id="btnbyid" layoutX="896.0" layoutY="660.0" mnemonicParsing="false" onAction="#getOnebyid" prefHeight="65.0" prefWidth="135.0" style="-fx-background-color: black;" text="afficher par id" textFill="WHITE" />
+      <Label layoutX="63.0" layoutY="130.0" style="-fx-font-size: 20;" text="description " />
+      <Label layoutX="61.0" layoutY="223.0" style="-fx-font-size: 20;" text="proprietaire " />
+      <Label layoutX="65.0" layoutY="306.0" style="-fx-font-size: 20;" text="estimation " />
+      <Label layoutX="64.0" layoutY="438.0" style="-fx-font-size: 20;" text="type_article" />
+      <TextField fx:id="tfimage" layoutX="189.0" layoutY="373.0" />
+      <Label layoutX="79.0" layoutY="369.0" style="-fx-font-size: 20;" text="image" />
+      <Label layoutX="59.0" layoutY="508.0" style="-fx-font-size: 20;" text="type_produit" />
+      <TextField fx:id="tftype_produit1" layoutX="189.0" layoutY="508.0" />
+      <Text fill="RED" layoutX="444.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 40;" text="AJOUT ARTICLE " textAlignment="CENTER" wrappingWidth="351.1533203125" />
+      <TextField fx:id="tfimage1" layoutX="189.0" layoutY="438.0" />
+   </children>
+</AnchorPane>
