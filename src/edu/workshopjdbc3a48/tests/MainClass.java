@@ -29,14 +29,14 @@ public class MainClass {
         ServiceChat sc1 = new ServiceChat(); 
  //  TEST SUR L'AJOUT
         // Création de l'utilisateur
-    // User u = new Client();
+     
+   //  User u = new Client("  username", "password", "email", null ,  "type", 0,0, "adresse",null,null);
     Client user1 = sc.getClientByUsernamePassword("ahmed", "zamer");
     Client user2 = sc.getClientByUsernamePassword("abdou", "abdouch");
 
  
-         // us.ajouter(u);
+          sc.ajouter(user1);
       
-        System.out.println( sc.verifier("ahmed","zamer"));
   //      us.ajouter(a);
  //TEST SUR MODIFICATION
          //us.modifier(a);

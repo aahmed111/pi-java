@@ -10,13 +10,18 @@ import edu.workshopjdbc3a48.entities.Client;
 import edu.workshopjdbc3a48.entities.Transporteur;
 import edu.workshopjdbc3a48.entities.User;
 import edu.workshopjdbc3a48.utils.DataSource;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 
 public class ServiceUser implements IService<User> {
 
@@ -25,62 +30,68 @@ public class ServiceUser implements IService<User> {
     @Override
     public void ajouter(User u) throws SQLException {
 
-        if (u instanceof Client) {
-            String type = "Client";
-            Client client = (Client) u;
-            String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`, `noteEvaluation`, `adresse` ,`etat`,`cout`)  VALUES (?,?,?,?,DEFAULT,?,?,?,DEFAULT,DEFAULT)";
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1, client.getUsername());
-            ps.setString(2, client.getPassword());
-            ps.setString(3, client.getEmail());
+     
+         
+           
+            if (u instanceof Client) {
 
-            ps.setString(5, type);
-            ps.setInt(6, client.getPhoneNumber());
-            ps.setInt(7, client.getNoteEvaluation());
-            ps.setString(8, client.getAdresse());
-            ps.executeUpdate();
-            System.out.println("client ajouté !");
-
-        } else if (u instanceof Admin) {
-
-            String type = "Admin";
-            Admin admin = (Admin) u;
-            String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation` ,`adresse`  ,`etat`,`cout`)  VALUES (?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT)";
-            PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1, admin.getUsername());
-            ps.setString(2, admin.getPassword());
-            ps.setString(3, admin.getEmail());
-            ps.setBytes(4, admin.getPhoto());
-            ps.setString(5, type);
-            ps.setInt(6, admin.getPhoneNumber());
-
-            ps.executeUpdate();
-            System.out.println("admin ajouté !");
-
-        } else {
-
-            {
-                Transporteur t = (Transporteur) u;
-
-                String type = "Transporteur";
-
-                String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation`,`adresse`,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,DEFAULT,?,?)";
+                String type = "Client";
+                Client client = (Client) u;
+                String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`, `noteEvaluation`, `adresse` ,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,?,DEFAULT,DEFAULT)";
                 PreparedStatement ps = cnx.prepareStatement(req);
-                ps.setString(1, t.getUsername());
-                ps.setString(2, t.getPassword());
-                ps.setString(3, t.getEmail());
-                ps.setBytes(4, t.getPhoto());
+                ps.setString(1, client.getUsername());
+                ps.setString(2, client.getPassword());
+                ps.setString(3, client.getEmail());
+                ps.setBytes(4, client.getPhoto());
                 ps.setString(5, type);
-                ps.setInt(6, t.getPhoneNumber());
-                ps.setInt(7, t.getPhoneNumber());
-                ps.setString(9, t.getEtat());
-                ps.setInt(10, t.getCout());
+                ps.setInt(6, client.getPhoneNumber());
+                ps.setInt(7, client.getNoteEvaluation());
+                ps.setString(8, client.getAdresse());
+                ps.executeUpdate();
+                System.out.println("client ajouté !");
+
+            } else if (u instanceof Admin) {
+
+                String type = "Admin";
+                Admin admin = (Admin) u;
+                String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation` ,`adresse`  ,`etat`,`cout`)  VALUES (?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT)";
+                PreparedStatement ps = cnx.prepareStatement(req);
+                ps.setString(1, admin.getUsername());
+                ps.setString(2, admin.getPassword());
+                ps.setString(3, admin.getEmail());
+                ps.setBytes(4, admin.getPhoto());
+                ps.setString(5, type);
+                ps.setInt(6, admin.getPhoneNumber());
 
                 ps.executeUpdate();
-                System.out.println("Transporteur ajouté !");
+                System.out.println("admin ajouté !");
 
+            } else {
+
+                {
+                    Transporteur t = (Transporteur) u;
+
+                    String type = "Transporteur";
+
+                    String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation`,`adresse`,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,DEFAULT,?,?)";
+                    PreparedStatement ps = cnx.prepareStatement(req);
+                    ps.setString(1, t.getUsername());
+                    ps.setString(2, t.getPassword());
+                    ps.setString(3, t.getEmail());
+                    ps.setBytes(4, t.getPhoto());
+                    ps.setString(5, type);
+                    ps.setInt(6, t.getPhoneNumber());
+                    ps.setInt(7, t.getPhoneNumber());
+                    ps.setString(9, t.getEtat());
+                    ps.setInt(10, t.getCout());
+
+                    ps.executeUpdate();
+                    System.out.println("Transporteur ajouté !");
+
+                }
             }
-        }
+             
+       
     }
 
     @Override
@@ -171,7 +182,7 @@ public class ServiceUser implements IService<User> {
         return u;
     }
 
-    public boolean verifier(String username, String password) throws SQLException {
+    public  boolean verifier(String username, String password) throws SQLException {
         boolean check = false;
         String req = "SELECT `username` ,`password` FROM USER ";
 
@@ -181,10 +192,9 @@ public class ServiceUser implements IService<User> {
 
             if (rs.getString("username").equals(username) && rs.getString("password").equals(password)) {
                 check = true;
-              break;
-            } 
-        
-             
+                break;
+            }
+
         }
         return check;
     }
@@ -244,4 +254,29 @@ public class ServiceUser implements IService<User> {
         }
         return listClient;
     }
+     public List<Transporteur> getAllTransorteur() throws SQLException {
+        List<Transporteur> listTransporteur = new ArrayList<>();
+
+        List<User> users = getAll();
+
+        for (User user : users) {
+            if (user instanceof Transporteur) {
+             Transporteur tr = (Transporteur) user;
+                listTransporteur.add(tr);
+            }
+        }
+        return listTransporteur ;
+    }
+    public  boolean isValidEmailAddress(String email) {
+    boolean result = true;
+    try {
+        
+        InternetAddress emailAddress = new InternetAddress(email);
+        emailAddress.validate();
+        
+    } catch (AddressException ex) {
+        result = false;
+    }
+    return result;
+}
 }

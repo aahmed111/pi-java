@@ -94,5 +94,13 @@ public class ProfilClientController implements Initializable {
     private void ajouterArticle(ActionEvent event) {
         
     }
+
+    @FXML
+    private void modifier(ActionEvent event) {
+    }
+
+    @FXML
+    private void supprimer(ActionEvent event) {
+    }
     
 }

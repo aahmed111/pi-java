@@ -24,6 +24,8 @@ public class Client extends User {
         this.adresse=adresse;
     }
 
+   
+
     public String getAdresse() {
         return adresse;
     }
