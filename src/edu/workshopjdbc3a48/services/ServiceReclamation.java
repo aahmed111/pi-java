@@ -50,7 +50,7 @@ public class ServiceReclamation implements IService<Reclamation> {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, t.getClient().getId());
             ps.setString(2, t.getSujet());
-            ps.setString(3, t.getContenu());
+           
             ps.setDate(4, new java.sql.Date(t.getDateReclamation().getTime()));
             ps.setBoolean(5, t.isEstTraitee());
  System.out.println("Reclamation ajouté");  

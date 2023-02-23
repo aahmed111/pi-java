@@ -29,19 +29,34 @@ public class ServiceChat implements IService<Chat> {
 Connection cnx= DataSource.getInstance().getCnx();
 
     @Override
-    public void ajouter(Chat c)  {
-      try {
-        String req = "INSERT INTO `chat`(  `id_user1`, `id_user2`,`nom`) VALUES (?,?,?)";
+   public void ajouter(Chat c) {
+    try {
+        // Vérifier si un chat existe déjà entre les deux utilisateurs
+        String reqCheck = "SELECT COUNT(*) FROM chat WHERE id_user1 = ? AND id_user2 = ?";
+        PreparedStatement psCheck = cnx.prepareStatement(reqCheck);
+        psCheck.setInt(1, c.getUser1().getId_user());
+        psCheck.setInt(2, c.getUser2().getId_user());
+        ResultSet rsCheck = psCheck.executeQuery();
+        rsCheck.next();
+        int count = rsCheck.getInt(1);
+        if (count > 0) {
+            System.out.println("Un chat existe déjà entre ces deux utilisateurs.");
+            return;
+        }
+        
+        // Ajouter le nouveau chat
+        String req = "INSERT INTO chat(id_user1, id_user2, nom) VALUES (?, ?, ?)";
         PreparedStatement ps = cnx.prepareStatement(req);
-        ps.setInt(1,c.getUser1().getId_user());
+        ps.setInt(1, c.getUser1().getId_user());
         ps.setInt(2, c.getUser2().getId_user());
-        ps.setString(3,c.getNom());
+        ps.setString(3, c.getNom());
         ps.executeUpdate();
-        System.out.println("chat ajouté");  
+        System.out.println("Chat ajouté.");
     } catch (SQLException e) {
         System.out.println("Erreur lors de l'ajout du chat : " + e.getMessage());
-    }    
     }
+}
+
 
     @Override
     public void supprimer(int id)   {
@@ -55,19 +70,19 @@ Connection cnx= DataSource.getInstance().getCnx();
             System.out.println(ex.getMessage());
         }
     }
-
-    @Override
-    public void modifier(Chat c) {
-        try {
-            String req = "UPDATE `chat` SET `nom`=? WHERE `id_chat`= " + c.getId_chat();
-            Statement ps = cnx.createStatement();
-            
-            ps.executeUpdate(req);
-            System.out.println("chat modifié !");
-             } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        } 
-    }
+@Override
+public void modifier(Chat c) {
+    try {
+        String req = "UPDATE `chat` SET `nom`=? WHERE `id_chat`= ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, c.getNom());
+        ps.setInt(2, c.getId_chat());
+        ps.executeUpdate();
+        System.out.println("chat modifié !");
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    } 
+}
 
     @Override
   public List<Chat> getAll() {
@@ -121,6 +136,9 @@ Connection cnx= DataSource.getInstance().getCnx();
     }
     return c;
     }
+
+    
+    
 }
 
  

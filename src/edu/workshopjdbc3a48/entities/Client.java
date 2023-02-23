@@ -45,6 +45,10 @@ public class Client extends User {
     public String toString() {
         return  "Client{"  +super.toString() +  ", noteEvaluation=" + noteEvaluation + '}';
     }
+
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
     
 }

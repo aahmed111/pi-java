@@ -17,7 +17,8 @@ import edu.workshopjdbc3a48.utils.DataSource;
 import java.util.Date;
 import java.sql.SQLException;
 import java.util.List;
-
+import edu.workshopjdbc3a48.entities.Chat;
+import edu.workshopjdbc3a48.entities.Message;
 
  
 public class MainClass {
@@ -28,23 +29,46 @@ public class MainClass {
         
         
         
-    /*
+     
     
-    
-         ServiceUser sc = new ServiceUser();
-        ServiceChat sc1 = new ServiceChat(); 
- //  TEST SUR L'AJOUT
-        // Création de l'utilisateur
-    // User u = new Client();
-    Client user1 = sc.getClientByUsernamePassword("ahmed", "zamer");
-    Client user2 = sc.getClientByUsernamePassword("abdou", "abdouch");
+// Créer un objet ServiceUser pour interagir avec la base de données des utilisateurs
+ServiceUser su = new ServiceUser();
 
+// Créer un objet ServiceChat pour interagir avec la base de données des chats
+ServiceChat sc = new ServiceChat();
+ 
+ServiceChat chatService = new ServiceChat();
 
-    Chat c = new Chat( user1, user2,"echangi");
-        // us.ajouter(u);
-         // us.ajouter(u);
-      
-    sc1.ajouter(c);
+// Récupérer les utilisateurs pour le chat
+Client user1 = su.getClientByUsernamePassword("ahmed", "zamer");
+Client user2 = su.getClientByUsernamePassword("abdou", "abdouch");
+
+// Créer un nouvel objet Chat
+Chat c = new Chat(user1, user2, "echangi");
+
+// Ajouter le chat à la base de données
+//sc.ajouter(c);
+//sc.supprimer(1);
+ 
+// Modifier le nom du chat
+c.setNom("Nouveau__nom");
+
+// Appeler la méthode modifier de l'objet ServiceChat pour enregistrer les modifications dans la base de données
+sc.modifier(c);
+
+ 
+List<Chat> chats = sc.getAll();
+for (Chat chat : chats) {
+    System.out.println(chat);
+}
+Chat chat = chatService.getOneById(7);
+System.out.println(chat.getNom());
+
+ServiceMessage rs = new ServiceMessage();
+ 
+Message m1 = new Message ("jbj");
+rs.ajouter(m1);
+
   //      us.ajouter(a);
  //TEST SUR MODIFICATION
          //us.modifier(a);

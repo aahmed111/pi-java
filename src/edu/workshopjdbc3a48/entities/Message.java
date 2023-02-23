@@ -10,23 +10,53 @@ public class Message {
     private Date date ;
     private String text ;
     private Chat chat;
+    private Reclamation reclamation;
 
-    public Message(int id_message, Date date, String text, Chat chat) {
+    public Message(int id_message, Date date, String text, Chat chat, Reclamation reclamation) {
         this.id_message = id_message;
         this.date = date;
         this.text = text;
         this.chat = chat;
+        this.reclamation = reclamation;
     }
 
+    public Message(String text, Chat chat, Reclamation reclamation) {
+        this.text = text;
+        this.chat = chat;
+        this.reclamation = reclamation;
+    }
+
+    public Message(String text) {
+        this.text = text;
+    }
+     
+
+    // Constructeur pour les messages de chat
     public Message(Date date, String text, Chat chat) {
         this.date = date;
         this.text = text;
         this.chat = chat;
     }
 
-    public Message(String text, Chat chat) {
+    // Constructeur pour les messages de réclamation
+    public Message(Date date, String text, Reclamation reclamation) {
+        this.date = date;
         this.text = text;
-        this.chat = chat;
+        this.reclamation = reclamation;
+    }
+
+    public Message(int id, Date date, String text, Chat chat, boolean reclamation) {
+        
+    }
+ 
+
+    // Méthode permettant de savoir si le message appartient à une réclamation ou un chat
+    public boolean isReclamation() {
+        return reclamation != null;
+    }
+
+    public boolean isChat() {
+        return chat != null;
     }
 
     public Message(Date date) {
@@ -60,17 +90,13 @@ public class Message {
     }
 
     @Override
-    public String toString() {
-        return "Message{" + "id_message=" + id_message + ", date=" + date + ", text=" + text + ", chat=" + chat + '}';
-    }
-
-    @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + this.id_message;
-        hash = 37 * hash + Objects.hashCode(this.date);
-        hash = 37 * hash + Objects.hashCode(this.text);
-        hash = 37 * hash + Objects.hashCode(this.chat);
+        hash = 47 * hash + this.id_message;
+        hash = 47 * hash + Objects.hashCode(this.date);
+        hash = 47 * hash + Objects.hashCode(this.text);
+        hash = 47 * hash + Objects.hashCode(this.chat);
+        hash = 47 * hash + Objects.hashCode(this.reclamation);
         return hash;
     }
 
@@ -98,9 +124,16 @@ public class Message {
         if (!Objects.equals(this.chat, other.chat)) {
             return false;
         }
+        if (!Objects.equals(this.reclamation, other.reclamation)) {
+            return false;
+        }
         return true;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Message{" + "id_message=" + id_message + ", date=" + date + ", text=" + text + ", chat=" + chat + ", reclamation=" + reclamation + '}';
+    }
+
     
 }

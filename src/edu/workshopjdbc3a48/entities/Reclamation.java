@@ -17,37 +17,33 @@ import java.util.Objects;
  
    public class Reclamation {
     private int id;
+     private Admin admin;
     private Client client;
-    private Admin admin;
-    private String sujet;
-    private String contenu;
-    private boolean estTraitee;
-    private Date dateReclamation;
-    private List<Message> messages;
+   
+      private Date dateReclamation;
+    private List<Message> messages; 
+    
+   
+  
 
     public Reclamation() {
         this.id = 0;
         this.client = null;
         this.admin = null;
-        this.sujet = "";
-        this.contenu = "";
-        this.estTraitee = false;
+        
+        
+     
         this.dateReclamation = null;
         this.messages = new ArrayList<Message>();
     }
 
-    public Reclamation(Client client, String sujet, String contenu, Date dateReclamation) {
-        this.id = 0;
+    public Reclamation(int id, Client client, Admin admin, Date dateReclamation, List<Message> messages) {
+        this.id = id;
         this.client = client;
-        this.admin = null;
-        this.sujet = sujet;
-        this.contenu = contenu;
-        this.estTraitee = false;
+        this.admin = admin;
         this.dateReclamation = dateReclamation;
-        this.messages = new ArrayList<Message>();
+        this.messages = messages;
     }
-
-    // getters, setters
 
     public int getId() {
         return id;
@@ -73,30 +69,6 @@ import java.util.Objects;
         this.admin = admin;
     }
 
-    public String getSujet() {
-        return sujet;
-    }
-
-    public void setSujet(String sujet) {
-        this.sujet = sujet;
-    }
-
-    public String getContenu() {
-        return contenu;
-    }
-
-    public void setContenu(String contenu) {
-        this.contenu = contenu;
-    }
-
-    public boolean isEstTraitee() {
-        return estTraitee;
-    }
-
-    public void setEstTraitee(boolean estTraitee) {
-        this.estTraitee = estTraitee;
-    }
-
     public Date getDateReclamation() {
         return dateReclamation;
     }
@@ -115,20 +87,17 @@ import java.util.Objects;
 
     @Override
     public String toString() {
-        return "Reclamation{" + "id=" + id + ", client=" + client + ", admin=" + admin + ", sujet=" + sujet + ", contenu=" + contenu + ", estTraitee=" + estTraitee + ", dateReclamation=" + dateReclamation + ", messages=" + messages + '}';
+        return "Reclamation{" + "id=" + id + ", client=" + client + ", admin=" + admin + ", dateReclamation=" + dateReclamation + ", messages=" + messages + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.id;
-        hash = 97 * hash + Objects.hashCode(this.client);
-        hash = 97 * hash + Objects.hashCode(this.admin);
-        hash = 97 * hash + Objects.hashCode(this.sujet);
-        hash = 97 * hash + Objects.hashCode(this.contenu);
-        hash = 97 * hash + (this.estTraitee ? 1 : 0);
-        hash = 97 * hash + Objects.hashCode(this.dateReclamation);
-        hash = 97 * hash + Objects.hashCode(this.messages);
+        int hash = 5;
+        hash = 73 * hash + this.id;
+        hash = 73 * hash + Objects.hashCode(this.client);
+        hash = 73 * hash + Objects.hashCode(this.admin);
+        hash = 73 * hash + Objects.hashCode(this.dateReclamation);
+        hash = 73 * hash + Objects.hashCode(this.messages);
         return hash;
     }
 
@@ -147,15 +116,6 @@ import java.util.Objects;
         if (this.id != other.id) {
             return false;
         }
-        if (this.estTraitee != other.estTraitee) {
-            return false;
-        }
-        if (!Objects.equals(this.sujet, other.sujet)) {
-            return false;
-        }
-        if (!Objects.equals(this.contenu, other.contenu)) {
-            return false;
-        }
         if (!Objects.equals(this.client, other.client)) {
             return false;
         }
@@ -170,6 +130,6 @@ import java.util.Objects;
         }
         return true;
     }
-
-   
-}
+    
+   }
+     
