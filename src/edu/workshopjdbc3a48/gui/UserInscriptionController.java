@@ -159,7 +159,7 @@ public class UserInscriptionController implements Initializable {
                         alert1.show();
                         
                         } else {
-                        User u2 = new Transporteur(username.getText(), pasworrd.getText(), email.getText(), bytes, typeUser, phoneNumb, 0, null, 0);
+                        User u2 = new Transporteur(username.getText(), pasworrd.getText(), email.getText(), bytes, typeUser, phoneNumb, 0,adresse.getText(), null, 0);
                         su.ajouter(u2);
                         Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
                         alert3.setContentText("Transporteur ajouté avec succés!");

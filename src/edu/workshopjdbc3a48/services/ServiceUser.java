@@ -35,7 +35,7 @@ public class ServiceUser implements IService<User> {
            
             if (u instanceof Client) {
 
-                String type = "Client";
+              
                 Client client = (Client) u;
                 String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`, `noteEvaluation`, `adresse` ,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,?,DEFAULT,DEFAULT)";
                 PreparedStatement ps = cnx.prepareStatement(req);
@@ -43,14 +43,14 @@ public class ServiceUser implements IService<User> {
                 ps.setString(2, client.getPassword());
                 ps.setString(3, client.getEmail());
                 ps.setBytes(4, client.getPhoto());
-                ps.setString(5, type);
+                ps.setString(5, client.getType());
                 ps.setInt(6, client.getPhoneNumber());
                 ps.setInt(7, client.getNoteEvaluation());
                 ps.setString(8, client.getAdresse());
                 ps.executeUpdate();
                 System.out.println("client ajouté !");
 
-            } else if (u instanceof Admin) {
+          /*  } else if (u instanceof Admin) {
 
                 String type = "Admin";
                 Admin admin = (Admin) u;
@@ -64,27 +64,24 @@ public class ServiceUser implements IService<User> {
                 ps.setInt(6, admin.getPhoneNumber());
 
                 ps.executeUpdate();
-                System.out.println("admin ajouté !");
+                System.out.println("admin ajouté !");*/
 
             } else {
 
                 {
                     Transporteur t = (Transporteur) u;
 
-                    String type = "Transporteur";
+                   
 
-                    String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation`,`adresse`,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,DEFAULT,?,?)";
+                    String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation`,`adresse`,`etat`,`cout`)  VALUES (?,?,?,?,?,?,DEFAULT,?,DEFAULT,DEFAULT)";
                     PreparedStatement ps = cnx.prepareStatement(req);
                     ps.setString(1, t.getUsername());
                     ps.setString(2, t.getPassword());
                     ps.setString(3, t.getEmail());
                     ps.setBytes(4, t.getPhoto());
-                    ps.setString(5, type);
+                    ps.setString(5,t.getType() );
                     ps.setInt(6, t.getPhoneNumber());
-                    ps.setInt(7, t.getPhoneNumber());
-                    ps.setString(9, t.getEtat());
-                    ps.setInt(10, t.getCout());
-
+                    ps.setString(7, t.getAdresse());
                     ps.executeUpdate();
                     System.out.println("Transporteur ajouté !");
 
@@ -121,7 +118,7 @@ public class ServiceUser implements IService<User> {
     @Override
     public void modifier(User u) throws SQLException {
 
-        String req = "UPDATE `user` SET `username`=?,`password`=?,`email`=?,`photo`=?,`phoneNumber`=? WHERE id_user=?";
+        String req = "UPDATE `user` SET `username`=?,`password`=?,`email`=?,`photo`=?,`phoneNumber`=?  WHERE id_user=?";
 
         PreparedStatement ps = cnx.prepareStatement(req);
 
@@ -151,10 +148,10 @@ public class ServiceUser implements IService<User> {
                 list.add(admin);
 
             } else if (rs.getString("type").equals("Client")) {
-                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("adresse"));
                 list.add(client);
             } else {
-                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("etat"), rs.getInt("cout"));
+                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8),rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
                 list.add(transporteur);
             }
 
@@ -175,7 +172,7 @@ public class ServiceUser implements IService<User> {
             } else if (rs.getString("type").equals("Client")) {
                 u = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
             } else {
-                u = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("etat"), rs.getInt("cout"));
+                u = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8),rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
             }
         }
 
@@ -221,7 +218,7 @@ public class ServiceUser implements IService<User> {
         ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            t = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9), rs.getInt(10));
+            t = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8),rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
         }
 
         return t;
@@ -279,4 +276,33 @@ public class ServiceUser implements IService<User> {
     }
     return result;
 }
+   public List<User> getUserByType(String type) throws SQLException{
+        List<User> list = new ArrayList<>();
+        String req = "SELECT * FROM user WHERE type=? ";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, type);
+        ResultSet rs = ps.executeQuery();
+         while (rs.next()) {
+            if (rs.getString("type").equals("Admin")) {
+                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7));
+                list.add(admin);
+
+            } else if (rs.getString("type").equals("Client")) {
+                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+                list.add(client);
+            } else {
+                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8),rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
+                list.add(transporteur);
+            }
+
+        }
+        return list;
+   
+   }   
+  
+
+
+       
+   
+    
 }

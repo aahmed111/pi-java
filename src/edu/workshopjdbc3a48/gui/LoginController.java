@@ -7,6 +7,7 @@ package edu.workshopjdbc3a48.gui;
 
 import edu.workshopjdbc3a48.entities.Admin;
 import edu.workshopjdbc3a48.entities.Client;
+import edu.workshopjdbc3a48.entities.Transporteur;
 import edu.workshopjdbc3a48.services.ServiceUser;
 import edu.workshopjdbc3a48.utils.DataSource;
 import java.io.IOException;
@@ -58,24 +59,10 @@ public class LoginController implements Initializable {
     @FXML
     private CheckBox show;
     private String[] types = {"Client", "Transporteur", "Admin"};
-
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     type.getItems().addAll(types);
-    password.setManaged(true);
-    show.setSelected(true);
-        show.setOnAction((ActionEvent event1) -> {
-        if (show.isSelected()) {
-           
-            password.setVisible(true);
-            password.setManaged(true);
-           
-        } else {     
-            password.setManaged(true);
-            password.setVisible(false);
-           
-        }
-    });
 
     }
     
@@ -124,9 +111,13 @@ public class LoginController implements Initializable {
                             appStage1.show();
                             break;
                         case "Transporteur":
+                            Transporteur loginTransporteur =su.getTransporteurByUsernamePassword(USERNAME, PASSWORD);
+                            id_Connector = loginTransporteur.getId_user();
                             FXMLLoader loader2 = new FXMLLoader(getClass().getResource("ProfilTransporteur.fxml"));
                             Parent root2 = loader2.load();
-
+                            ProfilTransporteurController pr = loader2.getController();
+                            pr.setId_Transporteur(id_Connector);
+                            pr.afficher(id_Connector);
                             Scene scene2 = new Scene(root2);
                             Stage appStage2 = (Stage) ((Node) event.getSource()).getScene().getWindow();
                             appStage2.setScene(scene2);

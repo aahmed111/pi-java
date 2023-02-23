@@ -34,12 +34,12 @@ public class MainClass {
     Client user1 = sc.getClientByUsernamePassword("ahmed", "zamer");
     Client user2 = sc.getClientByUsernamePassword("abdou", "abdouch");
 
- 
-          sc.ajouter(user1);
+        
+               
       
   //      us.ajouter(a);
  //TEST SUR MODIFICATION
-         //us.modifier(a);
+         sc.modifier(user1);
  //TEST SUR SUPRESSION
          // us.supprimer(40);
   //TEST SUR GetALL

@@ -14,20 +14,19 @@
    <children>
       <AnchorPane id="AnchorPane" prefHeight="810.0" prefWidth="944.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="83.0" layoutY="115.0" prefHeight="18.0" prefWidth="56.0" text="username" textFill="#cc2727" />
+            <Label layoutX="83.0" layoutY="115.0" prefHeight="18.0" prefWidth="56.0" text="username" textFill="#434141" />
             <TextField fx:id="username" layoutX="189.0" layoutY="105.0" prefHeight="38.0" prefWidth="250.0" promptText="username" />
-            <Label layoutX="75.0" layoutY="219.0" text="password" textFill="#cc2727" />
+            <Label layoutX="75.0" layoutY="219.0" text="password" textFill="#5b5151" />
             <TextField fx:id="pasworrd" layoutX="189.0" layoutY="209.0" prefHeight="37.0" prefWidth="250.0" promptText="password" />
-            <Label layoutX="86.0" layoutY="324.0" text="email" textFill="#cc2727" />
+            <Label layoutX="86.0" layoutY="324.0" text="email" textFill="#5b5151" />
             <TextField fx:id="email" layoutX="189.0" layoutY="313.0" prefHeight="38.0" prefWidth="250.0" promptText="exemple@exemple.com" />
             <Button fx:id="ajouter" layoutX="264.0" layoutY="663.0" mnemonicParsing="false" onAction="#ajouterUser" prefHeight="46.0" prefWidth="82.0" text="sign up" textFill="#cc2323" />
-            <Label layoutX="82.0" layoutY="426.0" prefHeight="18.0" prefWidth="44.0" text="type" textFill="#cc2727" />
+            <Label layoutX="82.0" layoutY="426.0" prefHeight="18.0" prefWidth="44.0" text="type" textFill="#5b5151" />
             <ChoiceBox fx:id="type" layoutX="216.0" layoutY="422.0" prefWidth="150.0" />
-            <Label layoutX="59.0" layoutY="517.0" prefHeight="18.0" prefWidth="89.0" text="phoneNumber" textFill="#cc2727" />
+            <Label layoutX="59.0" layoutY="517.0" prefHeight="18.0" prefWidth="89.0" text="phoneNumber" textFill="#5b5151" />
             <TextField fx:id="phoneNumber" layoutX="196.0" layoutY="507.0" prefHeight="38.0" prefWidth="250.0" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="608.0" prefHeight="18.0" prefWidth="76.0" text="adresse" textFill="#cc2727" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="608.0" prefHeight="18.0" prefWidth="76.0" text="adresse" textFill="#5b5151" />
             <Button fx:id="exit" layoutX="431.0" layoutY="663.0" mnemonicParsing="false" onAction="#exit" prefHeight="46.0" prefWidth="82.0" text="Retour" textFill="#e72727" />
-            <ImageView fitHeight="85.0" fitWidth="90.0" layoutX="59.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="85.0" fitWidth="90.0" layoutX="818.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
             <TextField fx:id="adresse" layoutX="196.0" layoutY="598.0" prefHeight="38.0" prefWidth="250.0" />
             <Button layoutX="646.0" layoutY="480.0" mnemonicParsing="false" onAction="#browser" prefHeight="26.0" prefWidth="133.0" text="Choisir un image" />
@@ -36,10 +35,13 @@
          <effect>
             <ColorAdjust brightness="0.06" hue="0.02">
                <input>
-                  <DropShadow>
+                  <DropShadow height="28.02" radius="40.4125" width="135.63">
                      <color>
-                        <Color red="0.6000000238418579" green="0.11999999731779099" blue="0.11999999731779099" />
+                        <Color red="0.7157894968986511" green="0.6256530284881592" blue="0.6256530284881592" />
                      </color>
+                     <input>
+                        <ColorAdjust />
+                     </input>
                   </DropShadow>
                </input>
             </ColorAdjust>

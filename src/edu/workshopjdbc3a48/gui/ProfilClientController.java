@@ -10,6 +10,7 @@ import edu.workshopjdbc3a48.services.ServiceUser;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -101,6 +104,19 @@ public class ProfilClientController implements Initializable {
 
     @FXML
     private void supprimer(ActionEvent event) {
+        ServiceUser su = new ServiceUser();
+        Alert alertName = new Alert(Alert.AlertType.ERROR, "Voulez vous supprimer cette compte !");
+                    Optional<ButtonType> resultSupression = alertName.showAndWait();
+                    if (resultSupression.isPresent() && resultSupression.get() == ButtonType.OK) {
+                      try {
+                           su.supprimer(Id_connecté);
+                           Alert succes = new Alert(Alert.AlertType.INFORMATION, "compte supprimé !");
+                           succes.show();
+                          } catch (SQLException ex) {
+                          System.out.println(ex.getMessage());
+                          }
+                       
+                    }
     }
     
 }
