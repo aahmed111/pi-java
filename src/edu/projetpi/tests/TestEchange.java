@@ -14,28 +14,17 @@ public class TestEchange {
 
     public static void main(String[] args) throws SQLException {
 
-     
-            ServiceEchange se = new ServiceEchange();
-             List<Echange> le = se.getAll();
+        ServiceEchange se = new ServiceEchange();
+            /* List<Echange> le = se.getAll();
              
-             System.out.println(le.toString());
+             System.out.println(le.toString());*/
+        //Echange e1 = new Echange("en attente", 31, 32, 42, 46);
+        Echange e = new Echange("terminée");
+        // System.out.println("\n date : "+e1.toString());
+        //se.ajouter(e1);
+       // List<Echange> list = se.getAll(); 
+                 se.modifier(e);
 
-           /* Echange e1 = new Echange("en attente",31,32,42,46);
-            //Echange e2 = new Echange("terminée");
-            System.out.println("\n date : "+e1.toString());
-            //se.ajouter(e1);
-            List<Echange> list=se.getAll();*/
-            
-         
-           // se.modifier(e);
-           
-            
-          
-
-        
-           
-        }
-    
     }
 
-
+}
