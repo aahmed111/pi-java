@@ -1,39 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="562.0" prefWidth="719.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.LoginController">
    <children>
-      <AnchorPane id="AnchorPane" layoutX="-11.0" layoutY="-14.0" prefHeight="444.0" prefWidth="618.0">
+      <AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="719.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="login" layoutX="203.0" layoutY="344.0" mnemonicParsing="false" onAction="#login" prefHeight="46.0" prefWidth="94.0" text="Login" />
-            <Button fx:id="sinUp" layoutX="412.0" layoutY="344.0" mnemonicParsing="false" onAction="#sinUp" prefHeight="46.0" prefWidth="94.0" text="Sin Up" />
-            <Label graphicTextGap="6.0" layoutX="98.0" layoutY="62.0" prefHeight="30.0" prefWidth="94.0" text="Username">
-               <font>
-                  <Font size="20.0" />
-               </font>
+            <Button fx:id="login" layoutX="553.0" layoutY="372.0" mnemonicParsing="false" onAction="#login" prefHeight="46.0" prefWidth="94.0" text="Login" />
+            <TextField fx:id="username" layoutX="373.0" layoutY="207.0" prefHeight="38.0" prefWidth="227.0" promptText="username" />
+            <PasswordField fx:id="password" layoutX="373.0" layoutY="282.0" prefHeight="38.0" prefWidth="227.0" promptText="password" />
+            <Label fx:id="message" layoutX="373.0" layoutY="330.0" prefHeight="30.0" prefWidth="227.0" textFill="#ec1919">
+               <effect>
+                  <Bloom />
+               </effect>
             </Label>
-            <TextField fx:id="username" layoutX="244.0" layoutY="58.0" prefHeight="38.0" prefWidth="227.0" />
-            <Label layoutX="102.0" layoutY="143.0" prefHeight="30.0" prefWidth="86.0" text="Password">
+            <ImageView fitHeight="120.0" fitWidth="142.0" layoutX="427.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Image/user.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="forget" alignment="CENTER" contentDisplay="CENTER" layoutX="373.0" layoutY="386.0" prefHeight="19.0" prefWidth="150.0" text="Forget password ?" textFill="#b41515">
                <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="password" layoutX="244.0" layoutY="145.0" prefHeight="38.0" prefWidth="227.0" />
-            <Label layoutX="341.0" layoutY="230.0" prefHeight="30.0" prefWidth="52.0" text="Type">
+                  <Font size="13.0" />
+               </font></Label>
+            <ToggleButton fx:id="show" layoutX="616.0" layoutY="288.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="40.0" text="Show">
                <font>
-                  <Font size="20.0" />
+                  <Font size="10.0" />
                </font>
-            </Label>
-            <CheckBox fx:id="show" layoutX="506.0" layoutY="155.0" mnemonicParsing="false" onAction="#show" text="show" />
-            <ChoiceBox fx:id="type" layoutX="412.0" layoutY="233.0" prefWidth="150.0" />
+            </ToggleButton>
+            <AnchorPane prefHeight="562.0" prefWidth="318.0" stylesheets="@style.css">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="217.0" layoutX="84.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Image/324220102_1390513315050705_4917919908598895187_n.png" />
+                     </image>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
+                  </ImageView>
+                  <Button fx:id="sinUp" layoutX="120.0" layoutY="328.0" mnemonicParsing="false" onAction="#sinUp" prefHeight="46.0" prefWidth="94.0" text="Sin Up" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

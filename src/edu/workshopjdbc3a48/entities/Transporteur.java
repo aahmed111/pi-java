@@ -11,22 +11,34 @@ package edu.workshopjdbc3a48.entities;
  */
 public class Transporteur extends User {
 
+    private String adresse;
     private int noteEvaluation;
     private int cout;
     private String etat;
 
-    public Transporteur(String username, String password, String email, String photo, String type, int phoneNumber, int noteEvaluation, String etat, int cout) {
+    public Transporteur(String username, String password, String email, byte[] photo, String type, int phoneNumber, int noteEvaluation, String adresse, String etat, int cout) {
         super(username, password, email, photo, type, phoneNumber);
         this.noteEvaluation = noteEvaluation;
+        this.adresse = adresse;
         this.etat = etat;
         this.cout = cout;
     }
 
-    public Transporteur(int id_user, String username, String password, String email, String photo, String type, int phoneNumber, int noteEvaluation, String etat, int cout) {
+    public Transporteur(int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber, int noteEvaluation, String adresse, String etat, int cout) {
         super(id_user, username, password, email, photo, type, phoneNumber);
+
         this.noteEvaluation = noteEvaluation;
+        this.adresse = adresse;
         this.etat = etat;
         this.cout = cout;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 
     public int getNoteEvaluation() {
@@ -55,7 +67,7 @@ public class Transporteur extends User {
 
     @Override
     public String toString() {
-        return "Transporteur{" + super.toString() + "noteEvaluation=" + noteEvaluation + ", cout=" + cout + ", etat=" + etat + '}';
+        return "Transporteur{" + "adresse=" + adresse + ", noteEvaluation=" + noteEvaluation + ", cout=" + cout + ", etat=" + etat + '}';
     }
 
 }

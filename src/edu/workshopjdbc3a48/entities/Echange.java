@@ -5,10 +5,8 @@
  */
 package edu.workshopjdbc3a48.entities;
 
-/**
- *
- * @author pc
- */
+//hello
+ 
 public class Echange {
     	private int id_echange;
         private String date_echange,statut;

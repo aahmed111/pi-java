@@ -10,86 +10,87 @@ package edu.workshopjdbc3a48.tests;
 import edu.workshopjdbc3a48.entities.Admin;
 import edu.workshopjdbc3a48.entities.Chat;
 import edu.workshopjdbc3a48.entities.Client;
+import edu.workshopjdbc3a48.entities.Echange;
+import edu.workshopjdbc3a48.entities.Message;
 import edu.workshopjdbc3a48.entities.Reclamation;
 import edu.workshopjdbc3a48.entities.User;
 import edu.workshopjdbc3a48.services.*;
 import edu.workshopjdbc3a48.utils.DataSource;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import edu.workshopjdbc3a48.entities.Chat;
-import edu.workshopjdbc3a48.entities.Message;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
- 
+
+
 public class MainClass {
+   /*  
+    public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
+      
+           ServiceUser sc = new ServiceUser();
+            ServiceChat sc1 = new ServiceChat();
+            //  TEST SUR L'AJOUT
+           
+             
+            //  User u = new Client("  username", "password", "email", null ,  "type", 0,0, "adresse",null,null);
+           // Client user1 = sc.getClientByUsernamePassword("ahmed", "zamer");
+           // Client user2 = sc.getClientByUsernamePassword("abdou", "abdouch");
+            
+            
+        //    User user = sc.getClientByUsernamePassword("abdou", "abdou");
+            // ID de l'utilisateur à modifier
+         //   user.setUsername("mohamed");
+            
+            
+// Appel de la méthode modifier pour mettre à jour l'utilisateur dans la base de données
+//sc.modifier(user);
 
+//      us.ajouter(a);
+//TEST SUR MODIFICATION
 
-    
-    public static void main(String[] args) throws SQLException {
-        
-        
-        
-     
-    
-// Créer un objet ServiceUser pour interagir avec la base de données des utilisateurs
-ServiceUser su = new ServiceUser();
+//TEST SUR SUPRESSION
+// us.supprimer(40);
+//TEST SUR GetALL
+/* List<User> ls = us.getAll();
 
-// Créer un objet ServiceChat pour interagir avec la base de données des chats
-ServiceChat sc = new ServiceChat();
- 
-ServiceChat chatService = new ServiceChat();
-
-// Récupérer les utilisateurs pour le chat
-Client user1 = su.getClientByUsernamePassword("ahmed", "zamer");
-Client user2 = su.getClientByUsernamePassword("abdou", "abdouch");
-
-// Créer un nouvel objet Chat
-Chat c = new Chat(user1, user2, "echangi");
-
-// Ajouter le chat à la base de données
-//sc.ajouter(c);
-//sc.supprimer(1);
- 
-// Modifier le nom du chat
-c.setNom("Nouveau__nom");
-
-// Appeler la méthode modifier de l'objet ServiceChat pour enregistrer les modifications dans la base de données
-sc.modifier(c);
-
- 
-List<Chat> chats = sc.getAll();
-for (Chat chat : chats) {
-    System.out.println(chat);
-}
-Chat chat = chatService.getOneById(7);
-System.out.println(chat.getNom());
-
-ServiceMessage rs = new ServiceMessage();
- 
-Message m1 = new Message ("jbj");
-rs.ajouter(m1);
-
-  //      us.ajouter(a);
- //TEST SUR MODIFICATION
-         //us.modifier(a);
- //TEST SUR SUPRESSION
-         // us.supprimer(40);
-  //TEST SUR GetALL
-       /* List<User> ls = us.getAll();
-    
-          for (User user : ls){
-          System.out.println(user); 
-          }*/
-  //TEST SUR GetOneByid
-        //System.out.print(us.getOneById(46)); 
-     
-       
+for (User user : ls){
+System.out.println(user);
+}*/
+//TEST SUR GetOneByid
+//System.out.print(us.getOneById(46));
+//String s = sc.getPasswordByEmail("abdelwahedsouid@gmail.com");
+             //    System.out.println(s);
+  //  }  
+ //}
   
- //Reclamation rec = new Reclamation( "abdouchnjnjjjjjj hdujjjjjjdcjd ");
- //ServiceReclamation sr = new ServiceReclamation ();
- //sr.ajouter(rec);
+
+
+
+
+ 
+
+
+
+public static void main(String[] args) {
+    ServiceReclamation sr = new ServiceReclamation();
+    try {
+        List<Reclamation> reclamations = sr.getAll();
+        for (Reclamation r : reclamations) {
+            System.out.println(r);
+        }
+    } catch (SQLException ex) {
+        System.out.println("Erreur lors de la récupération des réclamations : " + ex.getMessage());
+    }
+}
+  
+}
+        
     
-}
-     
-}
+
     

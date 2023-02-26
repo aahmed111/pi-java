@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author abdel
  */
-public class Article {
+public abstract class Article {
 
     protected int id_article, id_categorie;
     protected String  description, image, type_article;
@@ -21,11 +21,10 @@ public class Article {
     protected String titre;
     private Categorie c;
     private Date  date_ajout;
+    private Client client;
 
     public Article(int id_article, String description, String image, String proprietaire, int estimation, String type_article) {
-        this.id_article = id_article;
-
-       
+        this.id_article = id_article;     
         this.description = description;
         this.image = image;
         this.type_article = type_article;

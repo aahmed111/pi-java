@@ -5,31 +5,14 @@
  */
 package edu.workshopjdbc3a48.gui;
 
-import edu.workshopjdbc3a48.entities.Reclamation;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
 
-/**
- * FXML Controller class
- *
- * @author ahmed
- */
-public class ReclamationController implements Initializable {
 
-    @FXML
-    private TextField reclamation;
-     
-    
-    
-    
-  
+public class ModifierUserController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

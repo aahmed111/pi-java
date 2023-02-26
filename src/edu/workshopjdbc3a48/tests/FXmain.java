@@ -18,20 +18,19 @@ import javafx.stage.Stage;
  *
  * @author abdel
  */
-public class FXmain extends Application {
-    
+public class FXmain extends Application { 
     @Override
     public void start(Stage primaryStage) {
            try {
-            FXMLLoader loader =new FXMLLoader(getClass().getResource("../GUI/Login.fxml"));
+            FXMLLoader loader =new FXMLLoader(getClass().getResource("../GUI/ProfilClient.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
+         
             primaryStage.setScene(scene);
             primaryStage.show();  
             /*  Button btn = new Button();
             btn.setText("Say 'Hello World'");
-            btn.setOnAction(new EventHandler<ActionEvent>() {
-            
+            btn.setOnAction(new EventHandler<ActionEvent>() {      
             @Override
             public void handle(ActionEvent event) {
             System.out.println("Hello World!");
@@ -49,11 +48,7 @@ public class FXmain extends Application {
         } catch (IOException ex) {
             Logger.getLogger(FXmain.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
+    } 
     public static void main(String[] args) {
         
         launch(args);

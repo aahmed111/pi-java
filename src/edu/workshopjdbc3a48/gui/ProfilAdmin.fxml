@@ -19,11 +19,13 @@
          <font>
             <Font size="30.0" />
          </font></Label>
-      <ListView fx:id="ListView" layoutX="332.0" layoutY="131.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label fx:id="Clients" alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="71.0" prefHeight="46.0" prefWidth="374.0" text="Select Client">
+      <ListView fx:id="ListView" layoutX="342.0" layoutY="160.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="Clients" alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="80.0" prefHeight="46.0" prefWidth="374.0" text="Select Client">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
+      <Label layoutX="46.0" layoutY="80.0" prefHeight="46.0" prefWidth="209.0" text="Gestion Articles" />
+      <Button layoutX="376.0" layoutY="377.0" mnemonicParsing="false" onAction="#goToProfil" prefHeight="26.0" prefWidth="109.0" text="Go To Profil" />
    </children>
 </AnchorPane>

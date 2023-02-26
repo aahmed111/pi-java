@@ -12,17 +12,19 @@ import java.util.List;
 public class Client extends User {
     private  int  noteEvaluation ;
     private  String adresse;
-    public Client(int id_user, String username, String password, String email, String photo, String type, int phoneNumber,int noteEvaluation,String adresse) {
+    public Client(int id_user, String username, String password, String email, byte[]photo, String type, int phoneNumber,int noteEvaluation,String adresse) {
         super(id_user, username, password, email, photo, type, phoneNumber);
         this.noteEvaluation=noteEvaluation;
         this.adresse=adresse;
     }
 
-    public Client(String username, String password, String email, String photo, String type, int phoneNumber,int noteEvaluation,String adresse ) {
+    public Client(String username, String password, String email, byte[] photo, String type, int phoneNumber,int noteEvaluation,String adresse ) {
         super(username, password, email, photo, type, phoneNumber);
         this.noteEvaluation=noteEvaluation;
         this.adresse=adresse;
     }
+
+   
 
     public String getAdresse() {
         return adresse;
@@ -44,10 +46,6 @@ public class Client extends User {
     @Override
     public String toString() {
         return  "Client{"  +super.toString() +  ", noteEvaluation=" + noteEvaluation + '}';
-    }
-
-    public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
     

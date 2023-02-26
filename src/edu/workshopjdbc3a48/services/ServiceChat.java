@@ -6,7 +6,7 @@
 package edu.workshopjdbc3a48.services;
 
 import edu.workshopjdbc3a48.entities.User;
-import edu.workshopjdbc3a48.entities.Article;
+ 
 import edu.workshopjdbc3a48.entities.Chat;
 import edu.workshopjdbc3a48.utils.DataSource;
 import java.sql.Connection;
@@ -31,18 +31,6 @@ Connection cnx= DataSource.getInstance().getCnx();
     @Override
    public void ajouter(Chat c) {
     try {
-        // Vérifier si un chat existe déjà entre les deux utilisateurs
-        String reqCheck = "SELECT COUNT(*) FROM chat WHERE id_user1 = ? AND id_user2 = ?";
-        PreparedStatement psCheck = cnx.prepareStatement(reqCheck);
-        psCheck.setInt(1, c.getUser1().getId_user());
-        psCheck.setInt(2, c.getUser2().getId_user());
-        ResultSet rsCheck = psCheck.executeQuery();
-        rsCheck.next();
-        int count = rsCheck.getInt(1);
-        if (count > 0) {
-            System.out.println("Un chat existe déjà entre ces deux utilisateurs.");
-            return;
-        }
         
         // Ajouter le nouveau chat
         String req = "INSERT INTO chat(id_user1, id_user2, nom) VALUES (?, ?, ?)";
@@ -136,9 +124,27 @@ public void modifier(Chat c) {
     }
     return c;
     }
-
     
     
+public String getChatNameById(int id) {
+    String chatName = null;
+    try {
+        String req = "SELECT nom FROM chat WHERE id_chat = ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            chatName = rs.getString("nom");
+        }
+    } catch (SQLException ex) {
+        System.out.println("Erreur lors de la récupération du nom du chat : " + ex.getMessage());
+    }
+    return chatName;
+}    
+  /*  public boolean isUnique(Chat chat){
+        
+        
+    }*/
 }
 
  

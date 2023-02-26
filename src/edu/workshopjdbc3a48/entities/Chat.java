@@ -18,22 +18,16 @@ public class Chat {
    private int id_chat;
    private User user1,user2;
    private String nom;
-   private List<Message> messages;
+  
+
+     
 
     public Chat(int id_chat, User user1, User user2, String nom) {
-        
-         
-        this.user1 = user1;
-        this.user2 = user2;
-        this.nom = nom;
-    }
-
-    public Chat(int id_chat, User user1, User user2, String nom, List<Message> messages) {
         this.id_chat = id_chat;
         this.user1 = user1;
         this.user2 = user2;
         this.nom = nom;
-        this.messages = messages;
+        
     }
 
     public Chat(User user1, User user2, String nom) {
@@ -50,21 +44,13 @@ public class Chat {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-  
-
-  
-
-
-     
+    }  
 
     public int getId_chat() {
         return id_chat;
     }
 
-    
-
-    
+  
      
 
     public User getUser1() {
@@ -106,26 +92,17 @@ public class Chat {
         if (this.id_chat != other.id_chat) {
             return false;
         }
-        if (!Objects.equals(this.nom, other.nom)) {
-            return false;
-        }
-        if (!Objects.equals(this.user1, other.user1)) {
-            return false;
-        }
-        if (!Objects.equals(this.user2, other.user2)) {
-            return false;
-        }
-        if (!Objects.equals(this.messages, other.messages)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Chat{" + "id_chat=" + id_chat + ", user1=" + user1 + ", user2=" + user2 + ", nom=" + nom + ", messages=" + messages + '}';
+        return "Chat{" + "id_chat=" + id_chat + ", user1=" + user1 + ", user2=" + user2 + ", nom=" + nom + '}';
     }
+
  
+
+    
     
  
    
