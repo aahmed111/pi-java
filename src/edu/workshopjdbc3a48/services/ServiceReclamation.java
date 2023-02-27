@@ -50,10 +50,12 @@ import java.util.List;
     @Override
 public void ajouter(Reclamation t) throws SQLException {
     try {
-        String req = "INSERT INTO reclamation (id_user1, Nom_user, description, Email ,id_echange, date_envoie) VALUES (4,ahmed,?,?,4,NOW())";
+        String req = "INSERT INTO reclamation (id_user1, Nom_user, description, Email ,id_echange, date_envoie) VALUES (4,?,?,?,4,NOW())";
         PreparedStatement ps = cnx.prepareStatement(req);
-        ps.setString(1, t.getDescription()); 
-         ps.setString(2, t.getEmail()); 
+         ps.setString(1, t.getNom_user()); 
+        ps.setString(2, t.getDescription()); 
+         ps.setString(3, t.getEmail()); 
+         
         ps.executeUpdate();
         System.out.println("Reclamation ajoutée");
     } catch (SQLException e) {
@@ -106,12 +108,12 @@ public List<Reclamation> getAll() throws SQLException {
         while (rs.next()) {
           ServiceUser su = new ServiceUser() ;
           User user1  = su.getOneById(rs.getInt("id_user1"));
-          User user  = su.getOneById(rs.getInt("Nom_user"));     //a verifier 
+     //     User user  = su.getOneById(rs.getInt("Nom_user"));     //a verifier 
           ServiceEchange se = new ServiceEchange();
           Echange e = se.getOneById(rs.getInt("id_echange"));
         //  Reclamation rec = new Reclamation( rs.getInt(1), user1, user2,rs.getString("description") 
          // Reclamation rec = new Reclamation( rs.getInt(1),   user1,    user2     ,rs.getString("description")  ,      rs.getDate("date_envoie")        ,rs.getString("Email") , e) ;
-      Reclamation rec = new Reclamation( rs.getInt(1),   user1,    user     ,rs.getString("description")        ,rs.getString("Email") , e ,      rs.getDate("date_envoie")    ) ;
+      Reclamation rec = new Reclamation( rs.getInt(1),   user1,     rs.getString("Nom_user")   ,rs.getString("description")   ,rs.getString("Email") , e ,  rs.getDate("date_envoie") ) ;
             reclamations.add(rec);
         }
     } catch (SQLException e) {
@@ -159,7 +161,7 @@ public List<Reclamation> getAll() throws SQLException {
           User user  = su.getOneById(rs.getInt("Nom_user"));
           ServiceEchange se = new ServiceEchange();
           Echange e = se.getOneById(rs.getInt("id_echange"));
-              Reclamation rec = new Reclamation( rs.getInt(1),   user1,    user    ,rs.getString("description")        ,rs.getString("Email") , e ,      rs.getDate("date_envoie")  ) ;
+             Reclamation rec = new Reclamation( rs.getInt(1),   user1,     rs.getString("Nom_user")   ,rs.getString("description")   ,rs.getString("Email") , e ,  rs.getDate("date_envoie") ) ;
         }
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());

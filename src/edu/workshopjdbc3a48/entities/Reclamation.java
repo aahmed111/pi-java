@@ -19,72 +19,39 @@ import java.util.Objects;
 
     
     private int id;
-    private User user1,Nom_user;
-   
+    private User user1;
+     private String Nom_user;
     private Date date_envoie;
     private String description ; 
     
      private String Email;
     private Echange echange ;
-   
-
-    public Reclamation(int id, User user1, User Nom_user, String description , String Email, Echange echange, Date date_envoie) {
+ 
+    
+    
+    public Reclamation(int id, User user1, String Nom_user,  String description, String Email, Echange echange,Date date_envoie) {
         this.id = id;
         this.user1 = user1;
         this.Nom_user = Nom_user;
-        
+        this.date_envoie = date_envoie;
         this.description = description;
         this.Email = Email;
         this.echange = echange;
-        this.date_envoie = date_envoie;
     }
 
-    public Reclamation(int id) {
-        this.id = id;
-    }
-    
-    
-    
-    
-    
-    
-    
-    public Reclamation(User user1, User Nom_user, String description, Echange echange) {
-        this.user1 = user1;
+    public Reclamation(String Nom_user, String description, String Email) {
         this.Nom_user = Nom_user;
-        this.description = description;
-        this.echange = echange;
-    }
-
-    public Reclamation(String description, String Email) {
         this.description = description;
         this.Email = Email;
-    }
-    
-
-
-    public Reclamation(int id, User user1, User user2, String description, Echange echange, Date date_envoie) {
-        this.id = id;
-        this.user1 = user1;
-        this.Nom_user = Nom_user;
-        this.date_envoie = date_envoie;
-        this.description = description;
-        this.echange = echange;
-    }
-    public Reclamation( User user1, User user2, String description, Echange echange, Date date_envoie) {
-       
-        this.user1 = user1;
-        this.Nom_user = Nom_user;
-        this.date_envoie = date_envoie;
-        this.description = description;
-        this.echange = echange;
     }
 
     public int getId() {
         return id;
     }
 
-  
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public User getUser1() {
         return user1;
@@ -94,19 +61,21 @@ import java.util.Objects;
         this.user1 = user1;
     }
 
-    public User Nom_user() {
+    public String getNom_user() {
         return Nom_user;
     }
 
-    public void Nom_user(User user2) {
-        this.Nom_user = user2;
+    public void setNom_user(String Nom_user) {
+        this.Nom_user = Nom_user;
     }
 
     public Date getDate_envoie() {
         return date_envoie;
     }
 
-   
+    public void setDate_envoie(Date date_envoie) {
+        this.date_envoie = date_envoie;
+    }
 
     public String getDescription() {
         return description;
@@ -114,6 +83,14 @@ import java.util.Objects;
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public Echange getEchange() {
@@ -127,21 +104,14 @@ import java.util.Objects;
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + this.id;
+        hash = 73 * hash + this.id;
+        hash = 73 * hash + Objects.hashCode(this.user1);
+        hash = 73 * hash + Objects.hashCode(this.Nom_user);
+        hash = 73 * hash + Objects.hashCode(this.date_envoie);
+        hash = 73 * hash + Objects.hashCode(this.description);
+        hash = 73 * hash + Objects.hashCode(this.Email);
+        hash = 73 * hash + Objects.hashCode(this.echange);
         return hash;
-    }
-
-    @Override
-    public String toString() {
-        return "Reclamation{" + "id=" + id + ", user1=" + user1 + ", Nom_user=" + Nom_user + ", date_envoie=" + date_envoie + ", description=" + description + ", echange=" + echange + ", Email=" + Email + '}';
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
     }
 
     @Override
@@ -159,6 +129,9 @@ import java.util.Objects;
         if (this.id != other.id) {
             return false;
         }
+        if (!Objects.equals(this.Nom_user, other.Nom_user)) {
+            return false;
+        }
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
@@ -166,9 +139,6 @@ import java.util.Objects;
             return false;
         }
         if (!Objects.equals(this.user1, other.user1)) {
-            return false;
-        }
-        if (!Objects.equals(this.Nom_user, other.Nom_user)) {
             return false;
         }
         if (!Objects.equals(this.date_envoie, other.date_envoie)) {
@@ -180,8 +150,18 @@ import java.util.Objects;
         return true;
     }
 
-  
-     
+    @Override
+    public String toString() {
+        return "Reclamation{" + "id=" + id + ", user1=" + user1 + ", Nom_user=" + Nom_user + ", date_envoie=" + date_envoie + ", description=" + description + ", Email=" + Email + ", echange=" + echange + '}';
+    }
+   
+ 
+    
+    
+    
+   
+
+   
 
 
    

@@ -39,7 +39,7 @@ public class EnvoyeeReclamation extends Application {
         lblTitre.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
 
         
-        
+        /*
         Label lblNom = new Label("Nom :");
         TextField txtNom = new TextField();
         txtNom.setText("veuillez entrer votre nom complet");    
@@ -77,7 +77,54 @@ public class EnvoyeeReclamation extends Application {
         
         
         
+        */
         
+        
+        
+        
+ // Nom
+Label lblNom = new Label("Nom :");
+TextField txtNom = new TextField();
+txtNom.setPromptText("Veuillez entrer votre nom complet");
+txtNom.setStyle("-fx-background-color: #white ;");
+txtNom.setOnMouseClicked(e -> {
+    txtNom.clear();
+    txtNom.setStyle("-fx-background-color: white;");
+});
+
+// Email
+Label lblEmail = new Label("Email :");
+TextField txtEmail = new TextField();
+txtEmail.setPromptText("Veuillez entrer votre adresse email");
+txtEmail.setStyle("-fx-background-color: #white ;");
+txtEmail.setOnMouseClicked(e -> {
+    txtEmail.clear();
+    txtEmail.setStyle("-fx-background-color: white;");
+});
+
+// Description
+Label lblDescription = new Label("Description :");
+TextArea txtDescription = new TextArea();
+txtDescription.setPromptText("Veuillez entrer une description");
+txtDescription.setStyle("-fx-background-color: #white ;");
+txtDescription.setOnMouseClicked(e -> {
+    txtDescription.clear();
+    txtDescription.setStyle("-fx-background-color: white;");
+});
+
+Button btnValider = new Button("Valider");
+btnValider.setOnAction(e -> {
+    if(txtNom.getText().isEmpty() || txtEmail.getText().isEmpty() || txtDescription.getText().isEmpty()) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez remplir tous les champs");
+        alert.showAndWait();
+    } else {
+        // Continuer avec les informations entrées par l'utilisateur
+    }
+});
+
         
         
         
@@ -90,7 +137,7 @@ public class EnvoyeeReclamation extends Application {
                 String Email = txtEmail.getText();
                 String Description = txtDescription.getText();
                 
-                Reclamation t = new Reclamation (Description,Email);
+                Reclamation t = new Reclamation (nom,Description,Email);
                 ServiceReclamation Rs = new ServiceReclamation ();
                 
                 Rs.ajouter(t);
