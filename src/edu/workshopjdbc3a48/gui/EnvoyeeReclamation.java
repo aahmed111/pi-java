@@ -43,7 +43,7 @@ public class EnvoyeeReclamation extends Application {
         Label lblNom = new Label("Nom :");
         TextField txtNom = new TextField();
         txtNom.setText("veuillez entrer votre nom complet");    
-        txtNom.setStyle("-fx-background-color: lightgrey;");
+        txtNom.setStyle("-fx-background-color: #white ;");
         txtNom.setOnMouseClicked(e -> {
         txtNom.clear();
         txtNom.setStyle("-fx-background-color: white;");});
@@ -57,9 +57,11 @@ public class EnvoyeeReclamation extends Application {
         Label lblEmail = new Label("Email :");
         TextField txtEmail = new TextField();
         txtEmail.setPromptText("votre_Email ");
-        txtEmail.setStyle("-fx-background-color: lightgrey;");
+        txtEmail.setStyle("-fx-background-color: #white ;");
         txtEmail.setOnMouseClicked(e -> {
         txtEmail.clear();
+        
+        
         txtEmail.setStyle("-fx-background-color: white;");});
 
 
@@ -68,9 +70,7 @@ public class EnvoyeeReclamation extends Application {
         Label lblDescription = new Label("Description :");
         TextArea txtDescription = new TextArea();
         txtDescription.setText("votre_Description ");
-        
-        txtDescription.setStyle("-fx-background-color: lightgrey;");
-
+        txtDescription.setStyle("-fx-background-color: #white ;");
         txtDescription.setOnMouseClicked(e -> {
         txtDescription.clear();
         txtDescription.setStyle("-fx-background-color: white;");});
@@ -124,7 +124,7 @@ public class EnvoyeeReclamation extends Application {
         
         
         
-      // ajouter le button annuler On click fermer la fenetre         
+           
         
         
         

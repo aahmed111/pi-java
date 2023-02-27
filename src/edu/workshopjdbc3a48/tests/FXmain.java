@@ -1,7 +1,11 @@
 
 package edu.workshopjdbc3a48.tests;
 
+import edu.workshopjdbc3a48.entities.Reclamation;
+import edu.workshopjdbc3a48.services.ServiceReclamation;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -50,7 +54,16 @@ public class FXmain extends Application {
         }
     } 
     public static void main(String[] args) {
-        
+        ServiceReclamation sr = new ServiceReclamation();
+    try {
+        List<Reclamation> reclamations = sr.getAll();
+        System.out.println(reclamations);
+        for (Reclamation r : reclamations) {
+            System.out.println(r);
+        }
+    } catch (SQLException ex) {
+        System.out.println("Erreur lors de la récupération des réclamations : " + ex.getMessage());
+    }
         launch(args);
     }
     

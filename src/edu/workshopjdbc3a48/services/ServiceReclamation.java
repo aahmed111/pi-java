@@ -50,7 +50,7 @@ import java.util.List;
     @Override
 public void ajouter(Reclamation t) throws SQLException {
     try {
-        String req = "INSERT INTO reclamation (id_user1, Nom_user, description, Email ,id_echange, date_envoie) VALUES (2,5,?,?,4,NOW())";
+        String req = "INSERT INTO reclamation (id_user1, Nom_user, description, Email ,id_echange, date_envoie) VALUES (4,ahmed,?,?,4,NOW())";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, t.getDescription()); 
          ps.setString(2, t.getEmail()); 
@@ -101,8 +101,8 @@ public List<Reclamation> getAll() throws SQLException {
     List<Reclamation> reclamations = new ArrayList<>();
     try {
         String req = "SELECT * FROM reclamation";
-        PreparedStatement ps = cnx.prepareStatement(req);
-        ResultSet rs = ps.executeQuery();
+        Statement ps = cnx.createStatement();
+        ResultSet rs = ps.executeQuery(req);
         while (rs.next()) {
           ServiceUser su = new ServiceUser() ;
           User user1  = su.getOneById(rs.getInt("id_user1"));
