@@ -79,14 +79,14 @@ public class Detailreclamation extends Application {
         
         
        TableColumn<Reclamation, Void> deleteCol = new TableColumn<>("Supprimer");
-       deleteCol.setCellFactory(new Callback<TableColumn<Reclamation, Void>, TableCell<Reclamation, Void>>() {
+       deleteCol.setCellFactory(new Callback<TableColumn<Reclamation, Void>, TableCell<Reclamation, Void>>() { 
     @Override
     public TableCell<Reclamation, Void> call(final TableColumn<Reclamation, Void> param) {
         final TableCell<Reclamation, Void> cell = new TableCell<Reclamation, Void>() {
             private final Button btn = new Button("Supprimer");
 
             {
-                btn.setOnAction((ActionEvent event) -> {
+                btn.setOnAction((ActionEvent event) -> {   
                     try {
                         Reclamation r = getTableView().getItems().get(getIndex());
                         ServiceReclamation sr = new ServiceReclamation();
@@ -114,17 +114,15 @@ public class Detailreclamation extends Application {
     }
 });
 
-table.getColumns().add(deleteCol);
+ 
 
-
+  table.getColumns().addAll(idCol, id_userCol, Nom_user, descriptionCol, emailCol, echangeCol, dateCol, deleteCol);      
         
         
         
         
         
-       table.getColumns().addAll(idCol, id_userCol, Nom_user, descriptionCol, emailCol, echangeCol, dateCol);
-
-        // Créer un bouton pour consulter les réclamations
+        // Créer un bouton pour consulter les réclamations 
         Button consulterBtn = new Button("Consulter réclamations");
         consulterBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override

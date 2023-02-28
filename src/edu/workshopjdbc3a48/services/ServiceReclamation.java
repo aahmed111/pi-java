@@ -5,14 +5,13 @@
  */
 package edu.workshopjdbc3a48.services;
 
-import edu.workshopjdbc3a48.entities.Client;
+ 
 import edu.workshopjdbc3a48.entities.Echange;
 import edu.workshopjdbc3a48.entities.Reclamation;
 import edu.workshopjdbc3a48.entities.User;
 import edu.workshopjdbc3a48.utils.DataSource;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +33,7 @@ import java.util.List;
             String req = "INSERT INTO `reclamation`( `id_user1`, `Nom_user`, `description`,`Email`, `id_echange`, `date_envoie`) VALUES (null,null,?,?,null,NOW()";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, t.getUser1().getId_user()); 
-            ps.setString(2, t.getUser1().getnom_user1()); 
+            ps.setString(1, t.getNom_user());  
             ps.setString(3, t.getDescription());  
             ps.setString(4, t.getEmail());  
             ps.setInt(5, t.getEchange().getId_echange());    
@@ -45,6 +44,7 @@ import java.util.List;
         }
     }
  */
+ 
     
     
     @Override
@@ -53,7 +53,7 @@ public void ajouter(Reclamation t) throws SQLException {
         String req = "INSERT INTO reclamation (id_user1, Nom_user, description, Email ,id_echange, date_envoie) VALUES (4,?,?,?,4,NOW())";
         PreparedStatement ps = cnx.prepareStatement(req);
          ps.setString(1, t.getNom_user()); 
-        ps.setString(2, t.getDescription()); 
+         ps.setString(2, t.getDescription()); 
          ps.setString(3, t.getEmail()); 
          
         ps.executeUpdate();
@@ -97,7 +97,7 @@ public void ajouter(Reclamation t) throws SQLException {
     }
 
     
-    
+    /*
   @Override
 public List<Reclamation> getAll() throws SQLException {
     List<Reclamation> reclamations = new ArrayList<>();
@@ -121,6 +121,46 @@ public List<Reclamation> getAll() throws SQLException {
     }
     return reclamations;
 }
+    */
+    
+    @Override
+   public List<Reclamation> getAll() throws SQLException {
+    List<Reclamation> reclamations = new ArrayList<>();
+    try {
+        String req = "SELECT * FROM reclamation";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            ServiceUser su = new ServiceUser();
+            User user1 = null;
+            if (rs.getObject("id_user1") != null) {
+                user1 = su.getOneById(rs.getInt("id_user1"));
+            }
+            ServiceEchange se = new ServiceEchange();
+            Echange e = null;
+            if (rs.getObject("id_echange") != null) {
+                e = se.getOneById(rs.getInt("id_echange"));
+            }
+            Reclamation rec = new Reclamation(
+                    rs.getInt(1),
+                    user1,
+                    rs.getString("Nom_user"),
+                    rs.getString("description"),
+                    rs.getString("Email"),
+                    e,
+                    rs.getDate("date_envoie")
+            );
+            reclamations.add(rec);
+        }
+    } catch (SQLException e) {
+        System.out.println("Erreur lors de la récupération des réclamations : " + e.getMessage());
+    }
+    return reclamations;
+}
+
+
+
+
 
     
     
