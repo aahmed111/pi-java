@@ -44,7 +44,7 @@ public class Detailreclamation extends Application {
     TableView<Reclamation> table = new TableView<>();
     try {
         ObservableList<Reclamation> reclamations = FXCollections.observableArrayList(sr.getAll()); //recupere d'appres la db
-        
+        System.out.println(sr.getAll());
         table.setItems(reclamations);
     } 
     catch (SQLException ex) {

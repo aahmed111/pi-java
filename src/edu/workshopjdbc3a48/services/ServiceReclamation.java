@@ -26,13 +26,13 @@ import java.util.List;
 
     Connection cnx = DataSource.getInstance().getCnx();
 
-    /*
+  /*  
     @Override
     public void ajouter(Reclamation t) throws SQLException {
         try {
             String req = "INSERT INTO `reclamation`( `id_user1`, `Nom_user`, `description`,`Email`, `id_echange`, `date_envoie`) VALUES (null,null,?,?,null,NOW()";
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, t.getUser1().getId_user()); 
+            ps.setInt(1, t.getid_user1().getId_user()); 
             ps.setString(1, t.getNom_user());  
             ps.setString(3, t.getDescription());  
             ps.setString(4, t.getEmail());  
@@ -43,8 +43,8 @@ import java.util.List;
             System.out.println("Erreur lors de l'envoi de la reclamation : " + e.getMessage());
         }
     }
- */
  
+ */
     
     
     @Override
@@ -62,7 +62,7 @@ public void ajouter(Reclamation t) throws SQLException {
         System.out.println("Erreur lors de l'envoi de la reclamation : " + e.getMessage());
     }
 }
-
+   
     
     
     
@@ -70,7 +70,7 @@ public void ajouter(Reclamation t) throws SQLException {
     @Override
     public void supprimer(int id) throws SQLException {
         try {
-            String req = "DELETE FROM reclamation WHERE id = ?";
+            String req = "DELETE FROM reclamation WHERE id_reclamation = ?"+id;
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -126,21 +126,17 @@ public List<Reclamation> getAll() throws SQLException {
     @Override
    public List<Reclamation> getAll() throws SQLException {
     List<Reclamation> reclamations = new ArrayList<>();
-    try {
-        String req = "SELECT * FROM reclamation";
-        PreparedStatement ps = cnx.prepareStatement(req);
-        ResultSet rs = ps.executeQuery();
+    
+        String req = "SELECT * FROM `reclamation`";
+        Statement ps = cnx.createStatement();
+        ResultSet rs = ps.executeQuery(req);
         while (rs.next()) {
             ServiceUser su = new ServiceUser();
-            User user1 = null;
-            if (rs.getObject("id_user1") != null) {
-                user1 = su.getOneById(rs.getInt("id_user1"));
-            }
+         
+              User  user1 = su.getOneById(4);
+
             ServiceEchange se = new ServiceEchange();
-            Echange e = null;
-            if (rs.getObject("id_echange") != null) {
-                e = se.getOneById(rs.getInt("id_echange"));
-            }
+             Echange   e = se.getOneById(4);
             Reclamation rec = new Reclamation(
                     rs.getInt(1),
                     user1,
@@ -152,9 +148,7 @@ public List<Reclamation> getAll() throws SQLException {
             );
             reclamations.add(rec);
         }
-    } catch (SQLException e) {
-        System.out.println("Erreur lors de la récupération des réclamations : " + e.getMessage());
-    }
+   
     return reclamations;
 }
 

@@ -8,24 +8,29 @@ import java.util.Objects;
 public class Message {
     private int id_message;
     private Date date ;
-    private String text ;
+    private String Message ;
     private Chat chat;
 
     public Message(String text, Chat chat) {
-        this.text = text;
+        this.Message = Message;
         this.chat = chat;
     }
 
-    public Message(int id_message, Date date, String text, Chat chat) {
+    public Message(String Message) {
+        this.Message = Message;
+    }
+
+    
+    public Message(int id_message, Date date, String Message, Chat chat) {
         this.id_message = id_message;
         this.date = date;
-        this.text = text;
+        this.Message = Message;
         this.chat = chat;
     }
 
     public Message(Date date, String text, Chat chat) {
         this.date = date;
-        this.text = text;
+        this.Message = Message;
         this.chat = chat;
     }
     
@@ -44,12 +49,12 @@ public class Message {
         this.date = date;
     }
 
-    public String getText() {
-        return text;
+    public String getMessage() {
+        return Message;
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.Message = Message;
     }
 
     public Chat getChat() {
@@ -65,7 +70,7 @@ public class Message {
         int hash = 7;
         hash = 79 * hash + this.id_message;
         hash = 79 * hash + Objects.hashCode(this.date);
-        hash = 79 * hash + Objects.hashCode(this.text);
+        hash = 79 * hash + Objects.hashCode(this.Message);
         hash = 79 * hash + Objects.hashCode(this.chat);
         return hash;
     }
@@ -85,7 +90,7 @@ public class Message {
         if (this.id_message != other.id_message) {
             return false;
         }
-        if (!Objects.equals(this.text, other.text)) {
+        if (!Objects.equals(this.Message, other.Message)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {
@@ -99,7 +104,7 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" + "id_message=" + id_message + ", date=" + date + ", text=" + text + ", chat=" + chat + '}';
+        return "Message{" + "id_message=" + id_message + ", date=" + date + ", text=" + Message + ", chat=" + chat + '}';
     }
  
     

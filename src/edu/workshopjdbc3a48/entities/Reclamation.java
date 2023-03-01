@@ -19,7 +19,7 @@ import java.util.Objects;
 
     
     private int id;
-    private User user1;
+    private User id_user1;
      private String Nom_user;
     private Date date_envoie;
     private String description ; 
@@ -29,9 +29,9 @@ import java.util.Objects;
  
     
     
-    public Reclamation(int id, User user1, String Nom_user,  String description, String Email, Echange echange,Date date_envoie) {
+    public Reclamation(int id, User id_user1, String Nom_user,  String description, String Email, Echange echange,Date date_envoie) {
         this.id = id;
-        this.user1 = user1;
+        this.id_user1 = id_user1;
         this.Nom_user = Nom_user;
         this.date_envoie = date_envoie;
         this.description = description;
@@ -54,12 +54,10 @@ import java.util.Objects;
     }
 
     public User getUser1() {
-        return user1;
+        return id_user1;
     }
 
-    public void setUser1(User user1) {
-        this.user1 = user1;
-    }
+   
 
     public String getNom_user() {
         return Nom_user;
@@ -105,7 +103,7 @@ import java.util.Objects;
     public int hashCode() {
         int hash = 7;
         hash = 73 * hash + this.id;
-        hash = 73 * hash + Objects.hashCode(this.user1);
+        hash = 73 * hash + Objects.hashCode(this.id_user1);
         hash = 73 * hash + Objects.hashCode(this.Nom_user);
         hash = 73 * hash + Objects.hashCode(this.date_envoie);
         hash = 73 * hash + Objects.hashCode(this.description);
@@ -138,7 +136,7 @@ import java.util.Objects;
         if (!Objects.equals(this.Email, other.Email)) {
             return false;
         }
-        if (!Objects.equals(this.user1, other.user1)) {
+        if (!Objects.equals(this.id_user1, other.id_user1)) {
             return false;
         }
         if (!Objects.equals(this.date_envoie, other.date_envoie)) {
@@ -152,7 +150,7 @@ import java.util.Objects;
 
     @Override
     public String toString() {
-        return "Reclamation{" + "id=" + id + ", user1=" + user1 + ", Nom_user=" + Nom_user + ", date_envoie=" + date_envoie + ", description=" + description + ", Email=" + Email + ", echange=" + echange + '}';
+        return "Reclamation{" + "id=" + id + ", id_user1=" + id_user1 + ", Nom_user=" + Nom_user + ", date_envoie=" + date_envoie + ", description=" + description + ", Email=" + Email + ", echange=" + echange + '}';
     }
    
  

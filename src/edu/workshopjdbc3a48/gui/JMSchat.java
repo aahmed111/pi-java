@@ -5,6 +5,8 @@
  */
 package edu.workshopjdbc3a48.gui;
 
+import edu.workshopjdbc3a48.entities.Message;
+import edu.workshopjdbc3a48.services.ServiceMessage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Connection;
@@ -23,6 +25,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -31,7 +34,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javax.jms.DeliveryMode;
@@ -48,6 +51,7 @@ public class JMSchat extends Application {
     private String codeUser;
     private ObservableList<String> observableListMessages = FXCollections.observableArrayList();
     private ListView<String> listViewMessage = new ListView<>(observableListMessages);
+    
 
     @Override
     public void start(Stage primaryStage) {
@@ -86,6 +90,9 @@ public class JMSchat extends Application {
         Label labelTo = new Label("To:");
         TextField textFieldTo = new TextField("c1");
         textFieldTo.setPrefWidth(150);
+        
+        
+        
         Label labelMessage = new Label("Message:");
         TextArea textAreaMessage = new TextArea();
         textAreaMessage.setPrefRowCount(3);
@@ -99,14 +106,43 @@ public class JMSchat extends Application {
         VBox.setVgrow(listViewMessage, Priority.ALWAYS);
 
         vBox.getChildren().addAll(listViewMessage, hBox2);
-
+        
+        /*
+       listViewMessage.setCellFactory(listView -> {
+    ListCell<String> cell = new ListCell<String>() {
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setText(null);
+            } else {
+                String[] parts = item.split("\\s+", 4);
+                String from = parts[1];
+                String message = parts[3];
+                String align = from.equals(codeUser) ? "right" : "left";
+                String style = "-fx-background-color: #eee; -fx-padding: 5px; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-alignment: %s; -fx-border-color: #ccc; -fx-border-width: 1px;";
+                setText(String.format("<div style='%s'><b>%s:</b> %s</div>", String.format(style, align), from, message));
+            }
+        }
+    };
+    return cell;
+});
+*/
+           
+       
+         
+       
         borderPane.setCenter(vBox);
 
         Scene scene = new Scene(borderPane, 800, 500);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        primaryStage.show(); // creation de l'inrterface avec javafx
 
-        // connect to ActiveMQ broker
+        
+        
+        
+        
+        // connect to ActiveMQ  broker
         buttonConnecter.setOnAction(e -> {
             try {
                 codeUser = textFieldCode.getText().trim();
@@ -129,11 +165,11 @@ public class JMSchat extends Application {
             // create ActiveMQ destination
             Destination destination = session.createTopic("JMSchat");
 
-            // create ActiveMQ producer
+            // create ActiveMQ producer )(pour l'envoie des message)
             messageProducer = session.createProducer(destination);
             messageProducer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
 
-            // create ActiveMQ consumer
+            // create ActiveMQ consumer (poue la reseption des messages )
             MessageConsumer messageConsumer = session.createConsumer(destination);
             messageConsumer.setMessageListener(message -> {
                 try {
@@ -155,6 +191,19 @@ public class JMSchat extends Application {
 
     // send message
     buttonEnvoyer.setOnAction(e -> {
+ 
+          String Message =   textAreaMessage.getText();
+          
+         Message t = new Message(Message);
+         ServiceMessage Rs = new ServiceMessage();
+         Rs.ajouter(t);
+            
+          
+ 
+        
+        
+        
+        
         try {
             String to = textFieldTo.getText().trim();
             String text = textAreaMessage.getText().trim();
@@ -162,7 +211,7 @@ public class JMSchat extends Application {
             if (!to.isEmpty() && !text.isEmpty()) {
                 TextMessage message = session.createTextMessage(text);
                 message.setStringProperty("to", to);
-                message.setStringProperty("from", codeUser);
+                message.setStringProperty("from", codeUser); // envoye des message par code 
                 messageProducer.send(message);
                 textAreaMessage.clear();
             }
@@ -208,3 +257,4 @@ public static void main(String[] args) {
 }
 
 
+ 
