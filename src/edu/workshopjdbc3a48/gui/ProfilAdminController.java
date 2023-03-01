@@ -27,6 +27,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
@@ -39,44 +42,62 @@ import javafx.stage.Stage;
  */
 public class ProfilAdminController implements Initializable {
 
-    private int Id_Client;
+    private int Id_User;
     @FXML
-    private Label msgAdmin;
-    @FXML
-    private ListView<Integer> ListView;
-    @FXML
-    private Label Clients;
-    ServiceUser su = new ServiceUser();
+    private ListView<String> ListView;
 
-    public List<Integer> afficherClient() {
-        List<Integer> listId_user = new ArrayList<>();
+    public int getId_User() {
+        return Id_User;
+    }
+
+    public void setId_User(int Id_User) {
+        this.Id_User = Id_User;
+    }
+    ServiceUser su = new ServiceUser();
+    @FXML
+    private Button users;
+    @FXML
+    private Button exit;
+    @FXML
+    private PieChart pieChart;
+    @FXML
+    private LineChart<?, ?> LineChart;
+   
+    public List<String> afficherClient() {
+        List<String> listName = new ArrayList<>();
         List<Client> listClient = new ArrayList<>();
         try {
 
             listClient = su.getAllClient();
             for (Client client : listClient) {
-                listId_user.add(client.getId_user());
+                listName.add(client.getUsername());
             }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
 
         }
-        return listId_user;
+        return listName;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        List<Integer> listId = new ArrayList<>();
-        listId = afficherClient();
+        List<String> list = new ArrayList<>();
+        list = afficherClient();
+        
 
-        ListView.getItems().addAll(listId);
+        ListView.getItems().addAll(list);
         ListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Integer selection = ListView.getSelectionModel().getSelectedItem();
-                Id_Client = selection;
+                String selection = ListView.getSelectionModel().getSelectedItem();
+                String nom = selection;
+                try {
+                    Id_User = su.getIdByName(nom);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProfilAdminController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
             }
         });
@@ -86,16 +107,15 @@ public class ProfilAdminController implements Initializable {
     @FXML
     private void goToProfil(ActionEvent event)  {
         try {
-            Client c = (Client) su.getOneById(Id_Client);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfilClient.fxml"));
+            User u =  su.getOneById(Id_User);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfilC.fxml"));
             Parent root;
-          
-                root = loader.load();
+             root = loader.load();
          
             
-            ProfilClientController pc = loader.getController();
-            pc.setId_connecté(Id_Client);
-            pc.afficher(Id_Client);
+            ProfilCController pc = loader.getController();
+            pc.setId_connecté(Id_User);
+            pc.affiche(Id_User);
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             appStage.setScene(scene);
@@ -122,6 +142,11 @@ public class ProfilAdminController implements Initializable {
             Logger.getLogger(ProfilAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    @FXML
+    private void users(ActionEvent event) {
+        
     }
 
 }

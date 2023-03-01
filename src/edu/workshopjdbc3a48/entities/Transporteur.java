@@ -15,31 +15,31 @@ public class Transporteur extends User {
     private int noteEvaluation;
     private int cout;
     private String etat;
+    private Agence agence;
+    
+    
+    public Transporteur(String username, String password, String email, byte[] photo, int phoneNumber) {
+        super(username, password, email, photo, phoneNumber);
+    }
 
-    public Transporteur(String username, String password, String email, byte[] photo, String type, int phoneNumber, int noteEvaluation, String adresse, String etat, int cout) {
-        super(username, password, email, photo, type, phoneNumber);
+    public Transporteur(String username, String password, String email, byte[] photo, String type, int phoneNumber,String sexe, int noteEvaluation,  String etat, int cout) {
+        super(username, password, email, photo, type, phoneNumber,sexe);
         this.noteEvaluation = noteEvaluation;
-        this.adresse = adresse;
+     
         this.etat = etat;
         this.cout = cout;
     }
 
-    public Transporteur(int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber, int noteEvaluation, String adresse, String etat, int cout) {
-        super(id_user, username, password, email, photo, type, phoneNumber);
+    public Transporteur(int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber, int noteEvaluation, String sexe, String etat, int cout) {
+        super(id_user, username, password, email, photo, type, phoneNumber,sexe);
 
         this.noteEvaluation = noteEvaluation;
-        this.adresse = adresse;
+     
         this.etat = etat;
         this.cout = cout;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
+ 
 
     public int getNoteEvaluation() {
         return noteEvaluation;

@@ -4,19 +4,28 @@ package edu.workshopjdbc3a48.entities;
 
 public abstract class User {
     private int id_user,  phoneNumber ;
-    private String username , password ,email  ,type ;
+    String username;
+    private String password ,email  ,type,sexe ;
     private byte[] photo;
-
-    public User(String username, String password, String email, byte[] photo, String type,int phoneNumber) {
+    
+  public User(String username, String password, String email, byte[] photo, int phoneNumber) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.photo = photo;
+        this.phoneNumber=phoneNumber;
+    }
+    public User(String username, String password, String email, byte[] photo, String type,int phoneNumber,String sexe) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.photo = photo;
         this.type = type;
         this.phoneNumber=phoneNumber;
+        this.sexe=sexe;
     }
 
-    public User(int id_user, String username, String password, String email, byte[] photo, String type,int phoneNumber) {
+    public User(int id_user, String username, String password, String email, byte[] photo, String type,int phoneNumber,String sexe) {
         this.id_user = id_user;
         this.username = username;
         this.password = password;
@@ -24,6 +33,15 @@ public abstract class User {
         this.photo = photo;
         this.type = type;
         this.phoneNumber=phoneNumber;
+        this.sexe=sexe;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
     }
 
     public int getPhoneNumber() {

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.EmailCheckController">
+   <children>
+      <TextField fx:id="passwordEmail" alignment="CENTER" layoutX="72.0" layoutY="189.0" prefHeight="48.0" prefWidth="455.0" promptText="Entrer votre Password" stylesheets="@style.css" />
+      <TextField fx:id="email" alignment="CENTER" layoutX="72.0" layoutY="121.0" prefHeight="48.0" prefWidth="455.0" promptText="Entrer votre Email" styleClass="text-field" stylesheets="@style.css" />
+      <Button layoutX="251.0" layoutY="256.0" mnemonicParsing="false" onAction="#envoyer" prefHeight="26.0" prefWidth="97.0" text="Envoyer" />
+      <Button layoutX="527.0" layoutY="23.0" mnemonicParsing="false" onAction="#retour" text="retour" />
+   </children>
+</AnchorPane>

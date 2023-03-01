@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ModifierUserController">
-    
+<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1300.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ModifierUserController">
+   <children>
+      <AnchorPane id="AnchorPane" fx:id="ty" layoutX="10.0" layoutY="10.0" prefHeight="1000.0" prefWidth="1300.0" stylesheets="@dark-theme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextField fx:id="username" alignment="CENTER" layoutX="401.0" layoutY="157.0" prefHeight="58.0" prefWidth="547.0" promptText="changer username" stylesheets="@style.css" />
+            <TextField fx:id="pasworrd" alignment="CENTER" layoutX="402.0" layoutY="275.0" prefHeight="58.0" prefWidth="547.0" promptText="changer password" stylesheets="@style.css" />
+            <TextField fx:id="email" alignment="CENTER" layoutX="402.0" layoutY="423.0" prefHeight="58.0" prefWidth="547.0" promptText="changer email" stylesheets="@style.css" />
+            <TextField fx:id="phoneNumber" alignment="CENTER" layoutX="402.0" layoutY="561.0" prefHeight="58.0" prefWidth="547.0" promptText="Phone" stylesheets="@style.css" />
+            <ImageView fx:id="ImageV" fitHeight="138.0" fitWidth="200.0" layoutX="576.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+            <Button layoutX="598.0" layoutY="848.0" mnemonicParsing="false" onAction="#modifierProfil" prefHeight="46.0" prefWidth="187.0" stylesheets="@style.css" text="Modifier" />
+            <Button layoutX="64.0" layoutY="76.0" mnemonicParsing="false" onAction="#exit" prefHeight="58.0" prefWidth="126.0" stylesheets="@style.css" text="Profil" />
+            <Button layoutX="576.0" layoutY="743.0" mnemonicParsing="false" onAction="#browser" prefHeight="26.0" prefWidth="231.0" stylesheets="@style.css" text="modifier photo " />
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>

@@ -1,46 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="562.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.LoginController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="880.0" prefWidth="1480.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.LoginController">
    <children>
-      <AnchorPane id="AnchorPane" prefHeight="578.0" prefWidth="719.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane id="AnchorPane" layoutY="-2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="873.0" prefWidth="806.0" stylesheets="@style.css" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="658.0" AnchorPane.topAnchor="-2.0">
          <children>
-            <Button fx:id="login" layoutX="237.0" layoutY="458.0" mnemonicParsing="false" onAction="#login" prefHeight="46.0" prefWidth="94.0" text="Login" />
-            <Button fx:id="sinUp" layoutX="387.0" layoutY="458.0" mnemonicParsing="false" onAction="#sinUp" prefHeight="46.0" prefWidth="94.0" text="Sin Up" />
-            <TextField fx:id="username" layoutX="245.0" layoutY="211.0" prefHeight="38.0" prefWidth="227.0" promptText="username" />
-            <PasswordField fx:id="password" layoutX="246.0" layoutY="282.0" prefHeight="38.0" prefWidth="227.0" promptText="password" />
-            <Label layoutX="179.0" layoutY="365.0" prefHeight="30.0" prefWidth="52.0" text="Type">
+            <TextField fx:id="username" alignment="CENTER" layoutX="111.0" layoutY="380.0" prefHeight="59.0" prefWidth="626.0" promptText="username" stylesheets="@style.css" />
+            <Button fx:id="login" layoutX="280.0" layoutY="634.0" mnemonicParsing="false" onAction="#login" prefHeight="46.0" prefWidth="306.0" stylesheets="@dark-theme.css" text="Login">
                <font>
-                  <Font size="20.0" />
+                  <Font size="18.0" />
+               </font></Button>
+            <PasswordField fx:id="password" alignment="CENTER" layoutX="111.0" layoutY="507.0" prefHeight="59.0" prefWidth="626.0" promptText="password" stylesheets="@style.css" />
+            <Label fx:id="forget" alignment="CENTER" contentDisplay="CENTER" layoutX="281.0" layoutY="692.0" prefHeight="19.0" prefWidth="305.0" style="-fx-text-fill: #812a2a;" stylesheets="@dark-theme.css" text="Forget password ?" textFill="#812a2a">
+               <font>
+                  <Font size="16.0" />
                </font>
             </Label>
-            <CheckBox fx:id="show" layoutX="499.0" layoutY="288.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" text="show" />
-            <ChoiceBox fx:id="type" layoutX="284.0" layoutY="368.0" prefWidth="150.0" />
-            <ImageView fitHeight="150.0" fitWidth="217.0" layoutX="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Image/324220102_1390513315050705_4917919908598895187_n.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="84.0" fitWidth="86.0" layoutX="595.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Image/325487568_504340821815212_4524408024229645924_n.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="120.0" fitWidth="142.0" layoutX="299.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Image/user.png" />
-               </image>
-            </ImageView>
+            <FontAwesomeIcon fill="#ccbaba" glyphName="USERS" layoutX="328.0" layoutY="277.0" size="15em" />
+            <Label fx:id="message" alignment="CENTER" layoutX="316.0" layoutY="575.0" prefHeight="22.0" prefWidth="235.0" textFill="RED">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="806.0" layoutY="-2.0" prefHeight="882.0" prefWidth="676.0" stylesheets="@style.css">
+         <children>
+            <Button fx:id="sinUp" layoutX="168.0" layoutY="510.0" mnemonicParsing="false" onAction="#sinUp" prefHeight="46.0" prefWidth="339.0" stylesheets="@style.css" text="Sin Up" />
          </children>
       </AnchorPane>
    </children>

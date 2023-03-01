@@ -5,54 +5,95 @@
  */
 package edu.workshopjdbc3a48.entities;
 
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 /**
  *
  * @author pc
  */
-public class Reclamation {
-   private int id_reclamation;
-   private String date_envoie,etat;
+ 
+   public class Reclamation {
+    private int id;
+    private User user1,user2;
+    private Date date_envoie;
+    private String description ; 
+    private Echange echange ;
 
-    public Reclamation(int id_reclamation, String date_envoie, String etat) {
-        this.id_reclamation = id_reclamation;
+    public Reclamation(User user1, User user2, String description, Echange echange) {
+        this.user1 = user1;
+        this.user2 = user2;
+        this.description = description;
+        this.echange = echange;
+    }
+
+    public Reclamation(int id, User user1, User user2, String description, Echange echange, Date date_envoie) {
+        this.id = id;
+        this.user1 = user1;
+        this.user2 = user2;
         this.date_envoie = date_envoie;
-        this.etat = etat;
+        this.description = description;
+        this.echange = echange;
     }
-
-   
-    public Reclamation(String date_envoie, String etat) {
+    public Reclamation( User user1, User user2, String description, Echange echange, Date date_envoie) {
+       
+        this.user1 = user1;
+        this.user2 = user2;
         this.date_envoie = date_envoie;
-        this.etat = etat;
+        this.description = description;
+        this.echange = echange;
     }
 
-    public int getId_reclamation() {
-        return id_reclamation;
+    public int getId() {
+        return id;
     }
 
-    public String getDate_envoie() {
+  
+
+    public User getUser1() {
+        return user1;
+    }
+
+    public void setUser1(User user1) {
+        this.user1 = user1;
+    }
+
+    public User getUser2() {
+        return user2;
+    }
+
+    public void setUser2(User user2) {
+        this.user2 = user2;
+    }
+
+    public Date getDate_envoie() {
         return date_envoie;
     }
 
-    public String getEtat() {
-        return etat;
+   
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setDate_envoie(String date_envoie) {
-        this.date_envoie = date_envoie;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setEtat(String etat) {
-        this.etat = etat;
+    public Echange getEchange() {
+        return echange;
     }
 
-    @Override
-    public String toString() {
-        return "reclamation{" + "id_reclamation=" + id_reclamation + ", date_envoie=" + date_envoie + ", etat=" + etat + '}';
+    public void setEchange(Echange echange) {
+        this.echange = echange;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
+        hash = 13 * hash + this.id;
         return hash;
     }
 
@@ -68,11 +109,21 @@ public class Reclamation {
             return false;
         }
         final Reclamation other = (Reclamation) obj;
-        if (this.id_reclamation != other.id_reclamation) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
     }
-           
-           
-}
+
+    @Override
+    public String toString() {
+        return "Reclamation{" + "id=" + id + ", user1=" + user1 + ", user2=" + user2 + ", date_envoie=" + date_envoie + ", description=" + description + ", echange=" + echange + '}';
+    }
+    
+     
+
+
+   
+
+    
+   }

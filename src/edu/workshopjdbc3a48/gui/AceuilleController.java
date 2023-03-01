@@ -26,8 +26,6 @@ import javafx.stage.Stage;
 public class AceuilleController implements Initializable {
 
     private int Id_Connector ;
-    @FXML
-    private Label message;
 
     public int getId_Connector() {
         return Id_Connector;
@@ -39,20 +37,8 @@ public class AceuilleController implements Initializable {
 
     
     
-    public void  afficher(int id ){
-        try {
-            ServiceUser su = new ServiceUser();
-            Client c =  (Client) su.getOneById(Id_Connector);
-          
-             Client c1 =  (Client) su.getOneById(id);
-            message.setText(c.getUsername() + ""+c1.getUsername());
-        } catch (SQLException ex) {
-            Logger.getLogger(AceuilleController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-    public void afficherProduit(){ 
-                                      
-    }
+   
+  
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,12 +52,12 @@ public class AceuilleController implements Initializable {
         try {  // Recuperation de l'objet Client a traver son id 
             // Récupération de l'instance de LoginController
              
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfilClient.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfilC.fxml"));
             Parent root = loader.load();
            
-            ProfilClientController pc = loader.getController();
+            ProfilCController pc = loader.getController();
             pc.setId_connecté(Id_Connector);
-            pc.afficher(Id_Connector);
+            pc.affiche(Id_Connector);
             
             Scene scene = new Scene(root);
             Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

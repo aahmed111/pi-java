@@ -11,12 +11,16 @@ package edu.workshopjdbc3a48.entities;
  */
 public class Admin extends User {
 
-    public Admin(String username, String password, String email, byte[] photo, String type, int phoneNumber) {
-        super(username, password, email, photo, type, phoneNumber);
+    public Admin(String username, String password, String email, byte[] photo, String type, int phoneNumber,String sexe) {
+        super(username, password, email, photo, type, phoneNumber,sexe);
     }
 
-    public Admin(int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber) {
-        super(id_user, username, password, email, photo, type, phoneNumber);
+    public Admin(int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber,String sexe) {
+        super(id_user, username, password, email, photo, type, phoneNumber,sexe);
+    }
+
+    public Admin(String username, String password, String email, byte[] photo, int phoneNumber) {
+        super(username, password, email, photo, phoneNumber);
     }
 
   

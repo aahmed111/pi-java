@@ -30,27 +30,23 @@ public class ServiceUser implements IService<User> {
     @Override
     public void ajouter(User u) throws SQLException {
 
-     
-         
-           
-            if (u instanceof Client) {
+        if (u instanceof Client) {
 
-              
-                Client client = (Client) u;
-                String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`, `noteEvaluation`, `adresse` ,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,?,DEFAULT,DEFAULT)";
-                PreparedStatement ps = cnx.prepareStatement(req);
-                ps.setString(1, client.getUsername());
-                ps.setString(2, client.getPassword());
-                ps.setString(3, client.getEmail());
-                ps.setBytes(4, client.getPhoto());
-                ps.setString(5, client.getType());
-                ps.setInt(6, client.getPhoneNumber());
-                ps.setInt(7, client.getNoteEvaluation());
-                ps.setString(8, client.getAdresse());
-                ps.executeUpdate();
-                System.out.println("client ajouté !");
+            Client client = (Client) u;
+            String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`, `noteEvaluation`, `sexe` ,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,?,DEFAULT,DEFAULT)";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, client.getUsername());
+            ps.setString(2, client.getPassword());
+            ps.setString(3, client.getEmail());
+            ps.setBytes(4, client.getPhoto());
+            ps.setString(5, client.getType());
+            ps.setInt(6, client.getPhoneNumber());
+            ps.setInt(7, client.getNoteEvaluation());
+            ps.setString(8, client.getSexe());
+            ps.executeUpdate();
+            System.out.println("client ajouté !");
 
-          /*  } else if (u instanceof Admin) {
+            /*  } else if (u instanceof Admin) {
 
                 String type = "Admin";
                 Admin admin = (Admin) u;
@@ -65,30 +61,27 @@ public class ServiceUser implements IService<User> {
 
                 ps.executeUpdate();
                 System.out.println("admin ajouté !");*/
+        } else {
 
-            } else {
+            {
+                Transporteur t = (Transporteur) u;
 
-                {
-                    Transporteur t = (Transporteur) u;
+                String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation`,`sexe`,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,?,DEFAULT(),DEFAULT())";
+                PreparedStatement ps = cnx.prepareStatement(req);
+                ps.setString(1, t.getUsername());
+                ps.setString(2, t.getPassword());
+                ps.setString(3, t.getEmail());
+                ps.setBytes(4, t.getPhoto());
+                ps.setString(5, t.getType());
+                ps.setInt(6, t.getPhoneNumber());
+                ps.setInt(7, t.getNoteEvaluation());
+                ps.setString(8, t.getSexe());
+                ps.executeUpdate();
+                System.out.println("Transporteur ajouté !");
 
-                   
-
-                    String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation`,`adresse`,`etat`,`cout`)  VALUES (?,?,?,?,?,?,DEFAULT,?,DEFAULT,DEFAULT)";
-                    PreparedStatement ps = cnx.prepareStatement(req);
-                    ps.setString(1, t.getUsername());
-                    ps.setString(2, t.getPassword());
-                    ps.setString(3, t.getEmail());
-                    ps.setBytes(4, t.getPhoto());
-                    ps.setString(5,t.getType() );
-                    ps.setInt(6, t.getPhoneNumber());
-                    ps.setString(7, t.getAdresse());
-                    ps.executeUpdate();
-                    System.out.println("Transporteur ajouté !");
-
-                }
             }
-             
-       
+        }
+
     }
 
     @Override
@@ -144,14 +137,14 @@ public class ServiceUser implements IService<User> {
 
         while (rs.next()) {
             if (rs.getString("type").equals("Admin")) {
-                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7));
+                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7),rs.getString(8));
                 list.add(admin);
 
             } else if (rs.getString("type").equals("Client")) {
-                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("adresse"));
+                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("sexe"));
                 list.add(client);
             } else {
-                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8),rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
+                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("sexe"), rs.getString("etat"), rs.getInt("cout"));
                 list.add(transporteur);
             }
 
@@ -168,28 +161,28 @@ public class ServiceUser implements IService<User> {
         ResultSet rs = ps.executeQuery(req);
         if (rs.next()) {
             if (rs.getString("type").equals("Admin")) {
-                u = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7));
+                u = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7),rs.getString(8));
             } else if (rs.getString("type").equals("Client")) {
                 u = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
             } else {
-                u = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8),rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
+                u = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
             }
         }
 
         return u;
     }
 
-    public  boolean verifier(String username, String password) throws SQLException {
+    public boolean verifierUsername(String username ) throws SQLException {
         boolean check = false;
-        String req = "SELECT `username` ,`password` FROM USER ";
+        String req = "SELECT `username`  FROM USER ";
 
         Statement ps = cnx.createStatement();
         ResultSet rs = ps.executeQuery(req);
         while (rs.next()) {
 
-            if (rs.getString("username").equals(username) && rs.getString("password").equals(password)) {
+            if (rs.getString("username").equals(username) ) {
                 check = true;
-                break;
+               break;
             }
 
         }
@@ -218,7 +211,7 @@ public class ServiceUser implements IService<User> {
         ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            t = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8),rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
+            t = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("sexe"), rs.getString("etat"), rs.getInt("cout"));
         }
 
         return t;
@@ -232,7 +225,7 @@ public class ServiceUser implements IService<User> {
         ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            a = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7));
+            a = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7),rs.getString(8));
         }
 
         return a;
@@ -251,58 +244,100 @@ public class ServiceUser implements IService<User> {
         }
         return listClient;
     }
-     public List<Transporteur> getAllTransorteur() throws SQLException {
+
+    public List<Transporteur> getAllTransporteur() throws SQLException {
         List<Transporteur> listTransporteur = new ArrayList<>();
 
         List<User> users = getAll();
 
         for (User user : users) {
             if (user instanceof Transporteur) {
-             Transporteur tr = (Transporteur) user;
+                Transporteur tr = (Transporteur) user;
                 listTransporteur.add(tr);
             }
         }
-        return listTransporteur ;
+        return listTransporteur;
     }
-    public  boolean isValidEmailAddress(String email) {
-    boolean result = true;
-    try {
-        
-        InternetAddress emailAddress = new InternetAddress(email);
-        emailAddress.validate();
-        
-    } catch (AddressException ex) {
-        result = false;
+
+    public boolean isValidEmailAddress(String email) {
+        boolean result = true;
+        try {
+
+            InternetAddress emailAddress = new InternetAddress(email);
+            emailAddress.validate();
+
+        } catch (AddressException ex) {
+            result = false;
+        }
+        return result;
     }
-    return result;
-}
-   public List<User> getUserByType(String type) throws SQLException{
+
+    public List<User> getUserByType(String type) throws SQLException {
         List<User> list = new ArrayList<>();
         String req = "SELECT * FROM user WHERE type=? ";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, type);
         ResultSet rs = ps.executeQuery();
-         while (rs.next()) {
+        while (rs.next()) {
             if (rs.getString("type").equals("Admin")) {
-                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7));
+                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7),rs.getString(8));
                 list.add(admin);
 
             } else if (rs.getString("type").equals("Client")) {
                 User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
                 list.add(client);
             } else {
-                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8),rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
+                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
                 list.add(transporteur);
             }
 
         }
         return list;
-   
-   }   
-  
 
+    }
 
-       
-   
-    
+    public boolean mailExist(String email) throws SQLException {
+        boolean check = false;
+
+        String req = "SELECT `email`  FROM USER ";
+        Statement ps = cnx.createStatement();
+        ResultSet rs = ps.executeQuery(req);
+        while (rs.next()) {
+
+            if (rs.getString("email").equals(email)) {
+                check = true;
+                break;
+            }
+        }
+
+        return check;
+    }
+
+    public String getPasswordByEmail(String email) throws SQLException {
+
+        String password = null;
+
+        String req = "SELECT `password` FROM USER where `email`= ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            password = rs.getString("password");
+        }
+        return password;
+    }
+       public int getIdByName(String name) throws SQLException {
+
+        int Id = 0;
+
+        String req = "SELECT `id_user` FROM USER where `username`= ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, name);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+             Id = rs.getInt("id_user");
+        }
+        return Id;
+    }
+
 }

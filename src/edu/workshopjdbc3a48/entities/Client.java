@@ -11,28 +11,25 @@ import java.util.List;
 
 public class Client extends User {
     private  int  noteEvaluation ;
-    private  String adresse;
-    public Client(int id_user, String username, String password, String email, byte[]photo, String type, int phoneNumber,int noteEvaluation,String adresse) {
-        super(id_user, username, password, email, photo, type, phoneNumber);
+  
+    public Client(int id_user, String username, String password, String email, byte[]photo, String type, int phoneNumber ,int noteEvaluation,String sexe) {
+        super(id_user, username, password, email, photo, type, phoneNumber,sexe);
         this.noteEvaluation=noteEvaluation;
-        this.adresse=adresse;
+       
     }
 
-    public Client(String username, String password, String email, byte[] photo, String type, int phoneNumber,int noteEvaluation,String adresse ) {
-        super(username, password, email, photo, type, phoneNumber);
+    public Client(String username, String password, String email, byte[] photo, String type, int phoneNumber,int noteEvaluation,String sexe ) {
+        super(username, password, email, photo, type, phoneNumber,sexe);
         this.noteEvaluation=noteEvaluation;
-        this.adresse=adresse;
+     
+    }
+
+    public Client(String username, String password, String email, byte[] photo, int phoneNumber) {
+        super(username, password, email, photo, phoneNumber);
     }
 
    
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
   
 
     public int getNoteEvaluation() {
