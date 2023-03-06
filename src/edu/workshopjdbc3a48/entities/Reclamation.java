@@ -20,7 +20,7 @@ import java.util.Objects;
     
     private int id;
     private User id_user1;
-     private String Nom_user;
+     private String objet;
     private Date date_envoie;
     private String description ; 
     
@@ -29,10 +29,10 @@ import java.util.Objects;
  
     
     
-    public Reclamation(int id, User id_user1, String Nom_user,  String description, String Email, Echange echange,Date date_envoie) {
+    public Reclamation(int id, User id_user1, String objet,  String description, String Email, Echange echange,Date date_envoie) {
         this.id = id;
         this.id_user1 = id_user1;
-        this.Nom_user = Nom_user;
+        this.objet = objet;
         this.date_envoie = date_envoie;
         this.description = description;
         this.Email = Email;
@@ -40,7 +40,7 @@ import java.util.Objects;
     }
 
     public Reclamation(String Nom_user, String description, String Email) {
-        this.Nom_user = Nom_user;
+        this.objet = Nom_user;
         this.description = description;
         this.Email = Email;
     }
@@ -60,11 +60,11 @@ import java.util.Objects;
    
 
     public String getNom_user() {
-        return Nom_user;
+        return objet;
     }
 
     public void setNom_user(String Nom_user) {
-        this.Nom_user = Nom_user;
+        this.objet = Nom_user;
     }
 
     public Date getDate_envoie() {
@@ -104,7 +104,7 @@ import java.util.Objects;
         int hash = 7;
         hash = 73 * hash + this.id;
         hash = 73 * hash + Objects.hashCode(this.id_user1);
-        hash = 73 * hash + Objects.hashCode(this.Nom_user);
+        hash = 73 * hash + Objects.hashCode(this.objet);
         hash = 73 * hash + Objects.hashCode(this.date_envoie);
         hash = 73 * hash + Objects.hashCode(this.description);
         hash = 73 * hash + Objects.hashCode(this.Email);
@@ -127,7 +127,7 @@ import java.util.Objects;
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.Nom_user, other.Nom_user)) {
+        if (!Objects.equals(this.objet, other.objet)) {
             return false;
         }
         if (!Objects.equals(this.description, other.description)) {
@@ -150,7 +150,7 @@ import java.util.Objects;
 
     @Override
     public String toString() {
-        return "Reclamation{" + "id=" + id + ", id_user1=" + id_user1 + ", Nom_user=" + Nom_user + ", date_envoie=" + date_envoie + ", description=" + description + ", Email=" + Email + ", echange=" + echange + '}';
+        return "Reclamation{" + "id=" + id + ", id_user1=" + id_user1 + ", objet=" + objet + ", date_envoie=" + date_envoie + ", description=" + description + ", Email=" + Email + ", echange=" + echange + '}';
     }
    
  

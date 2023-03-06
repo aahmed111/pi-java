@@ -5,14 +5,10 @@
  */
 package edu.workshopjdbc3a48.gui;
 
- 
-
- 
-import edu.workshopjdbc3a48.entities.Message;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
- 
+
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -24,10 +20,10 @@ import java.util.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
- 
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
- 
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 
@@ -37,11 +33,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
- 
+
 import javafx.scene.input.KeyCode;
 
 import javafx.scene.layout.BorderPane;
- 
+
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
@@ -50,18 +46,22 @@ import javafx.stage.Stage;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
 import javax.jms.JMSException;
+import javax.jms.Message;
 import javax.jms.MessageConsumer;
- 
+import javax.jms.MessageListener;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
- 
+import javax.jms.StreamMessage;
 import javax.jms.TextMessage;
+import javax.jms.Topic;
+import javax.jms.TopicSubscriber;
+import org.apache.activemq.ActiveMQConnection;
 
 /**
  *
  * @author ahmed
  */
-public class JMSchat extends Application {
+public class ahmed extends Application {
 
     private MessageProducer messageProducer;
     private Session session;
@@ -187,7 +187,7 @@ public class JMSchat extends Application {
 
             String Message = textAreaMessage.getText();
 
-        //  Message t = new edu.workshopjdbc3a48.entities.Message(Message);
+            //  edu.workshopjdbc3a48.entities.Message t = new edu.workshopjdbc3a48.entities.Message(Message);
             //  ServiceMessage Rs = new ServiceMessage();
             // Rs.ajouter(t);
             try {

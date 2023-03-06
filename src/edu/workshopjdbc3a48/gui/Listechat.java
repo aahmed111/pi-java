@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -18,17 +19,26 @@ public class Listechat {
     private final ListView<String> chatListView = new ListView<>(chats);
 
     public Listechat() {
-        // Ajouter les chats initiaux ici si besoin
+        chatListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                String selectedChat = chatListView.getSelectionModel().getSelectedItem();
+                if (selectedChat != null) {
+                    String[] users = selectedChat.split(" -> ");
+                    if (users.length == 2) {
+                        showConversation(users[0], users[1]);
+                    }
+                }
+            }
+        });
     }
 
     public void addChat(String user1, String user2) {
-    String chat = user1 + " -> " + user2;
-    String chat2 = user2 + " -> " + user1;
-    if (!chats.contains(chat) && !chats.contains(chat2)) {
-        chats.add(chat);
+        String chat = user1 + " -> " + user2;
+        String chat2 = user2 + " -> " + user1;
+        if (!chats.contains(chat) && !chats.contains(chat2)) {
+            chats.add(chat);
+        }
     }
-}
-
 
     public void removeChat(String user1, String user2) {
         String chat = user1 + " -> " + user2;
@@ -54,6 +64,41 @@ public class Listechat {
         chatListView.setPrefSize(300, 500);
         borderPane.setCenter(chatListView);
 
+        // Ajouter un événement sur chaque élément de la liste pour afficher la conversation correspondante
+        for (String chat : chats) {
+            chatListView.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1) {
+                    String selectedChat = chatListView.getSelectionModel().getSelectedItem();
+                    if (selectedChat != null) {
+                        String[] users = selectedChat.split(" -> ");
+                        if (users.length == 2) {
+                            showConversation(users[0], users[1]);
+                        }
+                    }
+                }
+            });
+        }
+
+        Scene scene = new Scene(borderPane, 400, 600);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void showConversation(String user1, String user2) {
+        Stage stage = new Stage();
+        stage.setTitle("Conversation " + user1 + " -> " + user2);
+
+        BorderPane borderPane = new BorderPane();
+
+        TextArea conversationTextArea = new TextArea();
+        conversationTextArea.setEditable(false);
+
+        // TODO: Récupérer la conversation entre les deux utilisateurs à partir de votre modèle de données
+        // et l'afficher dans la zone de texte
+        conversationTextArea.setText("TODO: Afficher la conversation ici");
+
+        borderPane.setCenter(conversationTextArea);
+
         Scene scene = new Scene(borderPane, 400, 600);
         stage.setScene(scene);
         stage.show();
@@ -66,9 +111,10 @@ public class Listechat {
             Listechat listechat = new Listechat();
 
             // Ajouter des chats pour tester
-            listechat.addChat("a", "b");
-            listechat.addChat("c", "d");
-            
+           
+
+            listechat.addChat("Alice", "Bob");
+            listechat.addChat("Charlie", "Alice");
 
             // Afficher la liste des chats
             listechat.show();

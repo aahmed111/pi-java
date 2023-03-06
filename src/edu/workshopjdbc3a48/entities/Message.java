@@ -1,17 +1,16 @@
-
 package edu.workshopjdbc3a48.entities;
 
 import java.sql.Date;
 import java.util.Objects;
 
-
 public class Message {
+
     private int id_message;
-    private Date date ;
-    private String Message ;
+    private Date date;
+    private String Message;
     private Chat chat;
 
-    public Message(String text, Chat chat) {
+    public Message(String Message, Chat chat) {
         this.Message = Message;
         this.chat = chat;
     }
@@ -20,7 +19,6 @@ public class Message {
         this.Message = Message;
     }
 
-    
     public Message(int id_message, Date date, String Message, Chat chat) {
         this.id_message = id_message;
         this.date = date;
@@ -28,18 +26,15 @@ public class Message {
         this.chat = chat;
     }
 
-    public Message(Date date, String text, Chat chat) {
+    public Message(Date date, String Message, Chat chat) {
         this.date = date;
         this.Message = Message;
         this.chat = chat;
     }
-    
 
     public int getId_message() {
         return id_message;
     }
-
-   
 
     public Date getDate() {
         return date;
@@ -53,7 +48,7 @@ public class Message {
         return Message;
     }
 
-    public void setText(String text) {
+    public void setText(String Message) {
         this.Message = Message;
     }
 
@@ -106,10 +101,5 @@ public class Message {
     public String toString() {
         return "Message{" + "id_message=" + id_message + ", date=" + date + ", text=" + Message + ", chat=" + chat + '}';
     }
- 
-    
 
-     
-
-    
 }
