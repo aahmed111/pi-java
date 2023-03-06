@@ -1,8 +1,11 @@
 package edu.projetpi.gui;
 
 import edu.projetpi.entities.Article;
+import edu.projetpi.entities.ConfirmationMail;
+import edu.projetpi.entities.Echange;
 import edu.projetpi.entities.User;
 import edu.projetpi.services.ServiceArticle;
+import edu.projetpi.services.ServiceEchange;
 import edu.projetpi.services.ServiceUser;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,21 +18,24 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-
 public class Main_Echange extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Initialisation des éléments graphiques
         BorderPane root = new BorderPane();
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 800, 700);
         Label titleLabel = new Label("Effectuer un échange ");
         Label selectUserLabel = new Label("Choisir un client :");
         Label selectItemLabel = new Label("choisir un article :");
+        Label mySelectItemLabel = new Label("mes articles :");
+
         Label yourItemLabel = new Label("Votre article :");
         Label otherItemLabel = new Label("Ajouter un commentaire :");
         ListView<String> userList = new ListView<>();
         ListView<String> itemList = new ListView<>();
+        ListView<String> myList = new ListView<>();
+
         TextArea yourItemArea = new TextArea();
         TextArea otherItemArea = new TextArea();
         Button proposeButton = new Button("Proposer l'échange");
@@ -39,6 +45,8 @@ public class Main_Echange extends Application {
         titleLabel.setFont(new Font("Arial", 20));
         selectUserLabel.setFont(new Font("Arial", 16));
         selectItemLabel.setFont(new Font("Arial", 16));
+        mySelectItemLabel.setFont(new Font("Arial", 16));
+
         yourItemLabel.setFont(new Font("Arial", 16));
         otherItemLabel.setFont(new Font("Arial", 16));
         yourItemArea.setPromptText("Entrez une description de votre article");
@@ -47,6 +55,10 @@ public class Main_Echange extends Application {
         otherItemArea.setWrapText(true);
         userList.setPrefHeight(200);
         itemList.setPrefHeight(200);
+        myList.setPrefHeight(200);
+
+        myList.setPrefHeight(200);
+
         yourItemArea.setPrefHeight(100);
         otherItemArea.setPrefHeight(100);
         proposeButton.setDefaultButton(true);
@@ -55,12 +67,15 @@ public class Main_Echange extends Application {
         VBox titleBox = new VBox(titleLabel);
         HBox selectUserBox = new HBox(10, selectUserLabel, userList);
         HBox selectItemBox = new HBox(10, selectItemLabel, itemList);
+        HBox mySelectItemBox = new HBox(10, mySelectItemLabel, myList);
+
         VBox yourItemBox = new VBox(10, yourItemLabel, yourItemArea);
         VBox otherItemBox = new VBox(10, otherItemLabel, otherItemArea);
-        VBox inputBox = new VBox(10, yourItemBox, otherItemBox, proposeButton);
+        VBox inputBox = new VBox(10, otherItemBox, proposeButton);
         inputBox.setPadding(new Insets(10));
         inputBox.setAlignment(Pos.CENTER);
-        VBox contentBox = new VBox(20, selectUserBox, selectItemBox, inputBox);
+        mySelectItemBox.setPadding(new Insets(30));
+        VBox contentBox = new VBox(20, selectUserBox, selectItemBox, mySelectItemBox, inputBox);
         contentBox.setPadding(new Insets(10));
         root.setTop(titleBox);
         root.setCenter(contentBox);
@@ -69,19 +84,53 @@ public class Main_Echange extends Application {
         List<String> names = lu.stream().map(User::getNom).collect(Collectors.toList());
         ServiceArticle sa = new ServiceArticle();
         List<Article> la = sa.getAll();
-        List<String> articles = la.stream().map(Article::getDescription).collect(Collectors.toList());
+        List<String> articles = la.stream().map(Article::getDesignation).collect(Collectors.toList());
+
+        //get articles by connected user using id 50 for now
+        List<Article> userArticles = sa.getAllByIdUser(50);
+        System.out.println(userArticles.toString());
+        List<String> myArticles = userArticles.stream().map(Article::getDesignation).collect(Collectors.toList());
+
         // Simulation des données des utilisateurs et des articles
         userList.getItems().addAll(names);
         itemList.getItems().addAll(articles);
+        myList.getItems().addAll(myArticles);
 
-                // Gestion de l'événement de sélection d'un utilisateur
+        Echange e1 = new Echange();
+        e1.setId_client1(50);
+        e1.setStatut("en attente");
+        // Gestion de l'événement de sélection d'un utilisateur
         userList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             System.out.println("Utilisateur sélectionné : " + newValue);
+            lu.forEach((u) -> {
+                if (u.getNom().equalsIgnoreCase(newValue)) {
+                    System.out.println("\n ++++++++++ \n found article" + u.toString());
+                    e1.setId_client2(u.getId_user());
+                }
+            });
         });
 
         // Gestion de l'événement de sélection d'un article
         itemList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            System.out.println("Article sélectionné : " + newValue);
+
+            la.forEach((a) -> {
+                if (a.getDesignation().equalsIgnoreCase(newValue)) {
+                    //System.out.println("\n ++++++++++ \n found article"+a.toString());
+                    e1.setId_article2(a.getId_article());
+                }
+            });
+            // System.out.println("Article sélectionné : " + newValue);
+        });
+
+        myList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+
+            la.forEach((a) -> {
+                if (a.getDesignation().equalsIgnoreCase(newValue)) {
+                    System.out.println("\n ++++++++++ \n found article" + a.toString());
+                    e1.setId_article1(a.getId_article());
+                }
+            });
+            // System.out.println("Article sélectionné : " + newValue);
         });
 
         // Gestion de l'événement de clic sur le bouton "Proposer l'échange"
@@ -90,6 +139,8 @@ public class Main_Echange extends Application {
             String selectedItem = itemList.getSelectionModel().getSelectedItem();
             String yourItem = yourItemArea.getText();
             String otherItem = otherItemArea.getText();
+           // int client1Id = getOneById(userList.getAccessibleText());
+           // int client2Id = getClientIdByName(u.getId_user());
 
             // Vérification de la saisie de l'utilisateur et de l'article sélectionné
             if (selectedUser == null || selectedItem == null) {
@@ -99,19 +150,11 @@ public class Main_Echange extends Application {
                 alert.setContentText("Veuillez sélectionner un utilisateur et un article.");
                 alert.showAndWait();
                 return;
-            }
-
-            // Vérification de la saisie des descriptions des articles
-            if (yourItem.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur");
-                alert.setHeaderText("Description manquante");
-                alert.setContentText("Veuillez entrer une description pour votre article.");
-                alert.showAndWait();
-                return;
             } else {
             }
-
+            ServiceEchange se = new ServiceEchange();
+            System.out.println(e1.toString());
+            se.ajouter(e1);
             // Confirmation de la proposition d'échange
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
@@ -123,6 +166,7 @@ public class Main_Echange extends Application {
             alert.showAndWait().ifPresent(buttonType -> {
                 if (buttonType == yesButton) {
                     System.out.println("Proposition d'échange envoyée.");
+                    //ConfirmationMail.sendConfirmationMail(client1Id, client2Id);
                 } else if (buttonType == noButton) {
                     System.out.println("Proposition d'échange annulée.");
                 }

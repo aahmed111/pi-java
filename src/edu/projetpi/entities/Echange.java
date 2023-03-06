@@ -16,8 +16,8 @@ public class Echange {
     private int id_echange;
     private Date date_echange;
     private String statut;
-    private int id_client1;
-    private int id_client2;
+    private int id_user1;
+    private int id_user2;
     private int id_article1;
     private int id_article2;
 
@@ -37,22 +37,24 @@ public class Echange {
         this.id_article2 = id_article2;
     }
     
-    public Echange(){}
+    public Echange(){
+    this.date_echange=new Date();
+    }
 
     public int getId_client1() {
-        return id_client1;
+        return id_user1;
     }
 
     public void setId_client1(int id_client1) {
-        this.id_client1 = id_client1;
+        this.id_user1 = id_client1;
     }
 
     public int getId_client2() {
-        return id_client2;
+        return id_user2;
     }
 
     public void setId_client2(int id_client2) {
-        this.id_client2 = id_client2;
+        this.id_user2 = id_user2;
     }
     
     
@@ -65,8 +67,8 @@ public class Echange {
         this.statut = statut;
         this.id_article1=id_article1;
         this.id_article2=id_article2;
-        this.id_client1=id_client1;
-        this.id_client2=id_client2;
+        this.id_user1=id_client1;
+        this.id_user2=id_client2;
     }
     
      public Echange( String statut,int id_article1,
@@ -77,8 +79,8 @@ public class Echange {
         this.statut = statut;
         this.id_article1=id_article1;
         this.id_article2=id_article2;
-        this.id_client1=id_client1;
-        this.id_client2=id_client2;
+        this.id_user1=id_client1;
+        this.id_user2=id_client2;
     }
 
     public Echange(String statut) {

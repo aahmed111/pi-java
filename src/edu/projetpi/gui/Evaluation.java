@@ -41,7 +41,7 @@ public class Evaluation extends Application {
 
         ComboBox<Echange> comboBoxEchanges = new ComboBox<>();
         List<Echange> e = se.getAll().stream()
-                .filter(p -> p.getStatut().equalsIgnoreCase("terminé")).collect(Collectors.toList());
+                .filter(p -> p.getStatut().equalsIgnoreCase("terminée")).collect(Collectors.toList());
         comboBoxEchanges.getItems().addAll(e);
         comboBoxEchanges.setPromptText("Choisir un échange");
         vboxEchanges.getChildren().add(comboBoxEchanges);

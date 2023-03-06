@@ -3,43 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/tests/TestUser.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServicePersonne.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceEchange.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceRecmalation.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Chat.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Historique.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Personne.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Compte.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceChat.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/tests/TestArticle.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceHistorique.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/utils/DataSource.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Categorie.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Profil.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Reclamation.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Annonce.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/tests/TestAdmin.java</file>
             <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceUser.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Evaluation.java</file>
             <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/IService.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/tests/TestAnnoce.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/guii/FXML_PersonneController.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceAnnonce.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Sous_categorie.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceAdmin.java</file>
             <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Echange.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/User.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/tests/MainClass.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceEvaluation.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/guii/NewFXMain.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceArticle.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceCompte.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Translator.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceAnnonce.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Chat.java</file>
             <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceProfil.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceCategorie.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Admin.java</file>
-            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceSous_categorie.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Profil.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceHistorique.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Evaluation.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Annonce.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Historique.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceArticle.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceChat.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Reclamation.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Categorie.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/gui/Main_Echange.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/User.java</file>
             <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/entities/Article.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/tests/TestEchange.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceCategorie.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceEvaluation.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceRecmalation.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/services/ServiceEchange.java</file>
+            <file>file:/C:/Users/zayne/Downloads/projetpi/src/edu/projetpi/utils/DataSource.java</file>
         </group>
     </open-files>
 </project-private>

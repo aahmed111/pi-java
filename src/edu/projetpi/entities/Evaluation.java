@@ -15,16 +15,16 @@ public class Evaluation {
     private int valeur1;
     private int valeur2;
     private int id_echange;
-    private int id_client1;
-    private int id_client2;
+    private int id_user1;
+    private int id_user2;
 
     public Evaluation(int id_evaluation, int valeur1, int valeur2, int id_echange, int id_client1, int id_client2) {
         this.id_evaluation = id_evaluation;
         this.valeur1 = valeur1;
         this.valeur2 = valeur2;
         this.id_echange = id_echange;
-        this.id_client1 = id_client1;
-        this.id_client2 = id_client2;
+        this.id_user1 = id_client1;
+        this.id_user2= id_client2;
     }
     
     
@@ -41,19 +41,19 @@ public class Evaluation {
     }
 
     public int getId_client1() {
-        return id_client1;
+        return id_user1;
     }
 
     public void setId_client1(int id_client1) {
-        this.id_client1 = id_client1;
+        this.id_user1 = id_client1;
     }
 
     public int getId_client2() {
-        return id_client2;
+        return id_user2;
     }
 
     public void setId_client2(int id_client2) {
-        this.id_client2 = id_client2;
+        this.id_user2= id_client2;
     }
 
     public Evaluation(int valeur1, int valeur2) {
@@ -93,7 +93,7 @@ public class Evaluation {
 
     @Override
     public String toString() {
-        return "Evaluation{" + "id_evaluation=" + id_evaluation + ", valeur1=" + valeur1 + ", valeur2=" + valeur2 + ", id_echange=" + id_echange + ", id_client1=" + id_client1 + ", id_client2=" + id_client2 + '}';
+        return "Evaluation{" + "id_evaluation=" + id_evaluation + ", valeur1=" + valeur1 + ", valeur2=" + valeur2 + ", id_echange=" + id_echange + ", id_client1=" + id_user1 + ", id_client2=" + id_user2 + '}';
     }
 
    

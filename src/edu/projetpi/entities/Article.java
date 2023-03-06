@@ -12,15 +12,36 @@ package edu.projetpi.entities;
 public class Article {
 
     private int id_article;
-    private String date_ajout, proprietaire, estimation, description, image;
+    private String date_ajout, proprietaire, estimation, description, image, designation;
 
-    public Article(int id_article, String date_ajout, String proprietaire, String estimation, String description, String image) {
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public Article(int id_article, String date_ajout, String proprietaire, String estimation, String description, String image, String designation) {
         this.id_article = id_article;
         this.date_ajout = date_ajout;
         this.proprietaire = proprietaire;
         this.estimation = estimation;
         this.description = description;
         this.image = image;
+        this.designation = designation;
+    }
+    
+    
+
+   /* public Article(int id_article, String date_ajout, String proprietaire, String estimation, String description, String image) {
+        this.id_article = id_article;
+        this.date_ajout = date_ajout;
+        this.proprietaire = proprietaire;
+        this.estimation = estimation;
+        this.description = description;
+        this.image = image;
+
     }
 
     public Article(String date_ajout, String proprietaire, String estimation, String description) {
@@ -29,7 +50,7 @@ public class Article {
         this.estimation = estimation;
         this.description = description;
     }
-
+*/
     public int getId_article() {
         return id_article;
     }

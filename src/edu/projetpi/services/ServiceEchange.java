@@ -18,6 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
 /**
  *
  * @author pc
@@ -30,7 +33,7 @@ public class ServiceEchange implements IService<Echange> {
     public void ajouter(Echange e) {
         try {
             String req = "INSERT INTO `echange`( `statut`, `date_Echange`,"
-                    + "`id_client1`, `id_client2`, `id_article1` ,`id_article2`)"
+                    + "`id_user1`, `id_user2`, `id_article1` ,`id_article2`)"
                     + " VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, e.getStatut());

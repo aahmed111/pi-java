@@ -78,7 +78,11 @@ public class ServiceArticle implements IService<Article> {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                Article a = new Article(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                Article a = new Article(rs.getInt(1),
+                        rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getString(6), rs.getString(7),
+                rs.getString(2)
+                );
                 list.add(a);
             }
         } catch (SQLException ex) {
@@ -97,11 +101,35 @@ public class ServiceArticle implements IService<Article> {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery(req);
             if (rs.next()) {
-                a = new Article(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                a = new Article(rs.getInt(1), 
+                        rs.getString(2), rs.getString(3),
+                        rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return a;
     }
+    
+       public List<Article> getAllByIdUser(int idUser) {
+        List<Article> list = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM `article` WHERE id_user="+idUser;
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery(req);
+            while (rs.next()) {
+                Article a = new Article(rs.getInt(1),
+                        rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getString(6), rs.getString(7),
+                rs.getString(2)
+                );
+                list.add(a);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return list;
+    }
+    
 }

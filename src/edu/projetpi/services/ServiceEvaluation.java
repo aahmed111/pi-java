@@ -33,7 +33,7 @@ public class ServiceEvaluation implements IService<Evaluation> {
             Echange ech=s.getOneById(e.getId_echange());
             System.out.println(" echange returned from evaluation : "+ech);
             String req = "INSERT INTO `evaluation`"
-                    + "(`valeur1`,`valeur2` ,`id_echange`,`id_client1`,`id_client2` )"
+                    + "(`valeur1`,`valeur2` ,`id_echange`,`id_user1`,`id_user2` )"
                     + " VALUES (?,?,?,?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, e.getValeur1());

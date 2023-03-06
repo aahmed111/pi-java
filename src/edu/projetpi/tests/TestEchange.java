@@ -8,7 +8,6 @@ package edu.projetpi.tests;
 import edu.projetpi.entities.Echange;
 import edu.projetpi.services.ServiceEchange;
 import java.sql.SQLException;
-import java.util.List;
 
 public class TestEchange {
 
@@ -18,12 +17,13 @@ public class TestEchange {
             /* List<Echange> le = se.getAll();
              
              System.out.println(le.toString());*/
-        //Echange e1 = new Echange("en attente", 31, 32, 42, 46);
-        Echange e = new Echange("terminée");
+  
+        Echange e1 = new Echange("En attente", 97, 89,42, 46);
+        //Echange e1 = new Echange("terminée");
         // System.out.println("\n date : "+e1.toString());
-        //se.ajouter(e1);
+        se.ajouter(e1);
        // List<Echange> list = se.getAll(); 
-                 se.modifier(e);
+                 //se.modifier(e);
 
     }
 
