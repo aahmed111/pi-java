@@ -84,7 +84,6 @@ public class ServiceUser implements IService<User> {
         }
 
     }
-
     @Override
     public void supprimer(int id) throws SQLException {
         String type = null;
@@ -192,7 +191,7 @@ public class ServiceUser implements IService<User> {
 
         return u;
     }
-
+   
     public boolean verifierUsername(String username) throws SQLException {
         boolean check = false;
         String req = "SELECT `username`  FROM USER ";

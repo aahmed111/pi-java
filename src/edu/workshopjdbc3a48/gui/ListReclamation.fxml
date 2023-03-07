@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ListReclamationController">
+   <children>
+      <TableView fx:id="table" layoutX="10.0" layoutY="490.0" prefHeight="346.0" prefWidth="1580.0" stylesheets="@DashbordAdmin.css">
+         <columns>
+            <TableColumn fx:id="username" prefWidth="171.9999816417694" text="username" />
+            <TableColumn fx:id="objet" prefWidth="320.0000457763672" text="objet" />
+            <TableColumn fx:id="description" prefWidth="152.79995727539062" text="description" />
+            <TableColumn fx:id="email" prefWidth="144.79998779296875" text="email" />
+            <TableColumn fx:id="date_Reclamation" prefWidth="139.2000732421875" text="date reclamation" />
+            <TableColumn prefWidth="163.20001220703125" />
+            <TableColumn prefWidth="142.4000244140625" />
+         </columns>
+         <styleClass>
+            <String fx:value="column-header-background" />
+            <String fx:value="table-row-cell" />
+            <String fx:value="line-color" />
+            <String fx:value="table-row-cell" />
+         </styleClass>
+      </TableView>
+      <Button layoutX="1312.0" layoutY="250.0" mnemonicParsing="false" onAction="#voirEchange" prefHeight="55.0" prefWidth="149.0" text="Voir Echange" />
+      <Pane fx:id="PaneEchange" layoutX="78.0" layoutY="17.0" prefHeight="457.0" prefWidth="1213.0" />
+   </children>
+</Pane>

@@ -30,14 +30,14 @@ import java.util.List;
 public class ServiceMessage implements IService<Message> {
 
     Connection cnx = DataSource.getInstance().getCnx();
-
+/*
     @Override
     public void ajouter(Message t) {
         try {
             // Ajouter le nouveau message
-            String req = "INSERT INTO `message`(`date`, `text`, `id_chat`) VALUES (Now(),?,?)";
+            String req = "INSERT INTO `message`(`date`, `Message`, `id_chat`) VALUES (Now(),?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1, t.getText());
+            ps.setString(1, t.getMessage());
             ps.setInt(2,t.getChat().getId_chat());
             ps.executeUpdate();
             System.out.println("Message ajouté");
@@ -45,7 +45,27 @@ public class ServiceMessage implements IService<Message> {
             System.out.println("Erreur lors de l'ajout du message : " + e.getMessage());
         }
     }
-
+*/
+    
+    
+    
+     @Override
+    public void ajouter(Message t) {
+        try {
+            // Ajouter le nouveau message
+            String req = "INSERT INTO `message`(`date`, `Message`, `id_chat`) VALUES (Now(),?,1)";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, t.getMessage());
+          //  ps.setInt(2,t.getChat().getId_chat());
+            ps.executeUpdate();
+            System.out.println("Message ajouté");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'ajout du message : " + e.getMessage());
+        }
+    }
+    
+    
+    
     @Override
     public void supprimer(int id) {
         try {
@@ -64,7 +84,7 @@ public class ServiceMessage implements IService<Message> {
         try {
             String req = "UPDATE `message` SET `text`=? WHERE `id_message`=?";
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1, t.getText());
+            ps.setString(1, t.getMessage());
             ps.setInt(2, t.getId_message());
             ps.executeUpdate();
             System.out.println("Message modifié !");
@@ -83,7 +103,7 @@ public class ServiceMessage implements IService<Message> {
             while (rs.next()) {
                 int id_message = rs.getInt("id_message");
                 Date date = rs.getDate("date");
-                String text = rs.getString("text");
+                String text = rs.getString("Message");
                 int id_chat = rs.getInt("id_chat");
                 ServiceChat sc = new ServiceChat();
                 Chat chat = sc.getOneById(id_chat);
@@ -109,7 +129,7 @@ public class ServiceMessage implements IService<Message> {
             if (rs.next()) {
                 int id_message = rs.getInt("id_message");
                 Date date = rs.getDate("date");
-                String text = rs.getString("text");
+                String text = rs.getString("Message");
                 int id_chat = rs.getInt("id_chat");
                 ServiceChat sc = new ServiceChat();
                 Chat chat = sc.getOneById(id_chat);

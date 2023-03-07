@@ -16,63 +16,64 @@ import java.util.Objects;
  */
  
    public class Reclamation {
+
+    
     private int id;
-    private User user1,user2;
+    private User id_user1;
+     private String objet;
     private Date date_envoie;
     private String description ; 
+    
+     private String Email;
     private Echange echange ;
-
-    public Reclamation(User user1, User user2, String description, Echange echange) {
-        this.user1 = user1;
-        this.user2 = user2;
-        this.description = description;
-        this.echange = echange;
-    }
-
-    public Reclamation(int id, User user1, User user2, String description, Echange echange, Date date_envoie) {
+ 
+    
+    
+    public Reclamation(int id, User id_user1, String objet,  String description, String Email, Echange echange,Date date_envoie) {
         this.id = id;
-        this.user1 = user1;
-        this.user2 = user2;
+        this.id_user1 = id_user1;
+        this.objet = objet;
         this.date_envoie = date_envoie;
         this.description = description;
+        this.Email = Email;
         this.echange = echange;
     }
-    public Reclamation( User user1, User user2, String description, Echange echange, Date date_envoie) {
-       
-        this.user1 = user1;
-        this.user2 = user2;
-        this.date_envoie = date_envoie;
+
+    public Reclamation(String Nom_user, String description, String Email) {
+        this.objet = Nom_user;
         this.description = description;
-        this.echange = echange;
+        this.Email = Email;
     }
 
     public int getId() {
         return id;
     }
 
-  
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public User getUser1() {
-        return user1;
+        return id_user1;
     }
 
-    public void setUser1(User user1) {
-        this.user1 = user1;
+   
+
+    public String getNom_user() {
+        return objet;
     }
 
-    public User getUser2() {
-        return user2;
-    }
-
-    public void setUser2(User user2) {
-        this.user2 = user2;
+    public void setNom_user(String Nom_user) {
+        this.objet = Nom_user;
     }
 
     public Date getDate_envoie() {
         return date_envoie;
     }
 
-   
+    public void setDate_envoie(Date date_envoie) {
+        this.date_envoie = date_envoie;
+    }
 
     public String getDescription() {
         return description;
@@ -80,6 +81,14 @@ import java.util.Objects;
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
     public Echange getEchange() {
@@ -90,10 +99,25 @@ import java.util.Objects;
         this.echange = echange;
     }
 
+    public String getobjet() {
+        return objet;
+    }
+
+    public void setobjet(String objet) {
+        this.objet = objet;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 13 * hash + this.id;
+        hash = 73 * hash + this.id;
+        hash = 73 * hash + Objects.hashCode(this.id_user1);
+        hash = 73 * hash + Objects.hashCode(this.objet);
+        hash = 73 * hash + Objects.hashCode(this.date_envoie);
+        hash = 73 * hash + Objects.hashCode(this.description);
+        hash = 73 * hash + Objects.hashCode(this.Email);
+        hash = 73 * hash + Objects.hashCode(this.echange);
         return hash;
     }
 
@@ -112,17 +136,42 @@ import java.util.Objects;
         if (this.id != other.id) {
             return false;
         }
+        if (!Objects.equals(this.objet, other.objet)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.Email, other.Email)) {
+            return false;
+        }
+        if (!Objects.equals(this.id_user1, other.id_user1)) {
+            return false;
+        }
+        if (!Objects.equals(this.date_envoie, other.date_envoie)) {
+            return false;
+        }
+        if (!Objects.equals(this.echange, other.echange)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Reclamation{" + "id=" + id + ", user1=" + user1 + ", user2=" + user2 + ", date_envoie=" + date_envoie + ", description=" + description + ", echange=" + echange + '}';
+        return "Reclamation{" + "id=" + id + ", id_user1=" + id_user1 + ", objet=" + objet + ", date_envoie=" + date_envoie + ", description=" + description + ", Email=" + Email + ", echange=" + echange + '}';
     }
+   
+ 
     
-     
+    
+    
+   
+
+   
 
 
+   
    
 
     

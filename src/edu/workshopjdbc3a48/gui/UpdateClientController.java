@@ -77,7 +77,6 @@ public class UpdateClientController implements Initializable {
         }
 
     }
-
     @FXML
     private void browser(ActionEvent event) {
 

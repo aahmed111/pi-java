@@ -89,16 +89,7 @@ public class ProfilCController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Chat.fxml"));
-            fxml = loader.load();
-            ChatController mc = loader.getController();
-            pane.getChildren().removeAll();
-            mc.setId_user(getId_connecté());
-            pane.getChildren().setAll(fxml);
-        } catch (IOException ex) {
-            Logger.getLogger(LoginSinupController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
 
     public void affiche(int id) {
@@ -208,15 +199,16 @@ public class ProfilCController implements Initializable {
 
     @FXML
     private void chat(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Chat.fxml"));
-        fxml = loader.load();
-        ChatController controller = loader.getController();
-      
-      //  controller.affiche(Id_connecté);
-        Scene scene = new Scene(fxml);
-        Stage chatStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        chatStage.setScene(scene);
-        chatStage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Chat.fxml"));
+            fxml = loader.load();
+            ChatController mc = loader.getController();
+            pane.getChildren().removeAll();
+            mc.setId_user(getId_connecté());
+            pane.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSinupController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -257,6 +249,38 @@ public class ProfilCController implements Initializable {
         } catch (IOException | IllegalStateException e) {
             e.printStackTrace();
         }
+        }
+    }
+
+    @FXML
+    private void Echange(ActionEvent event) {
+        
+    }
+
+    private void reclamation(ActionEvent event) {
+          try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Reclamation.fxml"));
+            fxml = loader.load();
+            ReclamationController rc = loader.getController();
+            pane.getChildren().removeAll();
+            rc.setId_user(getId_connecté());
+            pane.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSinupController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void article(ActionEvent event) {
+             try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Article.fxml"));
+            fxml = loader.load();
+            ArticleController rc = loader.getController();
+            pane.getChildren().removeAll();
+            rc.setId_user(getId_connecté());
+            pane.getChildren().setAll(fxml);
+             } catch (IOException ex) {
+            Logger.getLogger(LoginSinupController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

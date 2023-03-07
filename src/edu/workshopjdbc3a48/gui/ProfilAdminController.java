@@ -172,4 +172,19 @@ public class ProfilAdminController implements Initializable {
     @FXML
     private void home(ActionEvent event) {
     }
+
+    @FXML
+    private void reclamation(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListReclamation.fxml"));
+            fxml = loader.load();
+
+            ListReclamationController l = loader.getController();
+            l.setId_User(id_admin);
+            pane.getChildren().removeAll();
+            pane.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSinupController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
