@@ -37,8 +37,7 @@ public class MainClass {
             // Création de l'utilisateur
             
             //  User u = new Client("  username", "password", "email", null ,  "type", 0,0, "adresse",null,null);
-            Client user1 = sc.getClientByUsernamePassword("ahmed", "zamer");
-            Client user2 = sc.getClientByUsernamePassword("abdou", "abdouch");
+           
             
             
         //    User user = sc.getClientByUsernamePassword("abdou", "abdou");

@@ -5,6 +5,7 @@
  */
 package edu.workshopjdbc3a48.gui;
 
+import edu.workshopjdbc3a48.entities.Admin;
 import edu.workshopjdbc3a48.entities.Client;
 import edu.workshopjdbc3a48.entities.Transporteur;
 import edu.workshopjdbc3a48.entities.User;
@@ -36,11 +37,16 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
-
 import javafx.stage.Stage;
-import static javax.management.Query.value;
+import org.bouncycastle.crypto.BlockCipher;
+import org.bouncycastle.crypto.BufferedBlockCipher;
+import org.bouncycastle.crypto.engines.AESFastEngine;
+import org.bouncycastle.crypto.modes.CBCBlockCipher;
+import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
+import org.bouncycastle.crypto.params.KeyParameter;
+import org.bouncycastle.util.encoders.Hex;
 
 public class UserInscriptionController implements Initializable {
 
@@ -60,9 +66,7 @@ public class UserInscriptionController implements Initializable {
     @FXML
     private ImageView ImageV;
     private byte[] bytes;
-    @FXML
-    private AnchorPane ty;
-    private String[] types = {"Transporteur", "Client"};
+    private String[] types = {"Transporteur", "Client", "Admin"};
     private String sexe;
     @FXML
     private ToggleGroup genre;
@@ -185,12 +189,30 @@ public class UserInscriptionController implements Initializable {
         }
     }
 
+    public static String encrypt(String plaintext, String keyHex) throws Exception {
+        byte[] key = Hex.decode(keyHex);
+        byte[] input = plaintext.getBytes("UTF-8");
+
+        BlockCipher engine = new AESFastEngine();
+        BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CBCBlockCipher(engine));
+        cipher.init(true, new KeyParameter(key));
+
+        byte[] output = new byte[cipher.getOutputSize(input.length)];
+        int len = cipher.processBytes(input, 0, input.length, output, 0);
+        len += cipher.doFinal(output, len);
+
+        return Hex.toHexString(output);
+    }
+
     @FXML
-    private void ajouterUser(ActionEvent event) throws SQLException {
+    private void ajouterUser(ActionEvent event) throws SQLException, Exception {
 
         if (isEmpty() == true) {
             if (verifierPassword(pasworrd.getText()) == true) {
                 pasworrd.setStyle(null);
+                String password = pasworrd.getText();
+                String keyHex = "00112233445566778899AABBCCDDEEFF"; // la clé AES en hexadécimal
+                String encryptedPassword = encrypt(password, keyHex);
                 if (verifierUsername(username.getText())) {
                     username.setStyle(null);
                     ServiceUser su = new ServiceUser();
@@ -212,70 +234,75 @@ public class UserInscriptionController implements Initializable {
                                         } else if (female.isSelected()) {
                                             sexe = "Female";
                                         }
-                                     //   if (verifierType(typeUser) == true) {
-                                            if (typeUser.equals("Client")) {
+                                        if (verifierType(typeUser) == true) {
+                                            if (verifierImage(bytes) == true) {
+                                                if (typeUser.equals("Client")) {
 
-                                                User u = new Client(username.getText(), pasworrd.getText(), email.getText(), bytes, typeUser, phoneNumb, 0, sexe);
+                                                    User u = new Client(username.getText(), encryptedPassword, email.getText(), bytes, typeUser, phoneNumb, sexe, 0);
 
-                                                su.ajouter(u);
+                                                    su.ajouter(u);
+                                                    Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                                                    alert1.setContentText("client ajouté avec succés! ");
+                                                    alert1.show();
 
-                                                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
-                                                alert1.setContentText("client ajouté avec succés! ");
-                                                alert1.show();
+                                                } else if (typeUser.equals("Admin")) {
+                                                    User u2 = new Admin(username.getText(), encryptedPassword, email.getText(), bytes, typeUser, phoneNumb, sexe);
+                                                    su.ajouter(u2);
+                                                    Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
+                                                    alert3.setContentText("Admin ajouté avec succés!");
+                                                    alert3.show();
+                                                } else {
+                                                    User u2 = new Transporteur(username.getText(), encryptedPassword, email.getText(), bytes, typeUser, phoneNumb, sexe);
+                                                    su.ajouter(u2);
+                                                    Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
+                                                    alert3.setContentText("Transporteur ajouté avec succés!");
+                                                    alert3.show();
 
+                                                }
+
+                                                try {
+                                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginSinup.fxml"));
+                                                    Parent rootU;
+
+                                                    rootU = loader.load();
+
+                                                    Scene sceneU = new Scene(rootU);
+                                                    Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                                    sceneU.setFill(Color.TRANSPARENT);
+                                                    appStage.setScene(sceneU);
+                                                    appStage.show();
+                                                } catch (IOException ex) {
+                                                    System.out.println(ex.getMessage());
+                                                }
                                             } else {
-                                                User u2 = new Transporteur(username.getText(), pasworrd.getText(), email.getText(), bytes, typeUser, phoneNumb, sexe, 0, null, 0);
-                                                su.ajouter(u2);
-                                                Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
-                                                alert3.setContentText("Transporteur ajouté avec succés!");
-                                                alert3.show();
-
+                                                Alert alertType = new Alert(Alert.AlertType.ERROR, "Veuillez choisir une photo !");
+                                                alertType.show();
                                             }
-
-                                            try {
-                                                FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-                                                Parent rootU;
-
-                                                rootU = loader.load();
-
-                                                Scene sceneU = new Scene(rootU);
-                                                Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                                appStage.setScene(sceneU);
-                                                appStage.show();
-                                            } catch (IOException ex) {
-                                                System.out.println(ex.getMessage());
-                                            }
-                                     //   }else{
-                                        //    afficherErreurType();
-                                       // }
                                         } else {
-                                            afficherErreurGenre();
+                                            Alert alertType = new Alert(Alert.AlertType.ERROR, "Veuillez sélectionner un type d'utilisateur !");
+                                            alertType.show();
                                         }
                                     } else {
-
-                                        Alert alertName = new Alert(Alert.AlertType.ERROR, "compte exist");
-                                        Optional<ButtonType> resultName = alertName.showAndWait();
-                                        if (resultName.isPresent() && resultName.get() == ButtonType.OK) {
-                                            username.setText("");
-                                            pasworrd.setText("");
-
-                                        }
-
+                                        afficherErreurGenre();
                                     }
                                 } else {
-                                    Alert alerttMail = new Alert(Alert.AlertType.ERROR, "Le champ inscription email doit être une adresse courriel valide !");
-                                    alerttMail.show();
-                                    email.setText("");
-                                    alerttMail.show();
-                                    email.setText("");
-                                    email.getStyleClass().add("error-field");
+
+                                    Alert alertName = new Alert(Alert.AlertType.ERROR, "compte exist");
+                                    Optional<ButtonType> resultName = alertName.showAndWait();
+                                    if (resultName.isPresent() && resultName.get() == ButtonType.OK) {
+                                        username.setText("");
+                                        pasworrd.setText("");
+
+                                    }
 
                                 }
                             } else {
-                                Alert alerttPhone = new Alert(Alert.AlertType.ERROR, "PhoneNumber  invalide !");
-                                alerttPhone.show();
-                                phoneNumber.setText("");
-                                phoneNumber.getStyleClass().add("error-field");
+                                Alert alerttMail = new Alert(Alert.AlertType.ERROR, "Le champ inscription email doit être une adresse courriel valide !");
+                                alerttMail.show();
+                                email.setText("");
+                                alerttMail.show();
+                                email.setText("");
+                                email.getStyleClass().add("error-field");
 
                             }
                         } else {
@@ -286,52 +313,30 @@ public class UserInscriptionController implements Initializable {
 
                         }
                     } else {
-                        Alert alertPassword = new Alert(Alert.AlertType.ERROR, "username invalide !");
-                        alertPassword.show();
-                        username.setText("");
-                        username.getStyleClass().add("error-field");
+                        Alert alerttPhone = new Alert(Alert.AlertType.ERROR, "PhoneNumber  invalide !");
+                        alerttPhone.show();
+                        phoneNumber.setText("");
+                        phoneNumber.getStyleClass().add("error-field");
 
                     }
                 } else {
-                    Alert alertPassword = new Alert(Alert.AlertType.ERROR, "Password invalide !");
+                    Alert alertPassword = new Alert(Alert.AlertType.ERROR, "username invalide !");
                     alertPassword.show();
-                    pasworrd.setText("");
-                    pasworrd.getStyleClass().add("error-field");
+                    username.setText("");
+                    username.getStyleClass().add("error-field");
 
                 }
+            } else {
+                Alert alertPassword = new Alert(Alert.AlertType.ERROR, "Password invalide !");
+                alertPassword.show();
+                pasworrd.setText("");
+                pasworrd.getStyleClass().add("error-field");
 
             }
 
         }
 
-        @FXML
-        private void exit
-        (ActionEvent event
-        
-            ) {
-        try {
-                // crée un objet FXMLLoader qui va permettre de charger les informations de la vue "Login.fxml"
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-                //charger l'interface graphique (Parent rootU)
-                Parent rootU = loader.load();
-                //crée une nouvelle scène (Scene sceneU)
-                Scene sceneU = new Scene(rootU);
-                //récupère l'objet Stage correspondant à la fenêtre principale
-                Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                //    String css =this.getClass().getResource("../GUI/style.css").toExternalForm();
-                //     sceneU.getStylesheets().add(css);
-                //remplacer la scene 
-                appStage.setScene(sceneU);
-                //voir la nouvelle scene
-                appStage.show();
-
-            } catch (IOException ex) {
-                Logger.getLogger(UserInscriptionController.class
-                          .getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    
+    }
 
     public boolean verifierPassword(String password) {
 
@@ -358,12 +363,24 @@ public class UserInscriptionController implements Initializable {
         return true;
     }
 
-    public boolean verifierType() {
-
-        return true;
+    private boolean verifierType(String type) {
+        if (type != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
-      private void afficherErreurType() {
-          
+
+    private boolean verifierImage(byte[] image) {
+        if (image != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void afficherErreurType() {
+
         Alert alertSexe = new Alert(Alert.AlertType.ERROR, "Veuillez choisir un type");
         alertSexe.show();
     }

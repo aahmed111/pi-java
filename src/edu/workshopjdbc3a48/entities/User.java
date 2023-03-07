@@ -1,13 +1,14 @@
 
 package edu.workshopjdbc3a48.entities;
 
+import java.time.LocalDateTime;
+
 
 public abstract class User {
     private int id_user,  phoneNumber ;
     String username;
     private String password ,email  ,type,sexe ;
-    private byte[] photo;
-    
+    private byte[] photo; 
   public User(String username, String password, String email, byte[] photo, int phoneNumber) {
         this.username = username;
         this.password = password;

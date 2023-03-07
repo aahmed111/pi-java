@@ -1,50 +1,23 @@
 
-* {
-    -fx-primary : #2A2E37;
-    -fx-secondary : #3A3F48;
-    -fx-primarytext : white;
-    -fx-blue: #1976D2;
-    -fx-red: #FF0000;
-    -fx-color-1:#1976D2;
-}.root {
-  
-    -fx-background-color:  primary ;
-    ;
-}
 
-.text-field {
-    -fx-background-color:transparent ;
-    -fx-border-width:0px 0px 3px 0px ;
-    -fx-border-color:#2c6eb5;
-    -fx-padding:3px 3px 3px 25px ;
-    -fx-text-inner-color:#fff;
+.parent{
+       -fx-background-color:transparent;
+}
+.line-color{
+    -fx-background-color:#F3ABB5;
+}
+.container {
+    -fx-background-color: #ffa07a; 
+    -fx-background-radius: 20;
+    -fx-opacity: 0.5; 
 }
 
 .button {
-
-    -fx-background-color: -fx-blue;
-    -fx-text-fill: white;
-    -fx-background-radius: 20;
+    -fx-background-color: transparent;
+    -fx-text-fill:#F78C7B;
 }
+.trans-btn-white-border:hover{
 
-.button:hover {
-    -fx-background-color: #999999;
-    -fx-cursor: hand;
-}
-
-.label {
-    -fx-text-fill: #f2f2f2;
-}
-.label:hover {
-  
-  -fx-cursor: hand;
-}
-
-
-.error-field {
-    -fx-border-color: red;
-    -fx-border-width: 2px;
-}
-.radio-button.erreur {
-    -fx-text-fill: red;
+    -fx-background-color:#cccccc;
+     -fx-cursor: hand;
 }

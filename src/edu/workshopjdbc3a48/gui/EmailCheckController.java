@@ -9,14 +9,10 @@ import edu.workshopjdbc3a48.services.ServiceUser;
 import java.io.IOException;
 
 import java.net.URL;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,17 +23,26 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import org.bouncycastle.crypto.BlockCipher;
+import org.bouncycastle.crypto.BufferedBlockCipher;
+import org.bouncycastle.crypto.engines.AESFastEngine;
+import org.bouncycastle.crypto.modes.CBCBlockCipher;
+import org.bouncycastle.crypto.paddings.PaddedBufferedBlockCipher;
+import org.bouncycastle.crypto.params.KeyParameter;
+import org.bouncycastle.util.encoders.Hex;
 
 public class EmailCheckController implements Initializable {
 
@@ -45,41 +50,47 @@ public class EmailCheckController implements Initializable {
 
     @FXML
     private TextField email;
-    @FXML
     private TextField passwordEmail;
+    @FXML
+    private VBox vbox;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+    }
+
+    public String decrypt(String ciphertextHex, String keyHex) throws Exception {
+        byte[] key = Hex.decode(keyHex);
+        byte[] input = Hex.decode(ciphertextHex);
+        BlockCipher engine = new AESFastEngine();
+        BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CBCBlockCipher(engine));
+        cipher.init(false, new KeyParameter(key));
+        byte[] output = new byte[cipher.getOutputSize(input.length)];
+        int len = cipher.processBytes(input, 0, input.length, output, 0);
+        len += cipher.doFinal(output, len);
+
+        return new String(output, "UTF-8");
+    }
+
+    public String encrypt(String plaintext, String keyHex) throws Exception {
+        byte[] key = Hex.decode(keyHex);
+        byte[] input = plaintext.getBytes("UTF-8");
+
+        BlockCipher engine = new AESFastEngine();
+        BufferedBlockCipher cipher = new PaddedBufferedBlockCipher(new CBCBlockCipher(engine));
+        cipher.init(true, new KeyParameter(key));
+
+        byte[] output = new byte[cipher.getOutputSize(input.length)];
+        int len = cipher.processBytes(input, 0, input.length, output, 0);
+        len += cipher.doFinal(output, len);
+
+        return Hex.toHexString(output);
     }
 
     @FXML
-    private void retour(ActionEvent event
-    ) {
-        try {
-            // crée un objet FXMLLoader qui va permettre de charger les informations de la vue "Login.fxml"
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
-            //charger l'interface graphique (Parent rootU)
-            Parent rootU = loader.load();
-            //crée une nouvelle scène (Scene sceneU)
-            Scene sceneU = new Scene(rootU);
-            //récupère l'objet Stage correspondant à la fenêtre principale
-            Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            //    String css =this.getClass().getResource("../GUI/style.css").toExternalForm();
-            //     sceneU.getStylesheets().add(css);
-            //remplacer la scene 
-            appStage.setScene(sceneU);
-            //voir la nouvelle scene
-            appStage.show();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    @FXML
-    private void envoyer(ActionEvent event) throws SQLException, MessagingException {
-        String Email = email.getText();
-        String motDePasse = passwordEmail.getText();
+    private void envoyer(ActionEvent event) throws SQLException, MessagingException, Exception {
+        String Email = "abdelwahed.souid@esprit.tn";
+        String motDePasse = "223JMT7042";
         ServiceUser sc = new ServiceUser();
         if (sc.isValidEmailAddress(Email)) {
             if (sc.mailExist(Email) == false) {
@@ -91,39 +102,42 @@ public class EmailCheckController implements Initializable {
                 }
             } else {
                 String passwordCompte = sc.getPasswordByEmail(Email);
+                String keyHex = "00112233445566778899AABBCCDDEEFF";
+                String NewpASS = decrypt(passwordCompte, keyHex);
 
                 Properties props = new Properties();
-                props.put("mail.smtp.auth", true);         
-                props.put("mail.smtp.host", "smtp.esprit.tn");
-                props.put("mail.smtp.port", 587 );
+                props.put("mail.smtp.auth", "true");         
+                props.put("mail.smtp.host", "smtp@esprit.tn");
+                props.put("mail.smtp.port","578 " );
                 props.put("mail.smtp.starttls.enable", true);
                 props.put("mail.transport.protocl", "smtp");
-
-
-                Session session = Session.getInstance(props, new Authenticator() {
-                    @Override
+                Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+                
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(Email, motDePasse);
                     }
                 });
- 
                 Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress("emailName@esprit.tn" ));
-                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Email));
+                message.setFrom(new InternetAddress(Email ));
+                message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.getText()));
                 message.setSubject("Confirmation d'inscription");
                 message.setText("Bonjour,\n"
                           + "Votre inscription a été confirmée. Veuillez trouver ci-dessous votre mot de passe de connexion dans l'application swapify :\n"
-                          + passwordCompte);
+                          + NewpASS);
                 
                 Transport.send(message);
+             //   Alert alertName = new Alert(Alert.AlertType.CONFIRMATION, "votre mt de passe est :" + NewpASS);
+
+               // alertName.show();
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginSinup.fxml"));
                     Parent rootU = loader.load();
                     Scene sceneU = new Scene(rootU);
                     Node node = (Node) event.getSource();
                     Stage appStage = (Stage) node.getScene().getWindow();
-
-                    appStage.setScene(sceneU);
+                    sceneU.setFill(Color.TRANSPARENT);
+                    appStage.setScene(sceneU);  
+                   
                     appStage.show();
                     Alert alertMail = new Alert(Alert.AlertType.INFORMATION, "password envoyé avec succes !!verifier votre email");
                     alertMail.show();

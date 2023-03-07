@@ -1,0 +1,71 @@
+.gradient-background{
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100% ,#D91F4E,#FF854C );
+    
+}
+.line-color{
+    -fx-background-color:#F3ABB5;
+}
+.container{
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-background-radius:10;
+}
+.shadow{
+      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10.0, 0.0, 0.0, 10.0);
+}
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+.btn-white-border:hover{
+
+    -fx-background-color:#cccccc;
+    -fx-cursor: hand;
+}
+.chart-plot-background{
+    -fx-background-color: transparent;
+    -fx-stroke: #f2f2f2;
+}
+.axis{
+     -fx-stroke: #f2f2f2;
+     -fx-fill:#fff;
+     -fx-font-size: 15 ;
+     -fx-tick-label-fill : #fff;
+}
+.default-color0.chart-pie{ -fx-pie-color:transparent;}
+.chart-pie-label{
+   -fx-fill:#f2f2f2;
+   -fx-stroke:#f2f2f2;
+    -fx-font-size: 15 ;
+}
+.chart-pie-label-line{
+    -fx-fill:#f2f2f2;
+    -fx-stroke:#f2f2f2;
+}
+.table-view .column-header-background .label{
+     -fx-background-color:linear-gradient(from 25% 25% to 100% 100% ,#D91F4E,#ffa07a); 
+     -fx-text-fill:whitesmoke;
+}
+.table-view .table-cell {
+    -fx-font-weight: bold;
+    -fx-text-fill: #D91F4E;
+}
+
+.table-view .table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #ffa07a;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: grey;
+}
+
+.combo-box-normal {
+    -jfx-focus-color: -fx-primarytext;
+    -jfx-unfocus-color: -fx-primarytext;
+    -fx-text-inner-color: -fx-primarytext;
+    -fx-prompt-text-fill: #ffffff;
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}

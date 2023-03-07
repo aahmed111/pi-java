@@ -1,34 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="1000.0" prefWidth="1300.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ProfilTransporteursController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="980.0" prefWidth="1919.0" styleClass="parent" stylesheets="@loginsinup.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ProfilTransporteursController">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="18.0" prefHeight="950.0" prefWidth="275.0" style="-fx-background-color: #485664;" styleClass="home-btn" stylesheets="@dark-theme.css" />
-      <ImageView fx:id="ImageV" fitHeight="150.0" fitWidth="200.0" layoutX="41.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="nomUser" alignment="CENTER" layoutX="64.0" layoutY="174.0" prefHeight="34.0" prefWidth="154.0" textFill="WHITE">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Button layoutX="24.0" layoutY="296.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="238.0" styleClass="home-btn" stylesheets="@dark-theme.css" text="Settings" textFill="#eae3e3" />
-      <Button layoutX="24.0" layoutY="374.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="238.0" styleClass="home-btn" stylesheets="@dark-theme.css" text="Articles" textFill="#eae3e3" />
-      <Button layoutX="24.0" layoutY="215.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="238.0" styleClass="home-btn" stylesheets="@dark-theme.css" text="Home" textFill="#fcfcfc" />
-      <Button layoutX="24.0" layoutY="452.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="238.0" styleClass="home-btn" stylesheets="@dark-theme.css" text="Annaonce" textFill="#eae3e3" />
-      <Button layoutX="24.0" layoutY="530.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="238.0" styleClass="home-btn" stylesheets="@dark-theme.css" text="Reclamation" textFill="#eae3e3" />
-      <Button layoutX="24.0" layoutY="608.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="238.0" styleClass="home-btn" stylesheets="@dark-theme.css" text="Meesages" textFill="#eae3e3" />
-      <Button layoutX="24.0" layoutY="686.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="238.0" styleClass="home-btn" stylesheets="@dark-theme.css" text="Exit" textFill="#eae3e3" />
-      <FontAwesomeIcon fill="WHITE" glyphName="HOME" layoutX="42.0" layoutY="262.0" size="2em" />
-      <FontAwesomeIcon fill="WHITE" glyphName="GEAR" layoutX="43.0" layoutY="343.0" size="2em" />
-      <FontAwesomeIcon layoutX="41.0" layoutY="417.0" />
-      <FontAwesomeIcon layoutX="41.0" layoutY="495.0" />
-      <FontAwesomeIcon layoutX="41.0" layoutY="573.0" />
-      <FontAwesomeIcon layoutX="41.0" layoutY="651.0" />
-      <FontAwesomeIcon layoutX="41.0" layoutY="729.0" />
+      <BorderPane layoutX="10.0" layoutY="10.0" prefHeight="1094.0" prefWidth="1798.0" stylesheets="@loginsinup.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <HBox prefHeight="115.0" prefWidth="1919.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="154.0" prefWidth="214.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#retour" prefHeight="70.0" prefWidth="110.0" stylesheets="@style.css" text="Retour">
+                           <font>
+                              <Font name="Calibri Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="144.0" prefWidth="1615.0">
+                     <children>
+                        <ImageView fx:id="ImageV" fitHeight="108.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="nomUser" alignment="CENTER" prefHeight="50.0" prefWidth="184.0" stylesheets="@loginsinup.css" textFill="#e49797">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                     </children></VBox>
+                  <VBox alignment="CENTER" layoutX="224.0" layoutY="10.0" prefHeight="122.0" prefWidth="158.0" stylesheets="@style.css">
+                     <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#exit" prefHeight="86.0" prefWidth="171.0" stylesheets="@style.css" text="Quitter" textFill="#eae3e3">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" />
+               </BorderPane.margin>
+            </HBox>
+         </top>
+         <center>
+            <Pane fx:id="pane" prefHeight="816.0" prefWidth="1653.0" BorderPane.alignment="CENTER" />
+         </center>
+         <left>
+            <VBox prefHeight="816.0" prefWidth="246.0" styleClass="btn" stylesheets="@style.css" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" stylesheets="@style.css">
+                     <children>
+                        <FontAwesomeIcon fill="#f78c7b" glyphName="HOME" size="2.5em" wrappingWidth="28.68570899963379">
+                           <HBox.margin>
+                              <Insets left="20.0" top="35.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>
+                        <Button mnemonicParsing="false" onAction="#agence" prefHeight="114.0" prefWidth="222.0" stylesheets="@style.css" text="Agence" textFill="#ececec">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" stylesheets="@style.css">
+                     <children>
+                        <FontAwesomeIcon fill="#f78c7b" glyphName="GEAR" size="2.5em" text="" wrappingWidth="28.68570899963379">
+                           <HBox.margin>
+                              <Insets left="20.0" top="35.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>
+                        <Button mnemonicParsing="false" onAction="#setting" prefHeight="114.0" prefWidth="222.0" stylesheets="@style.css" text="Settings" textFill="#eae3e3">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" stylesheets="@style.css">
+                     <children>
+                        <FontAwesomeIcon fill="#f78c7b" glyphName="CHAT" size="2.5em" wrappingWidth="28.68570899963379">
+                           <HBox.margin>
+                              <Insets left="20.0" top="35.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>
+                        <Button mnemonicParsing="false" onAction="#chat" prefHeight="114.0" prefWidth="222.0" stylesheets="@style.css" text="Chats" textFill="#eae3e3">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0" stylesheets="@style.css">
+                     <children>
+                        <FontAwesomeIcon fill="#f78c7b" glyphName="" size="2.5em" wrappingWidth="28.68570899963379">
+                           <HBox.margin>
+                              <Insets left="20.0" top="35.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>
+                        <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="202.0" stylesheets="@style.css" text="Reclamations" textFill="#eae3e3">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0" stylesheets="@style.css">
+                     <children>
+                        <FontAwesomeIcon fill="#f78c7b" glyphName="" size="2.5em" wrappingWidth="28.68570899963379">
+                           <HBox.margin>
+                              <Insets left="20.0" top="35.0" />
+                           </HBox.margin>
+                        </FontAwesomeIcon>
+                        <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="279.0" stylesheets="@style.css" text="A propos" textFill="#eae3e3">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" stylesheets="@style.css" />
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
    </children>
 </AnchorPane>

@@ -1,0 +1,53 @@
+/*
+ * Empty Stylesheet file.
+ */
+.parent{
+       -fx-background-color:transparent;
+}
+.pane{
+    -fx-background-color: #666666;
+}
+.trans-btn-white-border{
+
+    -fx-background-color:transparent;
+    -fx-background-radius:8px;
+    -fx-border-color:#cccccc;
+    -fx-border-raduis:5px;
+    -fx-border-width:1px;
+    -fx-text-fill:whitesmoke;
+}
+.button {
+    -fx-background-color: transparent;
+}
+.trans-btn-white-border:hover{
+
+    -fx-background-color:#cccccc;
+     -fx-cursor: hand;
+}
+.white-pane{
+    -fx-background-color:#fff;
+}
+.tf_box{
+    -fx-background-color:transparent;
+    -fx-border-color:lightsalmon; 
+    -fx-border-width:0px 0px 1px 0px;   
+}
+.pink-btn:hover{
+    -fx-background-color: brown;
+    -fx-cursor: hand;
+}
+.tf{
+     -fx-background-color:transparent;
+}
+.pink-btn{
+    -fx-background-color:#F78C7B; 
+    -fx-background-radius:8px;
+    -fx-text-fill:#fff;
+}
+.btn{
+   -fx-background-color:transparent;  
+}
+.btn:hover{
+   -fx-cursor: hand;
+ -fx-text-fill: #cccccc;
+}

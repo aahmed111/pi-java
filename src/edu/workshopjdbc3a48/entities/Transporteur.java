@@ -5,19 +5,38 @@
  */
 package edu.workshopjdbc3a48.entities;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author abdel
  */
 public class Transporteur extends User {
 
-    private String adresse;
+  
     private int noteEvaluation;
     private int cout;
     private String etat;
     private Agence agence;
-    
-    
+    private LocalDateTime date_deblock ;
+    private int is_block;
+
+    public Transporteur( int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber, String sexe,int noteEvaluation,  String etat,int cout, LocalDateTime date_deblock, int is_block) {
+        super(id_user, username, password, email, photo, type, phoneNumber, sexe);
+        this.noteEvaluation = noteEvaluation;
+        this.cout = cout;
+        this.etat = etat;
+        this.date_deblock = date_deblock;
+        this.is_block = is_block;
+    }
+
+    public Transporteur( String username, String password, String email, byte[] photo,String type, int phoneNumber,String sexe ) {
+        super(username, password, email, photo, type,phoneNumber,sexe );
+       
+    }
+
+   
+   
     public Transporteur(String username, String password, String email, byte[] photo, int phoneNumber) {
         super(username, password, email, photo, phoneNumber);
     }
@@ -30,7 +49,7 @@ public class Transporteur extends User {
         this.cout = cout;
     }
 
-    public Transporteur(int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber, int noteEvaluation, String sexe, String etat, int cout) {
+    public Transporteur(int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber,  String sexe,int noteEvaluation, String etat, int cout) {
         super(id_user, username, password, email, photo, type, phoneNumber,sexe);
 
         this.noteEvaluation = noteEvaluation;
@@ -38,6 +57,24 @@ public class Transporteur extends User {
         this.etat = etat;
         this.cout = cout;
     }
+
+    public LocalDateTime getDate_deblock() {
+        return date_deblock;
+    }
+
+    public void setDate_deblock(LocalDateTime date_deblock) {
+        this.date_deblock = date_deblock;
+    }
+
+    public int getIs_block() {
+        return is_block;
+    }
+
+    public void setIs_block(int is_block) {
+        this.is_block = is_block;
+    }
+
+  
 
  
 
@@ -67,7 +104,7 @@ public class Transporteur extends User {
 
     @Override
     public String toString() {
-        return "Transporteur{" + "adresse=" + adresse + ", noteEvaluation=" + noteEvaluation + ", cout=" + cout + ", etat=" + etat + '}';
+        return "Transporteur{" + ", noteEvaluation=" + noteEvaluation + ", cout=" + cout + ", etat=" + etat + '}';
     }
 
 }

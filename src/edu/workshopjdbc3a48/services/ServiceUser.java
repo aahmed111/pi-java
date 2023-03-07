@@ -10,18 +10,18 @@ import edu.workshopjdbc3a48.entities.Client;
 import edu.workshopjdbc3a48.entities.Transporteur;
 import edu.workshopjdbc3a48.entities.User;
 import edu.workshopjdbc3a48.utils.DataSource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Map;
+import java.util.TreeMap;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import org.xbill.DNS.Lookup;
+import org.xbill.DNS.Record;
+import org.xbill.DNS.TextParseException;
+import org.xbill.DNS.Type;
 
 public class ServiceUser implements IService<User> {
 
@@ -33,7 +33,7 @@ public class ServiceUser implements IService<User> {
         if (u instanceof Client) {
 
             Client client = (Client) u;
-            String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`, `noteEvaluation`, `sexe` ,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,?,DEFAULT,DEFAULT)";
+            String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`, `noteEvaluation`, `sexe` ,`etat`,`cout`,`duree`)  VALUES (?,?,?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, client.getUsername());
             ps.setString(2, client.getPassword());
@@ -46,27 +46,28 @@ public class ServiceUser implements IService<User> {
             ps.executeUpdate();
             System.out.println("client ajouté !");
 
-            /*  } else if (u instanceof Admin) {
+        } else if (u instanceof Admin) {
 
-                String type = "Admin";
-                Admin admin = (Admin) u;
-                String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation` ,`adresse`  ,`etat`,`cout`)  VALUES (?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT)";
-                PreparedStatement ps = cnx.prepareStatement(req);
-                ps.setString(1, admin.getUsername());
-                ps.setString(2, admin.getPassword());
-                ps.setString(3, admin.getEmail());
-                ps.setBytes(4, admin.getPhoto());
-                ps.setString(5, type);
-                ps.setInt(6, admin.getPhoneNumber());
+            String type = "Admin";
+            Admin admin = (Admin) u;
+            String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber` ,`sexe`)  VALUES (?,?,?,?,?,?,?)";
 
-                ps.executeUpdate();
-                System.out.println("admin ajouté !");*/
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, admin.getUsername());
+            ps.setString(2, admin.getPassword());
+            ps.setString(3, admin.getEmail());
+            ps.setBytes(4, admin.getPhoto());
+            ps.setString(5, "Admin");
+            ps.setInt(6, admin.getPhoneNumber());
+            ps.setString(7, admin.getSexe());
+            ps.executeUpdate();
+            System.out.println("admin ajouté !");
         } else {
 
             {
                 Transporteur t = (Transporteur) u;
 
-                String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation`,`sexe`,`etat`,`cout`)  VALUES (?,?,?,?,?,?,?,?,DEFAULT(),DEFAULT())";
+                String req = "INSERT INTO `user`(`username`, `password`, `email`, `photo`, `type`, `phoneNumber`,`noteEvaluation`,`sexe`)  VALUES (?,?,?,?,?,?,?,?)";
                 PreparedStatement ps = cnx.prepareStatement(req);
                 ps.setString(1, t.getUsername());
                 ps.setString(2, t.getPassword());
@@ -137,14 +138,20 @@ public class ServiceUser implements IService<User> {
 
         while (rs.next()) {
             if (rs.getString("type").equals("Admin")) {
-                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7),rs.getString(8));
+                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8));
                 list.add(admin);
 
             } else if (rs.getString("type").equals("Client")) {
-                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("sexe"));
+                Timestamp T = rs.getTimestamp("date_deblockage");
+                LocalDateTime date_deblockage = null;
+                if (T != null) {
+                    date_deblockage = T.toLocalDateTime();
+                }
+
+                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), date_deblockage, rs.getInt(11), rs.getInt(12));
                 list.add(client);
             } else {
-                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("sexe"), rs.getString("etat"), rs.getInt("cout"));
+                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString("etat"), rs.getInt("cout"));
                 list.add(transporteur);
             }
 
@@ -161,18 +168,32 @@ public class ServiceUser implements IService<User> {
         ResultSet rs = ps.executeQuery(req);
         if (rs.next()) {
             if (rs.getString("type").equals("Admin")) {
-                u = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7),rs.getString(8));
+                u = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8));
             } else if (rs.getString("type").equals("Client")) {
-                u = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+
+                Timestamp T = rs.getTimestamp("date_deblockage");
+                LocalDateTime date_deblockage = null;
+                if (T != null) {
+                    date_deblockage = T.toLocalDateTime();
+                }
+
+                u = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), date_deblockage, rs.getInt("is_block"), rs.getInt("duree"));
             } else {
-                u = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
+                Timestamp T = rs.getTimestamp("date_deblockage");
+                LocalDateTime date_deblockage = null;
+                if (T != null) {
+                    date_deblockage = T.toLocalDateTime();
+                }
+
+                u = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString("etat"), rs.getInt("cout"), date_deblockage, rs.getInt("is_block"));
+                // int id_user, String username, String password, String email, byte[] photo, String type, int phoneNumber, String sexe,int noteEvaluation,  String etat,int cout, LocalDateTime date_deblock, int is_block)
             }
         }
 
         return u;
     }
 
-    public boolean verifierUsername(String username ) throws SQLException {
+    public boolean verifierUsername(String username) throws SQLException {
         boolean check = false;
         String req = "SELECT `username`  FROM USER ";
 
@@ -180,52 +201,51 @@ public class ServiceUser implements IService<User> {
         ResultSet rs = ps.executeQuery(req);
         while (rs.next()) {
 
-            if (rs.getString("username").equals(username) ) {
+            if (rs.getString("username").equals(username)) {
                 check = true;
-               break;
+                break;
             }
 
         }
         return check;
     }
 
-    public Client getClientByUsernamePassword(String username, String password) throws SQLException {
+    public Client getClientByUsername(String username) throws SQLException {
         Client c = null;
-        String req = "SELECT * FROM user WHERE username=? AND password=? ";
+        String req = "SELECT * FROM user WHERE username=? ";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, username);
-        ps.setString(2, password);
+
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            c = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
-        }
+            c = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9));
 
+        }
         return c;
     }
 
-    public Transporteur getTransporteurByUsernamePassword(String username, String password) throws SQLException {
+    public Transporteur getTransporteurByUsername(String username) throws SQLException {
         Transporteur t = null;
-        String req = "SELECT * FROM user WHERE username=? AND password=? ";
+        String req = "SELECT * FROM user WHERE username=?  ";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, username);
-        ps.setString(2, password);
+
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            t = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("sexe"), rs.getString("etat"), rs.getInt("cout"));
-        }
 
+            t = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString("etat"), rs.getInt("cout"));
+        }
         return t;
     }
 
-    public Admin getAdminByUsernamePassword(String username, String password) throws SQLException {
+    public Admin getAdminByUsername(String username) throws SQLException {
         Admin a = null;
-        String req = "SELECT * FROM user WHERE username=? AND password=? ";
+        String req = "SELECT * FROM user WHERE username=? ";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, username);
-        ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            a = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7),rs.getString(8));
+            a = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8));
         }
 
         return a;
@@ -259,13 +279,21 @@ public class ServiceUser implements IService<User> {
         return listTransporteur;
     }
 
-    public boolean isValidEmailAddress(String email) {
+    public boolean isValidEmailAddress(String email) throws TextParseException {
         boolean result = true;
         try {
-
             InternetAddress emailAddress = new InternetAddress(email);
             emailAddress.validate();
+            String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+            String domain = emailAddress.getAddress().split("@")[1];
+            Record[] mxRecords = new Lookup(domain, Type.MX).run();
+            if (mxRecords == null || mxRecords.length == 0) {
+                result = false;
+            }
 
+            if (email.matches(regex)) {
+                result = true;
+            }
         } catch (AddressException ex) {
             result = false;
         }
@@ -280,15 +308,14 @@ public class ServiceUser implements IService<User> {
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             if (rs.getString("type").equals("Admin")) {
-                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7),rs.getString(8));
+                User admin = new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8));
                 list.add(admin);
 
             } else if (rs.getString("type").equals("Client")) {
-                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString(9));
+                User client = new Client(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9));
                 list.add(client);
             } else {
-                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getInt(8), rs.getString("adresse"), rs.getString("etat"), rs.getInt("cout"));
-                list.add(transporteur);
+                User transporteur = new Transporteur(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getBytes(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString("etat"), rs.getInt("cout"));
             }
 
         }
@@ -314,10 +341,8 @@ public class ServiceUser implements IService<User> {
     }
 
     public String getPasswordByEmail(String email) throws SQLException {
-
         String password = null;
-
-        String req = "SELECT `password` FROM USER where `email`= ?";
+        String req = "SELECT `password` FROM `user` WHERE `email`= ?";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
@@ -326,7 +351,8 @@ public class ServiceUser implements IService<User> {
         }
         return password;
     }
-       public int getIdByName(String name) throws SQLException {
+
+    public int getIdByName(String name) throws SQLException {
 
         int Id = 0;
 
@@ -335,9 +361,138 @@ public class ServiceUser implements IService<User> {
         ps.setString(1, name);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-             Id = rs.getInt("id_user");
+            Id = rs.getInt("id_user");
         }
         return Id;
     }
 
+    public void blockUser(int id_user, int duration) throws SQLException {
+        // Obtenez la date et l'heure actuelles
+        LocalDateTime now = LocalDateTime.now();
+        // Calculez la date et l'heure de déblocage en ajoutant la durée spécifiée
+        LocalDateTime unblockDateTime = now.plusMinutes(duration);
+        String query = "UPDATE `user` SET `date_deblockage`=? ,`is_block`=? WHERE `id_user`=?";
+        PreparedStatement statement = cnx.prepareStatement(query);
+        statement.setTimestamp(1, Timestamp.valueOf(unblockDateTime));
+        statement.setInt(2, 1);
+        statement.setInt(3, id_user);
+        statement.executeUpdate();
+
+    }
+
+    public void unblockUser(String username) throws SQLException {
+        // Mettez à jour la base de données pour définir la colonne "est_bloque" sur false et supprimer la colonne "date_deblocage"
+        String query = "UPDATE user SET is_block = 0 , date_deblockage = null WHERE username = ?";
+        PreparedStatement statement = cnx.prepareStatement(query);
+        statement.setString(1, username);
+        statement.executeUpdate();
+    }
+
+    public void UpdateUserErreur(String username) throws SQLException {
+        int id_user = getIdByName(username);
+        String req = "SELECT numbErreur, lastErreur FROM autentification WHERE username = ?";
+        PreparedStatement statement = cnx.prepareStatement(req);
+        statement.setString(1, username);
+        ResultSet rs = statement.executeQuery();
+
+        int numbErreur = 0;
+        Timestamp lastErreur = null;
+        if (rs.next()) {
+            numbErreur = rs.getInt("numbErreur");
+            lastErreur = rs.getTimestamp("lastErreur");
+            // Vérifie si l'utilisateur a échoué à la connexion dans les 5 dernières minutes
+            /*  boolean hasFailedRecently = lastErreur != null
+                      && System.currentTimeMillis() - lastErreur.getTime() < 5 * 60 * 1000;
+            if (hasFailedRecently) {
+                numbErreur++;
+            } else {
+                numbErreur = 1;
+            }
+             */
+            String req2 = "UPDATE autentification SET numbErreur = ?, lastErreur = ? WHERE username = ?";
+            PreparedStatement ps = cnx.prepareStatement(req2);
+            ps.setInt(1, numbErreur);
+            ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(3, username);
+            ps.executeUpdate();
+            if (numbErreur >= 5) {
+                blockUser(id_user, 10);
+            }
+        } else {
+            String query = "INSERT INTO  autentification (username,numbErreur, lastErreur) VALUES (?, 1, ?)";
+            PreparedStatement ps = cnx.prepareStatement(query);
+            ps.setString(1, username);
+            ps.setTimestamp(2, Timestamp.valueOf(LocalDateTime.now()));
+            ps.executeUpdate();
+        }
+    }
+
+    public boolean checkBlocked(String username) throws SQLException {
+        boolean isblocked = false;
+        /*LocalDateTime now = LocalDateTime.now();
+        LocalDateTime dateDeblock;
+        Timestamp date = null;
+        //Timestamp.valueOf(LocalDateTime.now()
+        // Calculez la date et l'heure de déblocage en ajoutant la durée spécifiée
+        String req = "SELECT `date_deblockage` FROM USER where `username`= ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            date = rs.getTimestamp(1);
+            dateDeblock = date.toLocalDateTime();
+            if (!dateDeblock.toLocalDate().isBefore(now.toLocalDate()) || dateDeblock.toLocalDate().isEqual(now.toLocalDate())) {
+                unblockUser(username);
+            }
+        }
+        String req2 = "SELECT `is_block` FROM USER where `username`= ?";
+        PreparedStatement ps2 = cnx.prepareStatement(req);
+        ps2.setString(1, username);
+        ResultSet rs2 = ps2.executeQuery();
+        if (rs.next()) {
+            int etat = rs.getInt(1);
+            if (etat == 1) {
+                isblocked = true;
+            }
+        }*/
+        return isblocked;
+    }
+
+    public void updateDuree(int userId, int duree) throws SQLException {
+        String reqSelect = "SELECT  `duree` FROM `user` WHERE `id_user`=?";
+        PreparedStatement prSelect = cnx.prepareStatement(reqSelect);
+        prSelect.setInt(1, userId);
+        ResultSet rs = prSelect.executeQuery();
+        int currentDuree = 0;
+        if (rs.next()) {
+            currentDuree = rs.getInt("duree");
+        }
+        String req = "UPDATE `user` SET `duree`=? WHERE `id_user`=?";
+        PreparedStatement pr = cnx.prepareStatement(req);
+        pr.setInt(1, currentDuree + duree);
+        pr.setInt(2, userId);
+        pr.executeUpdate();
+    }
+
+    public Map<String, Integer> getUserByDuree() throws SQLException {
+        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+        String req = "SELECT `username` , `duree` FROM user ORDER BY duree DESC LIMIT 10";
+        Statement st = cnx.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()) {
+            map.put(rs.getString(1), rs.getInt(2));
+        }
+        return map;
+    }
+
+    public Map<String, Integer> getListMaleFemale() throws SQLException {
+        Map<String, Integer> map = new TreeMap<String, Integer>();
+        String req = "SELECT `sexe`, sum(duree) FROM user GROUP BY sexe ";
+        Statement st = cnx.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()) {
+            map.put(rs.getString(1), rs.getInt(2));
+        }
+        return map;
+    }
 }
