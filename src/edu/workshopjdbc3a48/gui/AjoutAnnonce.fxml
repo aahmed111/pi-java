@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="501.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.AjoutAnnonceController">
+   <children>
+      <Text layoutX="140.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infos générales (obligatoires)">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="150.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Entrer les détails de votre annonce" />
+      <ChoiceBox layoutX="-96.0" layoutY="-57.0" prefWidth="150.0" />
+      <TextField fx:id="titre" layoutX="128.0" layoutY="214.0" prefHeight="34.0" prefWidth="230.0" />
+      <Label layoutX="128.0" layoutY="191.0" text="Titre de l'annonce" />
+      <Label layoutX="128.0" layoutY="270.0" text="description de l'annonce" />
+      <TextArea fx:id="condition" layoutX="126.0" layoutY="444.0" prefHeight="103.0" prefWidth="230.0" />
+      <Label layoutX="123.0" layoutY="420.0" text="Condition de l'échange" />
+      <TextArea fx:id="description" layoutX="128.0" layoutY="293.0" prefHeight="103.0" prefWidth="230.0" />
+      <Button fx:id="btnsuivant" layoutX="126.0" layoutY="648.0" mnemonicParsing="false" onAction="#suivant" prefHeight="34.0" prefWidth="230.0" text="suivant" />
+      <Label layoutX="128.0" layoutY="107.0" text="Choisir une catégorie" />
+      <Label layoutX="125.0" layoutY="568.0" text="Audience" />
+      <RadioButton fx:id="rbpub" layoutX="128.0" layoutY="592.0" mnemonicParsing="false" text="publique">
+         <toggleGroup>
+            <ToggleGroup fx:id="audience" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbmoi" layoutX="241.0" layoutY="592.0" mnemonicParsing="false" text="moi-uniquement" toggleGroup="$audience" />
+      <ComboBox fx:id="categorie" layoutX="128.0" layoutY="134.0" prefHeight="34.0" prefWidth="230.0" />
+      <ComboBox fx:id="TypeArticle" layoutX="128.0" layoutY="66.0" prefHeight="34.0" prefWidth="230.0" />
+   </children>
+</AnchorPane>

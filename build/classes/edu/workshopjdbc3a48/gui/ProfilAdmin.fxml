@@ -161,7 +161,7 @@
                               <Insets left="10.0" />
                            </HBox.margin>
                         </FontAwesomeIcon>
-                        <Button mnemonicParsing="false" onAction="#modifier" prefHeight="46.0" prefWidth="200.0" stylesheets="@DashbordAdmin.css" text="Reclamations">
+                        <Button mnemonicParsing="false" onAction="#reclamation" prefHeight="46.0" prefWidth="200.0" stylesheets="@DashbordAdmin.css" text="Reclamations">
                            <font>
                               <Font name="Calibri" size="23.0" />
                            </font>

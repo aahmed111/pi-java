@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1623.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ListAnnonceServiceController">
+   <children>
+      <VBox layoutY="-1.0" prefHeight="400.0" prefWidth="1623.0">
+         <children>
+            <VBox prefHeight="69.0" prefWidth="1600.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#ajoutService" prefHeight="68.0" prefWidth="343.0" text="AjouterService">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="333.0" prefWidth="1623.0">
+               <children>
+                  <ScrollPane prefHeight="335.0" prefWidth="1623.0">
+                     <content>
+                        <HBox fx:id="listService" prefHeight="334.0" prefWidth="1590.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

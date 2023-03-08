@@ -131,7 +131,7 @@ public class LoginController implements Initializable {
 
                 String typeUser = u.getType();
 
-                //     if (su.checkBlocked(USERNAME) == false) {
+              if (su.checkBlocked(USERNAME) == false) {
                 if ((u.getUsername().equals(USERNAME)) && (u.getPassword().equals(encryptedPassword))) {
                     found = true;
                     username.setStyle("-fx-border-color: none;");
@@ -207,13 +207,13 @@ public class LoginController implements Initializable {
                     su.UpdateUserErreur(username.getText());
                 }
 
-                /*   } else {
+                   } else {
                         Alert alert3 = new Alert(Alert.AlertType.WARNING);
                         alert3.setContentText("votre compte est bloqué");
                         alert3.showAndWait();
                         alert3.close();
                         break;
-                    }*/
+                    }
             }
         } catch (SQLException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);

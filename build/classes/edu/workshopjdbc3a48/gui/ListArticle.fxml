@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<HBox fx:id="article" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ListArticleController">
+   <children>
+      <ImageView fitHeight="203.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="115.0">
+         <children>
+            <Label fx:id="nomArticle" prefHeight="38.0" prefWidth="66.0" text="Label">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="note" alignment="CENTER" prefHeight="35.0" prefWidth="107.0" text="Label">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</HBox>

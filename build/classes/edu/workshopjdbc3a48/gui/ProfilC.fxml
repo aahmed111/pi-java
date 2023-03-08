@@ -15,21 +15,21 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="980.0" prefWidth="1919.0" styleClass="parent" stylesheets="@loginsinup.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ProfilCController">
    <children>
-      <BorderPane prefHeight="1094.0" prefWidth="1798.0" stylesheets="@loginsinup.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="980.0" prefWidth="1919.0" stylesheets="@loginsinup.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <HBox prefHeight="115.0" prefWidth="1919.0" styleClass="button" stylesheets="@style.css" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="74.0" prefWidth="1919.0" styleClass="button" stylesheets="@style.css" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" onAction="#retour" prefHeight="48.0" prefWidth="130.0" text="retour">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="144.0" prefWidth="1615.0">
+                  <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="76.0" prefWidth="1605.0">
                      <children>
-                        <VBox alignment="CENTER_LEFT" prefHeight="154.0" prefWidth="214.0">
+                        <VBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="1582.0">
                            <children>
                               <ImageView fx:id="ImageV" fitHeight="108.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="nomUser" alignment="CENTER" prefHeight="50.0" prefWidth="184.0" stylesheets="@loginsinup.css" textFill="#e49797">
+                              <Label fx:id="nomUser" alignment="CENTER" prefHeight="36.0" prefWidth="176.0" stylesheets="@loginsinup.css" textFill="#e49797">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
@@ -37,7 +37,7 @@
                            </children>
                         </VBox>
                      </children></VBox>
-                  <VBox alignment="CENTER" layoutX="224.0" layoutY="10.0" prefHeight="144.0" prefWidth="157.0" stylesheets="@style.css">
+                  <VBox alignment="CENTER" layoutX="224.0" layoutY="10.0" prefHeight="124.0" prefWidth="171.0" stylesheets="@style.css">
                      <children>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#exit" prefHeight="85.0" prefWidth="168.0" stylesheets="@style.css" text="Quitter" textFill="#eae3e3">
                            <font>
@@ -48,15 +48,18 @@
                   </VBox>
                </children>
                <BorderPane.margin>
-                  <Insets bottom="20.0" />
+                  <Insets />
                </BorderPane.margin>
             </HBox>
          </top>
          <center>
-            <Pane fx:id="pane" prefHeight="816.0" prefWidth="1618.0" BorderPane.alignment="CENTER" />
+            <Pane fx:id="pane" prefHeight="894.0" prefWidth="1718.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin></Pane>
          </center>
          <left>
-            <VBox prefHeight="816.0" prefWidth="281.0" styleClass="container" stylesheets="@style.css" BorderPane.alignment="CENTER">
+            <VBox prefHeight="776.0" prefWidth="246.0" styleClass="container" stylesheets="@style.css" BorderPane.alignment="CENTER">
                <children>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" stylesheets="@DashbordAdmin.css">
                      <children>
@@ -111,7 +114,7 @@
                               <Insets left="20.0" top="35.0" />
                            </HBox.margin>
                         </FontAwesomeIcon>
-                        <Button mnemonicParsing="false" prefHeight="114.0" prefWidth="222.0" stylesheets="@style.css" text="Reclamations" textFill="#eae3e3">
+                        <Button mnemonicParsing="false" onAction="#Echange" prefHeight="114.0" prefWidth="222.0" stylesheets="@style.css" text="Echange" textFill="#eae3e3">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -125,7 +128,7 @@
                               <Insets left="20.0" top="35.0" />
                            </HBox.margin>
                         </FontAwesomeIcon>
-                        <Button mnemonicParsing="false" prefHeight="114.0" prefWidth="222.0" stylesheets="@style.css" text="Articles" textFill="#eae3e3">
+                        <Button mnemonicParsing="false" onAction="#article" prefHeight="114.0" prefWidth="222.0" stylesheets="@style.css" text="Articles" textFill="#eae3e3">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>

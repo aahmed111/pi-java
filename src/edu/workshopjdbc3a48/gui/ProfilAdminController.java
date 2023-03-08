@@ -84,7 +84,7 @@ public class ProfilAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
        try {
-            fxml = FXMLLoader.load(getClass().getResource("Dashbord.fxml"));
+            fxml = FXMLLoader.load(getClass().getResource("DashbordAdmin.fxml"));
             pane.getChildren().removeAll();
             pane.getChildren().setAll(fxml);
         } catch (IOException ex) {
@@ -112,7 +112,7 @@ public class ProfilAdminController implements Initializable {
     @FXML
     private void dashbord(ActionEvent event) {
         try {
-            fxml = FXMLLoader.load(getClass().getResource("Dashbord.fxml"));
+            fxml = FXMLLoader.load(getClass().getResource("DashbordAdmin.fxml"));
             pane.getChildren().removeAll();
             pane.getChildren().setAll(fxml);
         } catch (IOException ex) {

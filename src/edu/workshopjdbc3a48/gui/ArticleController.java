@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -28,6 +29,10 @@ public class ArticleController implements Initializable {
     private int id_user;
     @FXML
     private Pane panel;
+    @FXML
+    private HBox listArticle;
+    @FXML
+    private HBox listService;
     public int getId_user() {
         return id_user;
     }
@@ -45,7 +50,7 @@ public class ArticleController implements Initializable {
 
     @FXML
     private void ajoutproduit(ActionEvent event) throws IOException {
-          Parent root = FXMLLoader.load(getClass().getResource("captcha.fxml"));
+          Parent root = FXMLLoader.load(getClass().getResource("captchaa.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -84,9 +89,8 @@ public class ArticleController implements Initializable {
         
     }
 
-    @FXML
     private void ajoutservice(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("captcha.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("captchaa.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);

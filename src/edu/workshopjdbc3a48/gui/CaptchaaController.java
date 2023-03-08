@@ -1,10 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package edu.workshopjdbc3a48.gui;
 
+
 import java.io.IOException;
+import java.net.URL;
 import java.util.Random;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,9 +22,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class CaptchaController {
 
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+public class CaptchaaController implements Initializable {
+
+
+  private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     private static final int CODE_LENGTH = 6;
 
     @FXML
@@ -38,10 +49,7 @@ public class CaptchaController {
 
     private String generatedCode;
 
-   @FXML
-private void initialize() {
-    refreshCaptcha();
-}
+
 
 private static String userInput;
 
@@ -96,4 +104,10 @@ private String generateCaptchaCode() {
 private String getCaptchaCode() {
     return this.generatedCode;
 }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+      refreshCaptcha();
+    }
+    
 }

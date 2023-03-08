@@ -84,6 +84,7 @@ public class ServiceUser implements IService<User> {
         }
 
     }
+
     @Override
     public void supprimer(int id) throws SQLException {
         String type = null;
@@ -191,7 +192,7 @@ public class ServiceUser implements IService<User> {
 
         return u;
     }
-   
+
     public boolean verifierUsername(String username) throws SQLException {
         boolean check = false;
         String req = "SELECT `username`  FROM USER ";
@@ -381,12 +382,11 @@ public class ServiceUser implements IService<User> {
 
     public void unblockUser(String username) throws SQLException {
         // Mettez à jour la base de données pour définir la colonne "est_bloque" sur false et supprimer la colonne "date_deblocage"
-        String query = "UPDATE user SET is_block = 0 , date_deblockage = null WHERE username = ?";
+        String query = "UPDATE user SET is_block = 0 , date_deblockage = NULL WHERE username = ?";
         PreparedStatement statement = cnx.prepareStatement(query);
         statement.setString(1, username);
         statement.executeUpdate();
     }
-
     public void UpdateUserErreur(String username) throws SQLException {
         int id_user = getIdByName(username);
         String req = "SELECT numbErreur, lastErreur FROM autentification WHERE username = ?";
@@ -428,8 +428,8 @@ public class ServiceUser implements IService<User> {
 
     public boolean checkBlocked(String username) throws SQLException {
         boolean isblocked = false;
-        /*LocalDateTime now = LocalDateTime.now();
-        LocalDateTime dateDeblock;
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime dateDeblock = null;
         Timestamp date = null;
         //Timestamp.valueOf(LocalDateTime.now()
         // Calculez la date et l'heure de déblocage en ajoutant la durée spécifiée
@@ -438,22 +438,25 @@ public class ServiceUser implements IService<User> {
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            date = rs.getTimestamp(1);
-            dateDeblock = date.toLocalDateTime();
-            if (!dateDeblock.toLocalDate().isBefore(now.toLocalDate()) || dateDeblock.toLocalDate().isEqual(now.toLocalDate())) {
-                unblockUser(username);
+            date = rs.getTimestamp("date_deblockage");
+            if (date != null) {
+                dateDeblock = date.toLocalDateTime();
+                if (dateDeblock.isBefore(now)) {
+                    unblockUser(username);
+                }
             }
+
         }
         String req2 = "SELECT `is_block` FROM USER where `username`= ?";
-        PreparedStatement ps2 = cnx.prepareStatement(req);
+        PreparedStatement ps2 = cnx.prepareStatement(req2);
         ps2.setString(1, username);
         ResultSet rs2 = ps2.executeQuery();
-        if (rs.next()) {
-            int etat = rs.getInt(1);
+        if (rs2.next()) {
+            int etat = rs2.getInt(1);
             if (etat == 1) {
                 isblocked = true;
             }
-        }*/
+        }
         return isblocked;
     }
 

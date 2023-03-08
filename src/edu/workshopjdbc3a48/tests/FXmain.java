@@ -18,7 +18,6 @@ public class FXmain extends Application {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../GUI/LoginSinup.fxml"));
-
             Parent root = loader.load();
             Scene scene = new Scene(root);
             scene.setFill(Color.TRANSPARENT);

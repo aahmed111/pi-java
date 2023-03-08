@@ -89,7 +89,8 @@ public class EmailCheckController implements Initializable {
 
     @FXML
     private void envoyer(ActionEvent event) throws SQLException, MessagingException, Exception {
-        String Email = "abdelwahed.souid@esprit.tn";
+        String MyEmail = "abdelwahed.souid@esprit.tn";
+        String Email = email.getText();
         String motDePasse = "223JMT7042";
         ServiceUser sc = new ServiceUser();
         if (sc.isValidEmailAddress(Email)) {
@@ -105,7 +106,7 @@ public class EmailCheckController implements Initializable {
                 String keyHex = "00112233445566778899AABBCCDDEEFF";
                 String NewpASS = decrypt(passwordCompte, keyHex);
 
-                Properties props = new Properties();
+         /*       Properties props = new Properties();
                 props.put("mail.smtp.auth", "true");         
                 props.put("mail.smtp.host", "smtp@esprit.tn");
                 props.put("mail.smtp.port","578 " );
@@ -125,10 +126,10 @@ public class EmailCheckController implements Initializable {
                           + "Votre inscription a été confirmée. Veuillez trouver ci-dessous votre mot de passe de connexion dans l'application swapify :\n"
                           + NewpASS);
                 
-                Transport.send(message);
-             //   Alert alertName = new Alert(Alert.AlertType.CONFIRMATION, "votre mt de passe est :" + NewpASS);
+                Transport.send(message);  */
+                Alert alertName = new Alert(Alert.AlertType.CONFIRMATION, "votre mt de passe est :" + NewpASS);
 
-               // alertName.show();
+                alertName.show();
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginSinup.fxml"));
                     Parent rootU = loader.load();
