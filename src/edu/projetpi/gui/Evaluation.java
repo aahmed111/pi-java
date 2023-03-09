@@ -2,6 +2,7 @@ package edu.projetpi.gui;
 
 import edu.projetpi.entities.Echange;
 import edu.projetpi.services.ServiceEchange;
+import edu.projetpi.services.ServiceEvaluation;
 import java.util.List;
 import java.util.stream.Collectors;
 import javafx.application.Application;
@@ -18,6 +19,8 @@ import javafx.stage.Stage;
 public class Evaluation extends Application {
 
     private ServiceEchange se = new ServiceEchange();
+    /*private ServiceEvaluation ev = new ServiceEvaluation();
+    private Evaluation e1 = new Evaluation();*/
 
     @Override
     public void start(Stage primaryStage) {
@@ -41,7 +44,7 @@ public class Evaluation extends Application {
 
         ComboBox<Echange> comboBoxEchanges = new ComboBox<>();
         List<Echange> e = se.getAll().stream()
-                .filter(p -> p.getStatut().equalsIgnoreCase("terminée")).collect(Collectors.toList());
+                .filter(p -> p.getStatut().equalsIgnoreCase("terminé")).collect(Collectors.toList());
         comboBoxEchanges.getItems().addAll(e);
         comboBoxEchanges.setPromptText("Choisir un échange");
         vboxEchanges.getChildren().add(comboBoxEchanges);
@@ -87,7 +90,8 @@ public class Evaluation extends Application {
                 alert.setTitle("Evaluation enregistrée");
                 alert.setHeaderText(null);
                 alert.setContentText("L'échange a été évalué avec succès.");
-                alert.showAndWait();
+                alert.showAndWait();           
+                //ev.ajouter(e1);
             }
         });
         root.getChildren().add(validerBtn);

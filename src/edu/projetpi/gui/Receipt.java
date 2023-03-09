@@ -20,7 +20,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 
-
 public class Receipt extends Application {
 
     private TextField nameField;
@@ -73,7 +72,7 @@ public class Receipt extends Application {
         PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
         PDType0Font font = PDType0Font.load(document, new File("C:\\Users\\zayne\\Downloads\\static\\OpenSans"));
-        
+
         float fontSize = 12;
 
         contentStream.beginText();

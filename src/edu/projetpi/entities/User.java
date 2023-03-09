@@ -37,6 +37,10 @@ public class User {
         this.verso_cin = verso_cin;
     }
 
+    public User() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId_user() {
         return id_user;
     }

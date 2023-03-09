@@ -14,17 +14,17 @@ public class Evaluation {
     private int id_evaluation;
     private int valeur1;
     private int valeur2;
-    private int id_echange;
-    private int id_user1;
-    private int id_user2;
+    private Echange echange;
+   private User user1;
+    private User user2;
 
-    public Evaluation(int id_evaluation, int valeur1, int valeur2, int id_echange, int id_client1, int id_client2) {
+    public Evaluation(int id_evaluation, int valeur1, int valeur2, Echange echange, User user1, User user2) {
         this.id_evaluation = id_evaluation;
         this.valeur1 = valeur1;
         this.valeur2 = valeur2;
-        this.id_echange = id_echange;
-        this.id_user1 = id_client1;
-        this.id_user2= id_client2;
+        this.echange = echange;
+        this.user1 = user1;
+        this.user2= user2;
     }
     
     
@@ -33,42 +33,46 @@ public class Evaluation {
     public Evaluation(int valeur1,int valeur2,
     int id_echange
     ) {
-       // this.id_evaluation = id_evaluation;
+       
         this.valeur1 = valeur1;
         this.valeur2 = valeur2;
-        this.id_echange=id_echange;
+        this.echange=echange;
         
     }
 
-    public int getId_client1() {
-        return id_user1;
+    public User getUser1() {
+        return user1;
     }
 
-    public void setId_client1(int id_client1) {
-        this.id_user1 = id_client1;
+    public void setUser1(User user1) {
+        this.user1 = user1;
     }
 
-    public int getId_client2() {
-        return id_user2;
+    public User getUser2() {
+        return user2;
     }
 
-    public void setId_client2(int id_client2) {
-        this.id_user2= id_client2;
+    public void setUser2(User user2) {
+        this.user2 = user2;
     }
+
+  
 
     public Evaluation(int valeur1, int valeur2) {
         this.valeur1 = valeur1;
         this.valeur2 = valeur2;
-        this.id_echange=12;
+        
     }
 
-    public int getId_echange() {
-        return id_echange;
+    public Echange getEchange() {
+        return echange;
     }
 
-    public void setId_echange(int id_echange) {
-        this.id_echange = id_echange;
+    public void setEchange(Echange echange) {
+        this.echange = echange;
     }
+
+   
     
 
     public int getId_evaluation() {
@@ -93,7 +97,7 @@ public class Evaluation {
 
     @Override
     public String toString() {
-        return "Evaluation{" + "id_evaluation=" + id_evaluation + ", valeur1=" + valeur1 + ", valeur2=" + valeur2 + ", id_echange=" + id_echange + ", id_client1=" + id_user1 + ", id_client2=" + id_user2 + '}';
+        return "Evaluation{" + "id_evaluation=" + id_evaluation + ", valeur1=" + valeur1 + ", valeur2=" + valeur2 + ", echange=" + echange + ", user1=" + user1 + ", user2=" + user2 + '}';
     }
 
    

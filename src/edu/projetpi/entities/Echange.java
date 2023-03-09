@@ -16,71 +16,97 @@ public class Echange {
     private int id_echange;
     private Date date_echange;
     private String statut;
-    private int id_user1;
-    private int id_user2;
-    private int id_article1;
-    private int id_article2;
+    private User user1;
+    private User user2;
+    private Article article1;
+    private Article article2;
+    private int confirmation;
 
-    public int getId_article1() {
-        return id_article1;
+    public Article getArticle1() {
+        return article1;
     }
 
-    public void setId_article1(int id_article1) {
-        this.id_article1 = id_article1;
+    public void setArticle1(Article article1) {
+        this.article1 = article1;
     }
 
-    public int getId_article2() {
-        return id_article2;
+    public Article getArticle2() {
+        return article2;
     }
 
-    public void setId_article2(int id_article2) {
-        this.id_article2 = id_article2;
+    public void setArticle2(Article article2) {
+        this.article2 = article2;
     }
+    
+
+   
     
     public Echange(){
     this.date_echange=new Date();
     }
 
-    public int getId_client1() {
-        return id_user1;
+    public User getUser1() {
+        return user1;
     }
 
-    public void setId_client1(int id_client1) {
-        this.id_user1 = id_client1;
+    public void setUser1(User user1) {
+        this.user1 = user1;
     }
 
-    public int getId_client2() {
-        return id_user2;
+    public User getUser2() {
+        return user2;
     }
 
-    public void setId_client2(int id_client2) {
-        this.id_user2 = id_user2;
+    public void setUser2(User user2) {
+        this.user2 = user2;
+    }
+
+   
+
+    public int getConfirmation() {
+        return confirmation;
+    }
+
+    public void setConfirmation(int confirmation) {
+        this.confirmation = confirmation;
+    }
+
+    public Echange(int id_echange, Date date_echange, String statut, User user1, User user2, Article article1, Article article2, int confirmation) {
+        this.id_echange = id_echange;
+        this.date_echange = date_echange;
+        this.statut = statut;
+        this.user1 = user1;
+        this.user2 = user2;
+        this.article1 = article1;
+        this.article2 = article2;
+        this.confirmation = confirmation;
     }
     
     
+    
 
-    public Echange(int id_echange, String statut,Date date_echange,int id_article1,
-            int id_article2,int id_client1,int id_client2
+    public Echange(int id_echange, String statut,Date date_echange,Article article1,
+            Article article2,User user1, User usert2
             ) {
         this.id_echange = id_echange;
         this.date_echange = date_echange;
         this.statut = statut;
-        this.id_article1=id_article1;
-        this.id_article2=id_article2;
-        this.id_user1=id_client1;
-        this.id_user2=id_client2;
+        this.article1=article1;
+        this.article2=article2;
+        this.user1=user1;
+        this.user2=user2;
     }
     
-     public Echange( String statut,int id_article1,
-            int id_article2,int id_client1,int id_client2
+     public Echange( String statut,Article article1,
+            Article article2,User user1,User user2
             ) {
         //this.id_echange = id_echange;
         this.date_echange = new Date();
         this.statut = statut;
-        this.id_article1=id_article1;
-        this.id_article2=id_article2;
-        this.id_user1=id_client1;
-        this.id_user2=id_client2;
+        this.article1=article1;
+        this.article2=article2;
+        this.user1=user1;
+        this.user2=user2;
     }
 
     public Echange(String statut) {

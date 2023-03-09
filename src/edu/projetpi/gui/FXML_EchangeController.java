@@ -10,7 +10,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -20,9 +26,27 @@ import javafx.scene.control.TextField;
 public class FXML_EchangeController implements Initializable {
 
     @FXML
-    private TextField fxNom;
+    private Pane pane;
     @FXML
-    private TextField fxprenom;
+    private ScrollPane root;
+    @FXML
+    private AnchorPane conteneur;
+    @FXML
+    private Label titre;
+    @FXML
+    private Label cc;
+    @FXML
+    private ListView<?> lc;
+    @FXML
+    private Label ca;
+    @FXML
+    private ListView<?> la;
+    @FXML
+    private Label ma;
+    @FXML
+    private ListView<?> lma;
+    @FXML
+    private Button propose;
 
     /**
      * Initializes the controller class.
@@ -35,15 +59,5 @@ public class FXML_EchangeController implements Initializable {
         // TODO
     }
 
-    @FXML
-    private void AjouterP(ActionEvent event) {
-        // ServicePersonne sp = new ServicePersonne();
-        //ServicePersonne = new Personne(FxNom.getText(), type.getText());
-
-    }
-
-    @FXML
-    private void AfficherP(ActionEvent event) {
-    }
 
 }

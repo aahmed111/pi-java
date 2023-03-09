@@ -14,6 +14,10 @@ public class Article {
     private int id_article;
     private String date_ajout, proprietaire, estimation, description, image, designation;
 
+    public Article() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String getDesignation() {
         return designation;
     }

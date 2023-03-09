@@ -1,7 +1,8 @@
 package edu.projetpi.gui;
 
+
+
 import edu.projetpi.entities.Article;
-import edu.projetpi.entities.ConfirmationMail;
 import edu.projetpi.entities.Echange;
 import edu.projetpi.entities.User;
 import edu.projetpi.services.ServiceArticle;
@@ -9,6 +10,8 @@ import edu.projetpi.services.ServiceEchange;
 import edu.projetpi.services.ServiceUser;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import edu.projetpi.utils.Mailer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -96,9 +99,9 @@ public class Main_Echange extends Application {
         itemList.getItems().addAll(articles);
         myList.getItems().addAll(myArticles);
 
-        Echange e1 = new Echange();
+       /* Echange e1 = new Echange();
         e1.setId_client1(50);
-        e1.setStatut("en attente");
+        e1.setStatut("en attente");*/
         // Gestion de l'événement de sélection d'un utilisateur
         userList.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             System.out.println("Utilisateur sélectionné : " + newValue);
@@ -106,6 +109,7 @@ public class Main_Echange extends Application {
                 if (u.getNom().equalsIgnoreCase(newValue)) {
                     System.out.println("\n ++++++++++ \n found article" + u.toString());
                     e1.setId_client2(u.getId_user());
+
                 }
             });
         });
@@ -115,7 +119,7 @@ public class Main_Echange extends Application {
 
             la.forEach((a) -> {
                 if (a.getDesignation().equalsIgnoreCase(newValue)) {
-                    //System.out.println("\n ++++++++++ \n found article"+a.toString());
+                    System.out.println("\n ++++++++++ \n found article"+a.getDesignation());
                     e1.setId_article2(a.getId_article());
                 }
             });
@@ -137,8 +141,8 @@ public class Main_Echange extends Application {
         proposeButton.setOnAction(event -> {
             String selectedUser = userList.getSelectionModel().getSelectedItem();
             String selectedItem = itemList.getSelectionModel().getSelectedItem();
-            String yourItem = yourItemArea.getText();
-            String otherItem = otherItemArea.getText();
+            String yourItem = myList.getSelectionModel().getSelectedItem();
+            // String otherItem = otherItemArea.getText();
            // int client1Id = getOneById(userList.getAccessibleText());
            // int client2Id = getClientIdByName(u.getId_user());
 
@@ -159,14 +163,23 @@ public class Main_Echange extends Application {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText("Voulez-vous proposer l'échange suivant ?");
-            alert.setContentText("- Vous : " + yourItem + "\n- " + selectedUser + " : " + otherItem);
+            alert.setContentText("- Vous : " + yourItem + "\n- " + selectedUser + " : " + selectedItem);
             ButtonType yesButton = new ButtonType("Oui", ButtonBar.ButtonData.YES);
             ButtonType noButton = new ButtonType("Non", ButtonBar.ButtonData.NO);
             alert.getButtonTypes().setAll(yesButton, noButton);
             alert.showAndWait().ifPresent(buttonType -> {
                 if (buttonType == yesButton) {
-                    System.out.println("Proposition d'échange envoyée.");
-                    //ConfirmationMail.sendConfirmationMail(client1Id, client2Id);
+                    try {
+                        User me = lu.stream().filter(u -> u.getId_user() == 50).findFirst().get();
+                        User other = lu.stream().filter(u -> u.getNom().equalsIgnoreCase(selectedUser)).findFirst().get();
+                        Article myArticle = la.stream().filter(a -> a.getDesignation().equalsIgnoreCase(yourItem)).findFirst().get();
+                        Article otherArticle = la.stream().filter(a -> a.getDesignation().equalsIgnoreCase(selectedItem)).findFirst().get();
+
+                        System.out.println("sending confiramtion mail");
+                        Mailer.sendSwapConfirmations(me, other, myArticle, otherArticle);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } else if (buttonType == noButton) {
                     System.out.println("Proposition d'échange annulée.");
                 }

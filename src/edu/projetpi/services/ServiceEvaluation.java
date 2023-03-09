@@ -7,6 +7,7 @@ package edu.projetpi.services;
 
 import edu.projetpi.entities.Echange;
 import edu.projetpi.entities.Evaluation;
+import edu.projetpi.entities.User;
 import edu.projetpi.utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,20 +28,18 @@ public class ServiceEvaluation implements IService<Evaluation> {
     @Override
     public void ajouter(Evaluation e) {
         try {
-            //get echange by id echange
-            //set client 1 and client 2 from echange
-            ServiceEchange s=new ServiceEchange();
-            Echange ech=s.getOneById(e.getId_echange());
-            System.out.println(" echange returned from evaluation : "+ech);
+
+            ServiceEchange s = new ServiceEchange();
+            Echange ech = s.getOneById(e.getEchange().getId_echange());
             String req = "INSERT INTO `evaluation`"
                     + "(`valeur1`,`valeur2` ,`id_echange`,`id_user1`,`id_user2` )"
                     + " VALUES (?,?,?,?,?)";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, e.getValeur1());
             ps.setInt(2, e.getValeur2());
-            ps.setInt(3, e.getId_echange());
-                        ps.setInt(4, ech.getId_client1());
-                        ps.setInt(5, ech.getId_client2());
+            ps.setInt(3, e.getEchange().getId_echange());
+            ps.setInt(4, ech.getUser1().getId_user());
+            ps.setInt(5, ech.getUser2().getId_user());
 
             ps.executeUpdate();
             System.out.println("evaluation ajoutée !");
@@ -86,11 +85,14 @@ public class ServiceEvaluation implements IService<Evaluation> {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
-                //Evaluation e = new Evaluation(rs.getInt(1), rs.getInt(2), rs.getInt(3));
-                Evaluation e1=new Evaluation(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4),
-                        rs.getInt(5), rs.getInt(6));
+                ServiceUser su = new ServiceUser();
+                ServiceEchange se = new ServiceEchange();
+                User user1 = su.getOneById(rs.getInt(1));
+                User user2 = su.getOneById(rs.getInt(2));
+                Echange echange = new Echange();
+                Evaluation e1 = new Evaluation(rs.getInt(1), rs.getInt(2), rs.getInt(3), echange ,
+                        user1, user2);
                 list.add(e1);
-                System.out.println("\n eval :"+e1.toString());
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -108,7 +110,12 @@ public class ServiceEvaluation implements IService<Evaluation> {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery(req);
             if (rs.next()) {
-                e = new Evaluation(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+                 ServiceUser su = new ServiceUser();
+                  ServiceEchange se = new ServiceEchange();
+                User user1 = su.getOneById(rs.getInt(1));
+                User user2 = su.getOneById(rs.getInt(2));
+                 Echange echange = new Echange();
+                e = new Evaluation(rs.getInt(1), rs.getInt(2), rs.getInt(2),echange , user1, user2);
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
