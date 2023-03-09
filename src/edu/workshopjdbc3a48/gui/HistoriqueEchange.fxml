@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="815.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.HistoriqueEchangeController">
+   <children>
+      <ScrollPane fx:id="scroll" layoutX="-2.0" prefHeight="815.0" prefWidth="1606.0">
+         <content>
+            <VBox fx:id="vBox" alignment="TOP_CENTER" prefHeight="802.0" prefWidth="1608.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="287.0" text="Liste des Echanges">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</Pane>

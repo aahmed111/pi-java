@@ -1,0 +1,65 @@
+.post-background{
+    -fx-background-color: #fff;
+    -fx-background-radius: 15;
+    -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1),5.0,0.0,0.0,5.0);
+}
+
+.reactions-container{
+    -fx-background-color: #ffffff;
+    -fx-background_radius: 50;
+    -fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.1),5.0,0.0,0.0,5.0);
+    -fx-border-width: 1;
+    -fx-border-color: #B8B9BB;
+    -fx-border-radius: 50;
+}
+
+.top-border{
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: #606266;
+}
+
+.round-button{
+    -fx-background-color: #F0F2F5;
+    -fx-background-radius: 50;
+}
+.white-background{
+    -fx-background-color: #fff;
+}
+filtrer_button{
+  -fx-background-color: #F0F2F5; 
+   -fx-background-radius: 50;  
+}
+
+.body-background{
+    -fx-background-color: #F0F2F5;
+}
+.text_field{
+    -fx-background-color: #F0F2F5;
+    -fx-background-radius: 50;
+}
+
+.text_area{
+    -fx-background-color: #F0F2F5;
+    -fx-background-radius: 50;
+}
+
+.list-view{
+   -fx-background-color: #F0F2F5; 
+   -fx-background-radius: 50;
+}
+.scroll-pane > .viewport {
+   -fx-background-color: transparent; 
+}
+.list-view {
+    -fx-background-color: #f0f0f0;
+    -fx-font-size: 12px;
+    -fx-background-radius: 0;
+}
+.a{
+    -fx-background-color: #B8B9BB ;
+    -fx-background_radius: 50;
+   
+    -fx-border-width: 1;
+    -fx-border-color: #B8B9BB;
+    -fx-border-radius: 50;
+}

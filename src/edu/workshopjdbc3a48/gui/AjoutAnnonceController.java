@@ -111,11 +111,11 @@ public class AjoutAnnonceController implements Initializable {
                                 if (!conditionn.matches("[a-zA-Z\\s]+")) {
                                     throw new Exception("La condition doit contenir des lettres et des espaces uniquement");
                                 } else {
-                                    if (type.equals("Service")) {
+                                    if (type.equals("Article")) {
                                         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                         appStage.close();
 
-                                        Parent root = FXMLLoader.load(getClass().getResource("ListAnnonceService.fxml"));
+                                        Parent root = FXMLLoader.load(getClass().getResource("ListAnnonceArticle.fxml"));
                                         Scene scene = new Scene(root);
                                         Stage stage = new Stage();
                                         stage.setScene(scene);
@@ -124,7 +124,7 @@ public class AjoutAnnonceController implements Initializable {
                                     } else {
                                         Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                                         appStage.close();
-                                        Parent root = FXMLLoader.load(getClass().getResource("ListAnnonceProduit.fxml"));
+                                        Parent root = FXMLLoader.load(getClass().getResource("ListAnnonceService.fxml"));
                                         Scene scene = new Scene(root);
                                         Stage stage = new Stage();
                                         stage.setScene(scene);
@@ -151,21 +151,7 @@ public class AjoutAnnonceController implements Initializable {
             alert2.show();
         }
 
-        /*  
-    else if (userInput.equalsIgnoreCase(captchaCode)) {
-        // the input is correct
-        ((Stage) captchaInput.getScene().getWindow()).close(); // fermer la fenêtre du captcha
-        this.messageLabel.setText("Captcha validé !");
-        // redirect to produitservice.fxml
-       
-    } else {
-        // the input is incorrect
-        this.messageLabel.setText("Captcha invalide !");
-        // clear the input field
-        this.captchaInput.setText("");
-        // optionally, disable the submit button to prevent further attempts
-        this.submitButton.setDisable(true);
-    }*/
+
     }
 
     public boolean isEmpty() {
@@ -196,28 +182,12 @@ public class AjoutAnnonceController implements Initializable {
             condition.setStyle(null);
         }
 
-        /*   if (categorie.getValue() == null) {
-            result = false;
-            condition.setStyle("-fx-border-color: red;");
-            errorMessage.append("- Condition\n");
-        } else {
-            condition.setStyle(null);
-        }
-
-        if ((rbpub.isSelected() || rbmoi.isSelected())) {
-            result = false;
-            condition.setStyle("-fx-border-color: red;");
-            errorMessage.append("- Condition\n");
-        } else {
-            condition.setStyle(null);
-        }*/
+  
         if (!result) {
             Alert alert = new Alert(Alert.AlertType.WARNING, errorMessage.toString());
             alert.showAndWait();
         }
-        //condition sur le type
-        //conditionsur le sexe 
-
+       
         return result;
     }
 

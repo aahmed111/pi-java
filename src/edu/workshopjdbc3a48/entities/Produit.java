@@ -54,12 +54,18 @@ public class Produit  extends Article{
         this.poids = poids;
         this.duree_de_vie = duree_de_vie;
     }*/
-
-    public Produit( int id_article, String description, String type_article, int estimation, byte[] image, Categorie c, Date date_ajout, String nom,int poids,String etat,  String duree_de_vie) {
-        super(id_article, description, type_article, estimation, image, c,  date_ajout, nom);
+public Produit( int id_article, String description, String type_article, int estimation, byte[] image, User u,Date date_ajout, String nom,int poids,String etat,  String duree_de_vie) {
+        super(id_article, description, type_article, estimation, image,  nom);
         this.etat = etat;
         this.poids = poids;
         this.duree_de_vie = duree_de_vie;
+    }
+   public Produit( int id_article, String description, String type_article, int estimation, byte[] image,  User user, String nom, int poids,String etat, String duree_de_vie) {
+        super(id_article,description, type_article, estimation, image,user, nom);
+        this.etat = etat;
+        this.poids = poids;
+        this.duree_de_vie = duree_de_vie;
+       
     }
       public Produit( int id_article, String description, String type_article, int estimation, byte[] image,  Date date_ajout, String nom, int poids,String etat, String duree_de_vie) {
         super(id_article, description, type_article, estimation, image,  date_ajout, nom);

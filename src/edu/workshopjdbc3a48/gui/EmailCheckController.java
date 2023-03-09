@@ -137,8 +137,7 @@ public class EmailCheckController implements Initializable {
                     Node node = (Node) event.getSource();
                     Stage appStage = (Stage) node.getScene().getWindow();
                     sceneU.setFill(Color.TRANSPARENT);
-                    appStage.setScene(sceneU);  
-                   
+                    appStage.setScene(sceneU);    
                     appStage.show();
                     Alert alertMail = new Alert(Alert.AlertType.INFORMATION, "password envoyé avec succes !!verifier votre email");
                     alertMail.show();

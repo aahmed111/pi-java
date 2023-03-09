@@ -196,7 +196,6 @@ public class LoginController implements Initializable {
                                 e.printStackTrace();
                             }
                     }
-
                 }
                 if (found == false) {
                     message.setText("username or password is wrong");

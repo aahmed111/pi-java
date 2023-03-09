@@ -80,9 +80,10 @@ public class AceuilleController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         mylistview.setItems(items);
-        annonces = new ArrayList<>(showAnnonce());
+       ServiceAnnonce sa = new ServiceAnnonce();
+        List<Annonce> la =sa.getAll();
         try {
-            for (Annonce annonce : annonces) {
+            for (Annonce annonce : la) {
 
                 FXMLLoader l = new FXMLLoader();
                 l.setLocation(getClass().getResource("Annonce.fxml"));
@@ -90,24 +91,25 @@ public class AceuilleController implements Initializable {
                 AnnonceController a = l.getController();
                 a.setData(annonce);
                 postcontainer.getChildren().add(vbox);
-            }
+            }   
         } catch (IOException ex) {
             Logger.getLogger(AceuilleController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public List<Annonce> showAnnonce() {
-        List<Annonce> la = new ArrayList<>();
-        Annonce annonce;
-        for (int i = 0; i < 20; i++) {
-            ServiceAnnonce sa = new ServiceAnnonce();
-            annonce = sa.getOneById(15);
+  /*  public List<Annonce> showAnnonce() {
+          ServiceAnnonce sa = new ServiceAnnonce();
+        List<Annonce> la =sa.getAll();
+     
+       for(Annonce a :la)
+          
+         
             la.add(annonce);
-        }
+        
         return la;
 
-    }
+    }*/
 
     @FXML
     private void goToProfil(ActionEvent event) throws SQLException {

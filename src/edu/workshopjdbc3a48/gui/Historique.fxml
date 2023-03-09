@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="v" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="1608.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.HistoriqueController">
+   <children>
+      <HBox alignment="TOP_RIGHT" prefHeight="237.0" prefWidth="1608.0">
+         <children>
+            <Label fx:id="labelEchange" prefHeight="230.0" prefWidth="516.0">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="234.0" prefWidth="139.0">
+               <children>
+                  <Button fx:id="supprimer" mnemonicParsing="false" prefHeight="54.0" prefWidth="139.0" text="Supprimer">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="annuler" mnemonicParsing="false" prefHeight="59.0" prefWidth="139.0" text="Annuler">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="reclamation" mnemonicParsing="false" prefHeight="62.0" prefWidth="139.0" text="Passer Reclamation" />
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

@@ -20,10 +20,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author abdel
- */
+
 public class ServicReservation implements IService<Reservation>{
     Connection cnx= DataSource.getInstance().getCnx();
 

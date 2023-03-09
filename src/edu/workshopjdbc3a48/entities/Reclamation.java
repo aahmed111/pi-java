@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.workshopjdbc3a48.entities;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
-/**
- *
- * @author pc
- */
- 
-   public class Reclamation {
+
+
+
+import edu.workshopjdbc3a48.entities.Echange;
+import edu.workshopjdbc3a48.entities.User;
+import java.sql.Date;
+
+public class Reclamation {
 
     
     private int id;
@@ -23,35 +16,57 @@ import java.util.Objects;
      private String objet;
     private Date date_envoie;
     private String description ; 
-    
+    private String username ;
      private String Email;
     private Echange echange ;
+
+    public User getId_user1() {
+        return id_user1;
+    }
+
+    public void setId_user1(User id_user1) {
+        this.id_user1 = id_user1;
+    }
+
+    public String getObjet() {
+        return objet;
+    }
+
+    public void setObjet(String objet) {
+        this.objet = objet;
+    }
+
+
  
     
     
-    public Reclamation(int id, User id_user1, String objet,  String description, String Email, Echange echange,Date date_envoie) {
+    public Reclamation(int id, User id_user1, String objet,  String description,  Echange echange,Date date_envoie) {
         this.id = id;
         this.id_user1 = id_user1;
         this.objet = objet;
         this.date_envoie = date_envoie;
         this.description = description;
-        this.Email = Email;
+
         this.echange = echange;
     }
 
-    public Reclamation(String Nom_user, String description, String Email) {
-        this.objet = Nom_user;
+        public Reclamation( User id_user1, String objet,  String description,  Echange echange) {
+        
+        this.id_user1 = id_user1;
+        this.objet = objet;
+      
         this.description = description;
-        this.Email = Email;
+        
+        this.echange = echange;
     }
+
+
+  
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public User getUser1() {
         return id_user1;
@@ -59,13 +74,7 @@ import java.util.Objects;
 
    
 
-    public String getNom_user() {
-        return objet;
-    }
-
-    public void setNom_user(String Nom_user) {
-        this.objet = Nom_user;
-    }
+ 
 
     public Date getDate_envoie() {
         return date_envoie;
@@ -106,18 +115,11 @@ import java.util.Objects;
     public void setobjet(String objet) {
         this.objet = objet;
     }
-    
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 73 * hash + this.id;
-        hash = 73 * hash + Objects.hashCode(this.id_user1);
-        hash = 73 * hash + Objects.hashCode(this.objet);
-        hash = 73 * hash + Objects.hashCode(this.date_envoie);
-        hash = 73 * hash + Objects.hashCode(this.description);
-        hash = 73 * hash + Objects.hashCode(this.Email);
-        hash = 73 * hash + Objects.hashCode(this.echange);
+        hash = 97 * hash + this.id;
         return hash;
     }
 
@@ -136,26 +138,12 @@ import java.util.Objects;
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.objet, other.objet)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.Email, other.Email)) {
-            return false;
-        }
-        if (!Objects.equals(this.id_user1, other.id_user1)) {
-            return false;
-        }
-        if (!Objects.equals(this.date_envoie, other.date_envoie)) {
-            return false;
-        }
-        if (!Objects.equals(this.echange, other.echange)) {
-            return false;
-        }
         return true;
     }
+    
+
+
+  
 
     @Override
     public String toString() {

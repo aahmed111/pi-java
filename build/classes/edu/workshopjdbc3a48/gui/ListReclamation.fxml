@@ -26,6 +26,6 @@
          </styleClass>
       </TableView>
       <Button layoutX="1312.0" layoutY="250.0" mnemonicParsing="false" onAction="#voirEchange" prefHeight="55.0" prefWidth="149.0" text="Voir Echange" />
-      <Pane fx:id="PaneEchange" layoutX="78.0" layoutY="17.0" prefHeight="457.0" prefWidth="1213.0" />
+      <Pane fx:id="PaneEchange" layoutX="11.0" layoutY="17.0" prefHeight="457.0" prefWidth="1280.0" />
    </children>
 </Pane>

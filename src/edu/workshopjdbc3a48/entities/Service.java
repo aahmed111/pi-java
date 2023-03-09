@@ -35,7 +35,11 @@ public class Service extends Article {
         this.niveau = niveau;
         this.duree = duree;
     }
-   
+   public Service( int id_article, String description, String type_article, int estimation, byte[] image,User user,Date date_ajout, String nom,String niveau, String duree) {
+        super(id_article, description, type_article, estimation, image, user, nom);
+        this.niveau = niveau;
+        this.duree = duree;
+    }
    /*  public Article(int id_article, String description,  int estimation, byte[] image, Categorie c,Date date_ajout, String nom) {
         this.id_article = id_article;
         this.description = description;

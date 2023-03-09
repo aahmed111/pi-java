@@ -31,10 +31,10 @@ public class Avis {
         
     }
 
-    public Avis( Reactions reaction,String commentaire, Date date_creation,User user,  Annonce annonce) {
+    public Avis( Reactions reaction,String commentaire, User user,  Annonce annonce) {
        this.reaction = reaction; 
        this.commentaire = commentaire;
-        this.date_creation = date_creation;
+        
         this.user = user;
         this.annonce = annonce;
         

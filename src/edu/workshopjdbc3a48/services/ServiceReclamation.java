@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.workshopjdbc3a48.services;
+
 
 import edu.workshopjdbc3a48.entities.Echange;
 import edu.workshopjdbc3a48.entities.Reclamation;
 import edu.workshopjdbc3a48.entities.User;
+import edu.workshopjdbc3a48.services.IService;
+import edu.workshopjdbc3a48.services.ServiceEchange;
+import edu.workshopjdbc3a48.services.ServiceUser;
 import edu.workshopjdbc3a48.utils.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,10 +16,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author pc
- */
+
+
+
 public class ServiceReclamation implements IService<Reclamation> {
 
     Connection cnx = DataSource.getInstance().getCnx();
@@ -29,7 +27,7 @@ public class ServiceReclamation implements IService<Reclamation> {
     @Override
     public void ajouter(Reclamation t) throws SQLException {
         try {
-            String req = "INSERT INTO `reclamation`( `id_user1`, `objet`, `description`,`Email`, `id_echange`, `date_envoie`) VALUES (null,null,?,?,null,NOW()";
+            String req = "INSERT INTO reclamation`( id_user1`, objet, description,`Email`, id_echange, date_envoie) VALUES (null,null,?,?,null,NOW()";
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setInt(1, t.getid_user1().getId_user()); 
             ps.setString(1, t.getNom_user());  
@@ -47,12 +45,12 @@ public class ServiceReclamation implements IService<Reclamation> {
     @Override
     public void ajouter(Reclamation t) throws SQLException {
         try {
-            String req = "INSERT INTO reclamation (id_user1,Nom_user, objet, description, Email ,id_echange, date_envoie) VALUES (4,'ahmed',?,?,?,4,NOW())";
+            String req = "INSERT INTO reclamation (id_user1, objet, description ,id_echange, date_envoie) VALUES (?,?,?,?,NOW())";
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setString(1, t.getobjet());
-            ps.setString(2, t.getDescription());
-            ps.setString(3, t.getEmail());
-
+            ps.setInt(1,t.getId());
+            ps.setString(2, t.getobjet());
+            ps.setString(3, t.getDescription());   
+            ps.setInt(4, t.getEchange().getId_echange());     
             ps.executeUpdate();
             System.out.println("Reclamation ajoutée");
         } catch (SQLException e) {
@@ -76,7 +74,7 @@ public class ServiceReclamation implements IService<Reclamation> {
     @Override
     public void modifier(Reclamation t) throws SQLException {
         try {
-            String req = "UPDATE `reclamation` SET `description`=? WHERE `id_reclamation`=?";
+            String req = "UPDATE reclamation SET description`=? WHERE id_reclamation`=?";
             PreparedStatement ps = cnx.prepareStatement(req);
 
             ps.setString(1, t.getDescription());
@@ -118,7 +116,7 @@ public List<Reclamation> getAll() throws SQLException {
     public List<Reclamation> getAll() throws SQLException {
         List<Reclamation> reclamations = new ArrayList<>();
 
-        String req = "SELECT * FROM `reclamation`";
+        String req = "SELECT * FROM reclamation";
         Statement ps = cnx.createStatement();
         ResultSet rs = ps.executeQuery(req);
         while (rs.next()) {
@@ -133,7 +131,7 @@ public List<Reclamation> getAll() throws SQLException {
                     user1,
                     rs.getString("objet"),
                     rs.getString("description"),
-                    rs.getString("Email"),
+                   
                     e,
                     rs.getDate("date_envoie")
             );

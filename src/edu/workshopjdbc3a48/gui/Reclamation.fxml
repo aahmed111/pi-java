@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="815.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ReclamationController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.workshopjdbc3a48.gui.ReclamationController">
    <children>
-      <VBox layoutX="306.0" layoutY="34.0" prefHeight="724.0" prefWidth="973.0">
+      <VBox layoutX="135.0" layoutY="15.0" prefHeight="400.0" prefWidth="500.0">
          <children>
             <Label prefHeight="62.0" prefWidth="135.0" text="Objet" />
             <TextField fx:id="textObject" prefHeight="93.0" prefWidth="759.0">

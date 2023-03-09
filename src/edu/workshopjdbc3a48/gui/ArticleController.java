@@ -5,8 +5,16 @@
  */
 package edu.workshopjdbc3a48.gui;
 
+import edu.workshopjdbc3a48.entities.Article;
+import edu.workshopjdbc3a48.entities.Echange;
+import edu.workshopjdbc3a48.entities.Produit;
+import edu.workshopjdbc3a48.entities.Service;
+import edu.workshopjdbc3a48.services.ServiceArticle;
+import edu.workshopjdbc3a48.services.ServiceEchange;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,8 +24,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -33,6 +43,8 @@ public class ArticleController implements Initializable {
     private HBox listArticle;
     @FXML
     private HBox listService;
+    @FXML
+    private VBox vBox;
     public int getId_user() {
         return id_user;
     }
@@ -45,7 +57,39 @@ public class ArticleController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
+            ServiceArticle se = new ServiceArticle();
+            Article a = se.getOneById(110);
+            
+            
+         
+                if (a instanceof Produit){
+                    
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("ListArticle.fxml"));
+                        VBox hb = loader.load();
+                        ListArticleController listArt = loader.getController();
+                        // = new Label(a.toString());
+                        listArt.ajouter(a);
+                        listArticle.getChildren().add(hb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(HistoriqueEchangeController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                /*  else{
+                Service s = (Service) a;
+                try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ListService.fxml"));
+                HBox hb = loader.load();
+                ListArticleController listArt = loader.getController();
+                listArt.ajouter(s);
+                listArticle.getChildren().add(hb);
+                } catch (IOException ex) {
+                Logger.getLogger(HistoriqueEchangeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }*/
+            
+     
     }    
 
     @FXML

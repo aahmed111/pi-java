@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 import edu.workshopjdbc3a48.entities.Reclamation;
+import edu.workshopjdbc3a48.entities.User;
+import edu.workshopjdbc3a48.services.ServiceEchange;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.geometry.Insets;
@@ -25,12 +27,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import edu.workshopjdbc3a48.services.ServiceReclamation;
+import edu.workshopjdbc3a48.services.ServiceUser;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.description;
 
 public class ReclamationController implements Initializable {
   private int id_user;
@@ -41,6 +45,17 @@ public class ReclamationController implements Initializable {
     public void setId_user(int id_user) {
         this.id_user = id_user;
     }
+    private int id_echange ;
+
+    public int getId_echange() {
+        return id_echange;
+    }
+
+    public void setId_echange(int id_echange) {
+        this.id_echange = id_echange;
+    }
+
+    
 
     @FXML
     private TextField textObject;
@@ -166,7 +181,10 @@ public class ReclamationController implements Initializable {
 
         if (isValid) {
             try {
-                Reclamation t = new Reclamation(objet, Description, email);
+                ServiceUser su = new ServiceUser();
+                User u = su.getOneById( getId_user());
+                ServiceEchange se = new ServiceEchange();
+                Reclamation t = new Reclamation(u ,objet,Description,se.getOneById(id_echange));
                 ServiceReclamation Rs = new ServiceReclamation();
 
                 Rs.ajouter(t);

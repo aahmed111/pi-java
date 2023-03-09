@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -19,9 +20,18 @@ import javafx.scene.layout.HBox;
  */
 public class ListAnnonceServiceController implements Initializable {
 
+
+    private int id_User;
     @FXML
     private HBox listService;
 
+    public int getId_User() {
+        return id_User;
+    }
+
+    public void setId_User(int Id_User) {
+        this.id_User = Id_User;
+    }
  
     @Override
     public void initialize(URL url, ResourceBundle rb) {

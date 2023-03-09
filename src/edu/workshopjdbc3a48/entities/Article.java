@@ -18,7 +18,7 @@ public   abstract  class Article  {
    protected String description,type_article;
   
   protected int estimation;
- 
+ private User u;
 protected byte[] image;
 protected Produit p;
 protected Service s;
@@ -37,7 +37,17 @@ protected Service s;
   private Date date_ajout ;
       private String nom;
       
-
+public Article(int id_article, String description, String type_article, int estimation, byte[] image, User u, String nom) {
+        this.id_article = id_article;
+        this.description = description;
+        this.type_article = type_article;
+        this.estimation = estimation;
+        this.image = image;
+        this.c = c;
+        this.u = u;
+     
+        this.nom = nom;
+    }
     public Article(int id_article, String description, String type_article, int estimation, byte[] image, Categorie c, User user, Date date_ajout, String nom) {
         this.id_article = id_article;
         this.description = description;
@@ -100,14 +110,14 @@ protected Service s;
         this.date_ajout = date_ajout;
         this.nom = nom;
     }
-    public Article(int id_article, String description, String type_article, int estimation, byte[] image,Categorie c, Date date_ajout, String nom) {
+    public Article(int id_article, String description, String type_article, int estimation, byte[] image,User u,Categorie c, Date date_ajout, String nom) {
         this.id_article = id_article;
         this.description = description;
         this.type_article = type_article;
         this.estimation = estimation;
         this.image = image;
         
-        
+        this.u=u;
         this.date_ajout = date_ajout;
         this.nom = nom;
     }
@@ -170,6 +180,7 @@ protected Service s;
         this.date_ajout = date_ajout;
         this.nom = nom;
     }
+     
      public Article(String description, String type_article, int estimation,   String nom) {
         this.description = description;
         this.type_article = type_article;

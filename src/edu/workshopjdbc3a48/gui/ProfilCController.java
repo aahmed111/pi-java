@@ -253,8 +253,17 @@ public class ProfilCController implements Initializable {
     }
 
     @FXML
-    private void Echange(ActionEvent event) {
-        
+    private void Echange(ActionEvent event) {    
+           try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HistoriqueEchange.fxml"));
+            fxml = loader.load();
+            HistoriqueEchangeController rc = loader.getController();
+            pane.getChildren().removeAll();
+            rc.setId_User(getId_connecté());
+            pane.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginSinupController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void reclamation(ActionEvent event) {
